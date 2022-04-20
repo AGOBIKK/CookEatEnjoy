@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CookEatEnjoy</string>
+    <string name="title_feed">Главня</string>
+    <string name="title_like">Избранное</string>
+    <string name="title_search">Поиск</string>
+    <string name="main_fragment">MAIN</string>
 </resources>
