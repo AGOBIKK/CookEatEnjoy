@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.screens
+package com.agobikk.cookeatenjoy.ui.screens
 
 import android.os.Bundle
 import android.view.View

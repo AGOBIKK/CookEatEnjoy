@@ -8,24 +8,24 @@
 
     <fragment
         android:id="@+id/likesFragment"
-        android:name="com.agobikk.cookeatenjoy.screens.LikesFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.LikesFragment"
         android:label="LikesFragment"
         tools:layout="@layout/fragment_likes" />
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.agobikk.cookeatenjoy.screens.SearchFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.agobikk.cookeatenjoy.screens.DetailFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.agobikk.cookeatenjoy.screens.FeedFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.FeedFragment"
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed">
         <action
