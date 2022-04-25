@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/feedItemView"
-    tools:context=".ui.screens.FeedFragment">
+    tools:context=".ui.screens.CategoryFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

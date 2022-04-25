@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutCategoryListItemBinding
-
 import com.agobikk.cookeatenjoy.model.Category
 import com.bumptech.glide.Glide
 
@@ -50,10 +49,7 @@ class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
                     .into(this)
             }
             itemView.setOnClickListener { categoryClick.onClick(item) }
-
         }
-
-
     }
 }
 

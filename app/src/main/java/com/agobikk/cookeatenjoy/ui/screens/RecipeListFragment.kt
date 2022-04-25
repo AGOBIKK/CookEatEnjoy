@@ -4,6 +4,6 @@ import androidx.fragment.app.Fragment
 import com.agobikk.cookeatenjoy.R
 
 
-class DetailFragment : Fragment(R.layout.fragment_detail) {
+class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
 
 }
