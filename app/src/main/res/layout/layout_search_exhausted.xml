@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screens.DetailFragment">
+    android:layout_height="@dimen/recycler_loading_view_height">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
+        android:id="@+id/no_results_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Детали"
-        android:textSize="72sp"
+        android:drawablePadding="@dimen/dp_10"
+        android:text="@string/request_not_found"
+        app:drawableEndCompat="@drawable/ic_mood_bad"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

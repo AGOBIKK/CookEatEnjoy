@@ -31,7 +31,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
 
 }
@@ -39,6 +39,7 @@ android {
 dependencies {
     def nav_version = "2.4.2"
     def viewBindingDelegate_version = "1.4.7"
+    def glide = "4.13.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -55,6 +56,9 @@ dependencies {
 
     //Viewbinding by Kirill Rozov
     implementation "com.github.kirich1409:viewbindingpropertydelegate:$viewBindingDelegate_version"
+
+    implementation "com.github.bumptech.glide:glide:$glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide"
 
     //Internet
     def okHttp_version = '4.8.0'

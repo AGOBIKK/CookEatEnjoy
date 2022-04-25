@@ -4,4 +4,24 @@
     <string name="title_like">Избранное</string>
     <string name="title_search">Поиск</string>
     <string name="main_fragment">MAIN</string>
+    <string name="categories">Categories</string>
+    <string name="recipe_image">Recipe Image</string>
+    <string name="no_results">No results found for %s.\nTry searching again with other terms.</string>
+    <string name="request_not_found">Request not found</string>
+
+
+    <!--    Categories-->
+    <string name="mainCourse">"Main course"</string>
+    <string name="sideDish">Side dish</string>
+    <string name="dessert">Dessert</string>
+    <string name="appetizer">Appetizer</string>
+    <string name="salad">Salad</string>
+    <string name="bread">Bread</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="soup">Soup</string>
+    <string name="beverage">Beverage</string>
+    <string name="sauce">Sauce</string>
+    <string name="marinade">Marinade</string>
+    <string name="fingerfood">Fingerfood</string>
+
 </resources>
