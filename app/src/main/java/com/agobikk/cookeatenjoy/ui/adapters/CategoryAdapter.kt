@@ -8,6 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutCategoryListItemBinding
 import com.agobikk.cookeatenjoy.model.Category
+import com.agobikk.cookeatenjoy.model.RecipeList
 import com.bumptech.glide.Glide
 
 class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
@@ -20,14 +21,12 @@ class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
             notifyItemChanged(itemCount)
         }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder =
         CategoryViewHolder(
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.layout_category_list_item, parent, false)
         )
-
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = categoryData[position]
