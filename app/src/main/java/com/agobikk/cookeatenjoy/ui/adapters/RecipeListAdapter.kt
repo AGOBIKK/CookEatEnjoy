@@ -21,9 +21,8 @@ class RecipeListAdapter(val recipeClick: OnRecipeClick) :
             notifyItemChanged(itemCount)
         }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeListViewHolder =
-        RecipeListAdapter.RecipeListViewHolder(
+        RecipeListViewHolder(
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.layout_recipe_list_item, parent, false)
@@ -36,7 +35,6 @@ class RecipeListAdapter(val recipeClick: OnRecipeClick) :
 
     override fun getItemCount(): Int = recipeListData.size
 
-
     class RecipeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val viewBinding: LayoutRecipeListItemBinding by viewBinding()
@@ -46,22 +44,20 @@ class RecipeListAdapter(val recipeClick: OnRecipeClick) :
             recipeListTitleTextView.text = recipe.title
             descriptionTextView.text = recipe.description
             maxReadyTimeTextView.text = recipe.maxReadyTime.roundToInt().toString()
-
-            Glide
-                .with(itemView.context)
-                .setDefaultRequestOptions(
-                    RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
-                        .error(R.drawable.ic_broken_image)
-                )
-                .load(recipe.imageUrl)
-                .into(recipeListImage)
+            recipeListImage.apply {
+                Glide
+                    .with(context)
+                    .setDefaultRequestOptions(
+                        RequestOptions()
+                            .placeholder(R.drawable.loading_animation)
+                            .error(R.drawable.ic_broken_image)
+                    )
+                    .load(recipe.imageUrl)
+                    .into(this)
+            }
         }
-
     }
-
 }
-
 
 class OnRecipeClick(val clickListener: (id: String) -> Unit) {
     fun onClick(recipe: RecipeList) = clickListener(recipe.recipeId)

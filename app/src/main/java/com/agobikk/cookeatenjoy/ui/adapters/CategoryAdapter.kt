@@ -20,14 +20,12 @@ class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
             notifyItemChanged(itemCount)
         }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder =
         CategoryViewHolder(
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.layout_category_list_item, parent, false)
         )
-
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = categoryData[position]
