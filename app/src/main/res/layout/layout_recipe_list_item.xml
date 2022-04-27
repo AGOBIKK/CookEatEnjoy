@@ -23,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/recipe_image_list_height"
             android:contentDescription="@string/recipe_image"
-            app:srcCompat="@drawable/salad"
             android:scaleType="centerCrop"
             tools:src="@drawable/salad" />
 
@@ -41,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="100"
                 android:ellipsize="end"
-                android:text="Салат цезарь"
                 android:textColor="@color/teal_200"
                 android:textSize="@dimen/recipe_title_text_size"
                 tools:text="Title" />
@@ -61,7 +59,6 @@
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_weight="100"
                 android:gravity="start"
-                android:text="Салат цезарь - очень вкусный салат "
                 android:textSize="@dimen/recipe_publisher_text_size"
                 android:textStyle="italic"
                 tools:text="Description" />

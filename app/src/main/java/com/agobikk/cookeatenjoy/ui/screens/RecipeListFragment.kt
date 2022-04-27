@@ -24,9 +24,25 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
 
         adapter = RecipesAdapter(OnClickListener { navigateToRecipeList() })
         viewBinding.recipeListRecyclerView.adapter = adapter
+
+        //сейчас тут нет данных т.к. еще не приходят  данные из сети
         viewModel.recipeList.observe(viewLifecycleOwner) {
             it.let { adapter.submitList(it) }
         }
+
+        /**'
+         * Временное решение для иницилизации списка, после того как данные будут приходить по сети
+         * Это удалить  и будет применено
+         */
+
+        val p1 = RecipeList("1", "2","4", 22F,"")
+        val p2 = RecipeList("1", "2","4", 10F,"")
+        val p3 = RecipeList("1", "2","4", 40F,"")
+        val p4 = RecipeList("1", "2","4", 40F,"")
+        val p5 = RecipeList("1", "2","4", 40F,"")
+        val p6 = RecipeList("1", "2","4", 40F,"")
+        val p7 = RecipeList("1", "2","4", 40F,"")
+        adapter.submitList(listOf(p1,p2,p3,p4,p5,p6,p7))
 
     }
 

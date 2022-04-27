@@ -52,6 +52,7 @@ class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
     }
 }
 
+
 class OnCategoryClick(val clickListener: (string: String) -> Unit) {
     fun onClick(category: Category) = clickListener(category.categoryName)
 }
