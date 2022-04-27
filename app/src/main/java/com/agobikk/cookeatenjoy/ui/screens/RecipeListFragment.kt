@@ -21,6 +21,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         adapter = RecipesAdapter(OnClickListener { navigateToRecipeList() })
         viewBinding.recipeListRecyclerView.adapter = adapter
         viewModel.recipeList.observe(viewLifecycleOwner) {
@@ -28,7 +29,6 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         }
 
     }
-
 
     private fun navigateToRecipeList() {
         findNavController().navigate(R.id.action_RecipeListFragment_to_detailRecipeFragment)
