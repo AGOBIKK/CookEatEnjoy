@@ -22,15 +22,23 @@
         android:id="@+id/RecipeListFragment"
         android:name="com.agobikk.cookeatenjoy.ui.screens.RecipeListFragment"
         android:label="fragment_list_recipe"
-        tools:layout="@layout/fragment_list_recipe" />
+        tools:layout="@layout/fragment_list_recipe">
+        <action
+            android:id="@+id/action_RecipeListFragment_to_detailRecipeFragment"
+            app:destination="@id/detailRecipeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/CategoryFragment"
         android:name="com.agobikk.cookeatenjoy.ui.screens.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category">
         <action
-            android:id="@+id/action_categoryFragment_to_detailFragment"
+            android:id="@+id/action_categoryFragment_to_recipeListFragment"
             app:destination="@id/RecipeListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailRecipeFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.DetailRecipeFragment"
+        android:label="DetailRecipeFragment" />
 
 </navigation>
