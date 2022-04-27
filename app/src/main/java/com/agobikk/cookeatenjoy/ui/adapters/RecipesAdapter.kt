@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlin.math.roundToInt
 
+
 class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickListener) :
     ListAdapter<RecipeList, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
 
@@ -33,7 +34,7 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
     }
 
 
-class RecipeViewHolder (temView: View) : RecyclerView.ViewHolder(temView) {
+    class RecipeViewHolder (temView: View) : RecyclerView.ViewHolder(temView) {
 
         private val viewBinding: LayoutRecipeListItemBinding by viewBinding()
 
