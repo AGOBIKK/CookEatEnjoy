@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/recipe_image_list_height"
             android:contentDescription="@string/recipe_image"
-            app:srcCompat="@drawable/dessert"
+            app:srcCompat="@drawable/salad"
             android:scaleType="centerCrop"
             tools:src="@drawable/salad" />
 
