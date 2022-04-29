@@ -12,13 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_8"
-        android:text="@string/recipes"
-        android:textSize="26sp" />
-    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_list_recyclerView"
         android:layout_width="match_parent"

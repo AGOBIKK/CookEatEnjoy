@@ -3,13 +3,11 @@ package com.agobikk.cookeatenjoy.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
-import com.agobikk.cookeatenjoy.model.Category
 import com.agobikk.cookeatenjoy.model.RecipeList
 import com.agobikk.cookeatenjoy.ui.screens.RecipeListFragment
 import com.bumptech.glide.Glide
@@ -19,7 +17,6 @@ import kotlin.math.roundToInt
 
 class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickListener) :
     ListAdapter<RecipeList, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder =
@@ -37,7 +34,7 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
     }
 
 
-   inner class RecipeViewHolder (temView: View) : RecyclerView.ViewHolder(temView) {
+    inner class RecipeViewHolder(temView: View) : RecyclerView.ViewHolder(temView) {
 
         private val viewBinding: LayoutRecipeListItemBinding by viewBinding()
 

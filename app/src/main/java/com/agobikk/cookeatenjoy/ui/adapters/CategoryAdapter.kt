@@ -8,14 +8,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutCategoryListItemBinding
 import com.agobikk.cookeatenjoy.model.Category
-import com.agobikk.cookeatenjoy.model.RecipeList
 import com.bumptech.glide.Glide
 
 class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
 
-     var categoryData = listOf<Category>()
+    var categoryData = listOf<Category>()
         set(value) {
             field = value
             notifyItemChanged(itemCount)
