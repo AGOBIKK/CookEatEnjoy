@@ -63,14 +63,14 @@
 
 
             <TextView
-                android:id="@+id/recipe_publisher_label"
+                android:id="@+id/source_name_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/title"
-                android:textColor="@color/black"
+                android:text="@string/source_name"
+                android:textColor="@color/purple_200"
                 android:textSize="@dimen/recipe_publisher_text_size"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/social_score_layout"
@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/recipe_detail_publisher"
+                android:id="@+id/source_name_recipe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_16"
@@ -87,8 +87,8 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toStartOf="@+id/social_score_layout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_publisher_label"
-                tools:text="Recipe Publisher" />
+                app:layout_constraintTop_toBottomOf="@+id/source_name_label"
+                tools:text="Full Belly Sisters" />
 
             <TextView
                 android:id="@+id/instructions"
@@ -100,9 +100,9 @@
                 android:textColor="@color/purple_700"
                 android:textSize="@dimen/recipe_publisher_text_size"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/recipe_detail_publisher"
+                app:layout_constraintEnd_toEndOf="@+id/source_name_recipe"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_detail_publisher" />
+                app:layout_constraintTop_toBottomOf="@+id/source_name_recipe" />
 
 
             <androidx.cardview.widget.CardView
@@ -115,7 +115,7 @@
                 app:cardElevation="4dp"
                 app:layout_constraintBottom_toTopOf="@+id/ingredients_card_layout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/recipe_publisher_label">
+                app:layout_constraintTop_toTopOf="@id/source_name_label">
 
                 <LinearLayout
                     android:layout_width="match_parent"

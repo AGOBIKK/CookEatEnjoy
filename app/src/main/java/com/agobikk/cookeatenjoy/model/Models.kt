@@ -1,10 +1,14 @@
 package com.agobikk.cookeatenjoy.model
 
+
 data class DetailRecipe(
+    val analyzedInstructions: Array<String>?,
+    val imageUrl: String,
+    val recipeId: String,
     val title: String,
-    val image: String,
+    val sourceName: String,
     val instructions: String,
-    val extendedIngredients: String
+    val favorite: Boolean = false
 )
 
 data class Category(
