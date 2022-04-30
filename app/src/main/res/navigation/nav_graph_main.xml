@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/likesFragment"
-        android:name="com.agobikk.cookeatenjoy.ui.screens.LikesFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.likes.LikesFragment"
         android:label="LikesFragment"
         tools:layout="@layout/fragment_likes" />
 
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/RecipeListFragment"
-        android:name="com.agobikk.cookeatenjoy.ui.screens.RecipeListFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment"
         android:label="fragment_list_recipe"
         tools:layout="@layout/fragment_list_recipe">
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailRecipeFragment"
-        android:name="com.agobikk.cookeatenjoy.ui.screens.DetailRecipeFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment"
         android:label="DetailRecipeFragment" />
 
 </navigation>

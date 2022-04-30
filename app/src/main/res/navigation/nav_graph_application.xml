@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.agobikk.cookeatenjoy.ui.screens.MainFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
 </navigation>

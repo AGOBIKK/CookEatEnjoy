@@ -1,20 +1,18 @@
-package com.agobikk.cookeatenjoy.ui.adapters
+package com.agobikk.cookeatenjoy.ui.screens.recipe
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
-import com.agobikk.cookeatenjoy.model.Category
 import com.agobikk.cookeatenjoy.model.RecipeList
-import com.agobikk.cookeatenjoy.ui.screens.RecipeListFragment
+import com.agobikk.cookeatenjoy.ui.adapters.RecipeDiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlin.math.roundToInt
+import by.kirich1409.viewbindingdelegate.viewBinding
 
 
 class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickListener) :
