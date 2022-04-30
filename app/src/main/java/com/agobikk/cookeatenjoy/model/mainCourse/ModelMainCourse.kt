@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.model
+package com.agobikk.cookeatenjoy.model.mainCourse
 
 
 import com.google.gson.annotations.SerializedName
