@@ -129,7 +129,7 @@
                     android:paddingEnd="16dp">
 
                     <ImageView
-                        android:id="@+id/ingredient"
+                        android:id="@+id/ingredient_image"
                         android:layout_width="@dimen/dp_48"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ingredient"
