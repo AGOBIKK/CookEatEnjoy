@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
 import com.agobikk.cookeatenjoy.model.RecipeList
-import com.agobikk.cookeatenjoy.ui.adapters.RecipeDiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlin.math.roundToInt

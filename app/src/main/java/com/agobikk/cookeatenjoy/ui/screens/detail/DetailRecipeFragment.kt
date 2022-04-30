@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
@@ -21,7 +22,6 @@ import com.google.android.material.appbar.AppBarLayout
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
-    lateinit var ingredientsContainer: LinearLayout
     lateinit var mDetailRecipe: DetailRecipe
     private var isFavorite: Boolean = false
 
@@ -30,8 +30,10 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         setScrollListener()
+             subscribeUi()
         with(viewBinding) {
-            recipeDetailCloseIcon.setOnClickListener{ findNavController().navigateUp()}
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener{ findNavController().navigateUp()}
+
         }
     }
 
@@ -45,8 +47,16 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         appBarLayout.addOnOffsetChangedListener(offsetChangedListener)
     }
 
-    private fun setDetails(detailRecipe: DetailRecipe) = with(viewBinding) {
+    private fun subscribeUi(){
+        viewModel.recipeDetail.observe(viewLifecycleOwner) {
+            it?.let {
+                Log.i("DetailRecipeFragment", "subscribeUi: $it")
+                setDetails(it)
+            }
+        }
+    }
 
+    private fun setDetails(detailRecipe: DetailRecipe)  = with(viewBinding) {
         Glide.with(requireContext())
             .setDefaultRequestOptions(
                 RequestOptions()
@@ -55,11 +65,8 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
             )
             .load(detailRecipe.imageUrl)
             .into(recipeDetailImage)
-
         recipeDetailTitle.text = detailRecipe.title
         sourceNameRecipe.text = detailRecipe.sourceName
-
-
-
+        instructions.text = detailRecipe.instructions
     }
 }

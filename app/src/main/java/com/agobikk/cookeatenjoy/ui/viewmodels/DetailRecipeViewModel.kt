@@ -10,8 +10,9 @@ import com.agobikk.cookeatenjoy.model.RecipeList
 class DetailRecipeViewModel : ViewModel() {
 
 
-    private val _recipeDetail = MutableLiveData<List<DetailRecipe>?>()
-    val recipeDetail: LiveData<List<DetailRecipe>?> = _recipeDetail
+    private val _recipeDetail = MutableLiveData<DetailRecipe>()
+    val recipeDetail: LiveData<DetailRecipe> = _recipeDetail
 
-
+    private val _favorite = MutableLiveData<Boolean>()
+    val favorite: LiveData<Boolean> = _favorite
 }
