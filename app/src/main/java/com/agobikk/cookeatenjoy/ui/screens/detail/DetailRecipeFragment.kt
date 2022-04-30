@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.ui.screens
+package com.agobikk.cookeatenjoy.ui.screens.detail
 
 import androidx.fragment.app.Fragment
 import com.agobikk.cookeatenjoy.R
