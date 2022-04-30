@@ -33,7 +33,7 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
     }
 
 
-    inner class RecipeViewHolder(temView: View) : RecyclerView.ViewHolder(temView) {
+    inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val viewBinding: LayoutRecipeListItemBinding by viewBinding()
 
