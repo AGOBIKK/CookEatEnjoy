@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentCategoryBinding
@@ -24,7 +23,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
     }
 
     private fun initRecyclerView() = with(viewBinding) {
-        adapter = CategoryAdapter(OnCategoryClick { recipe -> navigateToRecipeList (recipe)})
+        adapter = CategoryAdapter(OnCategoryClick { recipe -> navigateToRecipeList(recipe) })
         categoryListRecyclerView.adapter = adapter
 
         val categoryList: List<Category> = List(Const.DEFAULT_CATEGORIES_NAMES.size) { index ->
@@ -37,7 +36,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
     }
 
     private fun navigateToRecipeList(query: String) {
-       findNavController().navigate(R.id.action_categoryFragment_to_recipeListFragment)
+        findNavController().navigate(R.id.action_categoryFragment_to_recipeListFragment)
 
     }
 }

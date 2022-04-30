@@ -34,14 +34,14 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
          * Это удалить  и будет применено
          */
 
-        val p1 = RecipeList("1", "2","4", 22F,"")
-        val p2 = RecipeList("1", "2","4", 10F,"")
-        val p3 = RecipeList("1", "2","4", 40F,"")
-        val p4 = RecipeList("1", "2","4", 40F,"")
-        val p5 = RecipeList("1", "2","4", 40F,"")
-        val p6 = RecipeList("1", "2","4", 40F,"")
-        val p7 = RecipeList("1", "2","4", 40F,"")
-        adapter.submitList(listOf(p1,p2,p3,p4,p5,p6,p7))
+        val p1 = RecipeList("1", "2", "4", 22F, "", true)
+        val p2 = RecipeList("1", "2", "4", 10F, "", false)
+        val p3 = RecipeList("1", "2", "4", 40F, "", false)
+        val p4 = RecipeList("1", "2", "4", 40F, "", true)
+        val p5 = RecipeList("1", "2", "4", 40F, "", true)
+        val p6 = RecipeList("1", "2", "4", 40F, "", false)
+        val p7 = RecipeList("1", "2", "4", 40F, "", true)
+        adapter.submitList(listOf(p1, p2, p3, p4, p5, p6, p7))
 
     }
 

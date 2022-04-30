@@ -19,7 +19,6 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
     ListAdapter<RecipeList, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder =
         RecipeViewHolder(
             LayoutInflater
@@ -35,7 +34,7 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
     }
 
 
-   inner class RecipeViewHolder (temView: View) : RecyclerView.ViewHolder(temView) {
+    inner class RecipeViewHolder(temView: View) : RecyclerView.ViewHolder(temView) {
 
         private val viewBinding: LayoutRecipeListItemBinding by viewBinding()
 
