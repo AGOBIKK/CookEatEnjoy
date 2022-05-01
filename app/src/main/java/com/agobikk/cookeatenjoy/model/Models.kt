@@ -25,3 +25,4 @@ data class RecipeList(
     val imageUrl: String,
     val vegan: Boolean
 )
+

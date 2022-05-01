@@ -39,6 +39,15 @@
     <fragment
         android:id="@+id/detailRecipeFragment"
         android:name="com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment"
-        android:label="DetailRecipeFragment" />
+        android:label="DetailRecipeFragment" >
+        <action
+            android:id="@+id/action_detailRecipeFragment_to_ingredientFragment"
+            app:destination="@id/ingredientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ingredientFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.ingredient.IngredientListFragment"
+        android:label="fragment_ingredient"
+        tools:layout="@layout/fragment_list_ingredient" />
 
 </navigation>

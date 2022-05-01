@@ -23,7 +23,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
     }
 
     private fun initRecyclerView() = with(viewBinding) {
-        adapter = CategoryAdapter(OnCategoryClick { recipe -> navigateToRecipeList(recipe) })
+        adapter = CategoryAdapter(OnCategoryClick {  navigateToRecipeList() })
         categoryListRecyclerView.adapter = adapter
 
         val categoryList: List<Category> = List(Const.DEFAULT_CATEGORIES_NAMES.size) { index ->
@@ -35,7 +35,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
         adapter.categoryData = categoryList
     }
 
-    private fun navigateToRecipeList(query: String) {
+    private fun navigateToRecipeList() {
         findNavController().navigate(R.id.action_categoryFragment_to_recipeListFragment)
 
     }
