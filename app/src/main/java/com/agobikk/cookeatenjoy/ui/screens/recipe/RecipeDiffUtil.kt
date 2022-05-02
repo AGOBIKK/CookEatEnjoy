@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.ui.adapters
+package com.agobikk.cookeatenjoy.ui.screens.recipe
 
 import androidx.recyclerview.widget.DiffUtil
 import com.agobikk.cookeatenjoy.model.RecipeList

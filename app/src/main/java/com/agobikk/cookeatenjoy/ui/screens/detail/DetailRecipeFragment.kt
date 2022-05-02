@@ -1,10 +1,8 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
 import android.os.Bundle
-import android.service.autofill.FillEventHistory
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,7 +19,6 @@ import com.google.android.material.appbar.AppBarLayout
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
-    lateinit var ingredientsContainer: LinearLayout
     lateinit var mDetailRecipe: DetailRecipe
     private var isFavorite: Boolean = false
 
@@ -30,23 +27,36 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         setScrollListener()
+        subscribeUi()
         with(viewBinding) {
-            recipeDetailCloseIcon.setOnClickListener{ findNavController().navigateUp()}
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener { findNavController().navigateUp() }
+            ingredientImage.setOnClickListener { findNavController().navigate(R.id.action_detailRecipeFragment_to_ingredientFragment) }
         }
     }
 
     private fun setScrollListener() = with(viewBinding) {
         val appBarLayout = recipeDetailAppBarLayout
-        val offsetChangedListener = AppBarLayout.OnOffsetChangedListener {_, verticalOffset ->
-            Log.i("DetailRecipeFragment", "setScrollListener: $verticalOffset \nrange:  ${appBarLayout.totalScrollRange}")
-            val seekPosition = - verticalOffset / appBarLayout.totalScrollRange.toFloat()
+        val offsetChangedListener = AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+            Log.i(
+                "DetailRecipeFragment",
+                "setScrollListener: $verticalOffset \nrange:  ${appBarLayout.totalScrollRange}"
+            )
+            val seekPosition = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
             recipeDetailMotionLayout.progress = seekPosition
         }
         appBarLayout.addOnOffsetChangedListener(offsetChangedListener)
     }
 
-    private fun setDetails(detailRecipe: DetailRecipe) = with(viewBinding) {
+    private fun subscribeUi() {
+        viewModel.recipeDetail.observe(viewLifecycleOwner) {
+            it?.let {
+                Log.i("DetailRecipeFragment", "subscribeUi: $it")
+                setDetails(it)
+            }
+        }
+    }
 
+    private fun setDetails(detailRecipe: DetailRecipe) = with(viewBinding) {
         Glide.with(requireContext())
             .setDefaultRequestOptions(
                 RequestOptions()
@@ -55,11 +65,8 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
             )
             .load(detailRecipe.imageUrl)
             .into(recipeDetailImage)
-
         recipeDetailTitle.text = detailRecipe.title
         sourceNameRecipe.text = detailRecipe.sourceName
-
-
-
+        instructions.text = detailRecipe.instructions
     }
 }
