@@ -1,9 +1,7 @@
 package com.agobikk.cookeatenjoy.util
 
-import com.agobikk.cookeatenjoy.MainActivity
 import com.agobikk.cookeatenjoy.R
 
-lateinit var MAIN: MainActivity
 
 object Const {
     const val NO_RESULTS = "no_results"
