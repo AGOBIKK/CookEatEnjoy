@@ -2,6 +2,7 @@ package com.agobikk.cookeatenjoy.ui.screens.ingredient
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -16,6 +17,7 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
         adapter = IngredientListAdapter(OnClickListener {})
         viewBinding.ingredientsRecyclerview.adapter = adapter
 

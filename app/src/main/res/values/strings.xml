@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CookEatEnjoy</string>
+    <string name="app_name">Cook Eat Enjoy</string>
     <string name="title_feed">Главная</string>
     <string name="title_like">Избранное</string>
     <string name="title_search">Поиск</string>
@@ -15,6 +15,7 @@
     <string name="make_recipe_favorite">Make recipe favorite</string>
     <string name="share_this_recipe">Share this recipe</string>
     <string name="close_recipe">Close recipe</string>
+    <string name="search">Search</string>
 
 
     <!--    Categories-->
@@ -71,8 +72,4 @@
 Вот и все, на этом процесс приготовления цыпленка табака полностью завершен. Румяную золотистую птичку выкладываем на блюдо или большую плоскую тарелку, поливаем оставшимся в сковородке соусом, в котором до этого кипел цыпленок, украшаем зеленью и горячим подаем на стол. Гарниром к цыпленку могут служить свежие или запеченные овощи и отварной картофель, посыпанный укропом.
 Цыпленок табака в домашних условиях
 Как видите, приготовить цыпленка табака в домашних условиях совсем несложно, главное иметь желание и немножко терпения</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
 </resources>
