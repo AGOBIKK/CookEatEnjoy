@@ -10,7 +10,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.model.RecipeList
-import com.agobikk.cookeatenjoy.ui.viewmodels.RecipesViewModel
 
 
 class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {

@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/CategoryFragment"
-        android:name="com.agobikk.cookeatenjoy.ui.screens.CategoryFragment"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.category.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category">
         <action

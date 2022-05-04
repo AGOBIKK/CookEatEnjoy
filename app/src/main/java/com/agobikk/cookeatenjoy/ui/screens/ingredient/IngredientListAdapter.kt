@@ -3,6 +3,8 @@ package com.agobikk.cookeatenjoy.ui.screens.ingredient
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -24,13 +26,17 @@ class IngredientListAdapter(private val onClickListener: IngredientListFragment.
         )
 
     override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
+        holder.cardView.animation =
+            AnimationUtils.loadAnimation(holder.cardView.context, R.anim.anim_item)
         val item = getItem(position)
         holder.itemView.setOnClickListener { onClickListener.onClick(item) }
         holder.bind(item)
+
     }
 
 
     class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var cardView: CardView = itemView.findViewById(R.id.ingredients_cardView)
 
         private val viewBinding: LayoutIngredientsItemBinding by viewBinding()
         fun bind(extendedIngredient: ExtendedIngredient) = with(viewBinding) {
