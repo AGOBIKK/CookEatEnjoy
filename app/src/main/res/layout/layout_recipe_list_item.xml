@@ -40,8 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="100"
                 android:ellipsize="end"
-                android:textColor="@color/teal_200"
                 android:fontFamily="@font/courgette"
+                android:textColor="@color/teal_200"
                 android:textSize="@dimen/recipe_title_text_size"
                 tools:text="Title" />
 
@@ -60,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_weight="100"
-                android:gravity="start"
                 android:fontFamily="@font/courgette"
+                android:gravity="start"
                 android:textSize="@dimen/recipe_publisher_text_size"
                 android:textStyle="italic"
                 tools:text="Description" />
@@ -99,7 +99,6 @@
 
 
     </LinearLayout>
-
 
 
 </androidx.cardview.widget.CardView>

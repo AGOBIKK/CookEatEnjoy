@@ -26,15 +26,17 @@ class IngredientListAdapter(private val onClickListener: IngredientListFragment.
         )
 
     override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
+        holder.cardView.animation =
+            AnimationUtils.loadAnimation(holder.cardView.context, R.anim.anim_item)
         val item = getItem(position)
         holder.itemView.setOnClickListener { onClickListener.onClick(item) }
         holder.bind(item)
-        holder.cardView.animation = AnimationUtils.loadAnimation(holder.cardView.context, R.anim.anim_item_ingredient)
+
     }
 
 
     class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-     var cardView: CardView = itemView.findViewById(R.id.ingredients_cardView)
+        var cardView: CardView = itemView.findViewById(R.id.ingredients_cardView)
 
         private val viewBinding: LayoutIngredientsItemBinding by viewBinding()
         fun bind(extendedIngredient: ExtendedIngredient) = with(viewBinding) {
