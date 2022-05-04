@@ -3,7 +3,8 @@ package com.agobikk.cookeatenjoy.ui.screens.ingredient
 import androidx.recyclerview.widget.DiffUtil
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 
-class IngredientDiffUtil : DiffUtil.ItemCallback<ExtendedIngredient>() {
+class IngredientDiffUtil(
+) : DiffUtil.ItemCallback<ExtendedIngredient>() {
     override fun areItemsTheSame(
         oldItem: ExtendedIngredient,
         newItem: ExtendedIngredient
@@ -13,4 +14,6 @@ class IngredientDiffUtil : DiffUtil.ItemCallback<ExtendedIngredient>() {
         oldItem: ExtendedIngredient,
         newItem: ExtendedIngredient
     ) = oldItem == newItem
+
+
 }

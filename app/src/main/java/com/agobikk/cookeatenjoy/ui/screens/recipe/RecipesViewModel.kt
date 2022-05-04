@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.ui.viewmodels
+package com.agobikk.cookeatenjoy.ui.screens.recipe
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
