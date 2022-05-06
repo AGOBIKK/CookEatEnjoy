@@ -11,13 +11,14 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
 import com.agobikk.cookeatenjoy.model.RecipeList
+import com.agobikk.cookeatenjoy.model.ResultMainCourse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlin.math.roundToInt
 
 
 class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickListener) :
-    ListAdapter<RecipeList, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
+    ListAdapter<ResultMainCourse, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder =
@@ -43,10 +44,11 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
         var cardView: CardView = itemView.findViewById(R.id.card_view)
         private val viewBinding: LayoutRecipeListItemBinding by viewBinding()
 
-        fun bind(recipe: RecipeList) = with(viewBinding) {
+        fun bind(recipe: ResultMainCourse) = with(viewBinding) {
             recipeListTitleTextView.text = recipe.title
-            descriptionTextView.text = recipe.description
-            maxReadyTimeTextView.text = recipe.maxReadyTime.roundToInt().toString()
+//            recipeListTitleTextView.text = recipe.title
+//            descriptionTextView.text = recipe.description
+//            maxReadyTimeTextView.text = recipe.maxReadyTime.roundToInt().toString()
             recipeListImage.apply {
                 Glide
                     .with(context)
@@ -55,7 +57,7 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
                             .placeholder(R.drawable.loading_animation)
                             .error(R.drawable.ic_broken_image)
                     )
-                    .load(recipe.imageUrl)
+                    .load(recipe.image)
                     .into(this)
             }
         }

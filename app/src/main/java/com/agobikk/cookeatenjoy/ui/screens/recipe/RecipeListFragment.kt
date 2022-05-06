@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.model.RecipeList
+import com.agobikk.cookeatenjoy.model.ResultMainCourse
 
 
 class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
@@ -25,8 +26,8 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         viewBinding.recipeListRecyclerView.adapter = adapter
 
         //сейчас тут нет данных т.к. еще не приходят  данные из сети
-        viewModel.recipeList.observe(viewLifecycleOwner) {
-            it.let { adapter.submitList(it) }
+        viewModel.recipeList.observe(viewLifecycleOwner) {list ->
+            adapter.submitList(list.body()!!.results) }
         }
 
         /**'
@@ -34,14 +35,8 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
          * Это удалить  и будет применено
          */
 
-        val p1 = RecipeList("1", "2", "4", 22F, "", true)
-        val p2 = RecipeList("1", "2", "4", 10F, "", false)
-        val p3 = RecipeList("1", "2", "4", 40F, "", false)
-        val p4 = RecipeList("1", "2", "4", 40F, "", true)
-        val p5 = RecipeList("1", "2", "4", 40F, "", true)
-        val p6 = RecipeList("1", "2", "4", 40F, "", false)
-        val p7 = RecipeList("1", "2", "4", 40F, "", true)
-        adapter.submitList(listOf(p1, p2, p3, p4, p5, p6, p7))
+
+
 
     }
 
@@ -50,8 +45,8 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
 
     }
 
-    class OnClickListener(val clickListener: (recipeList: RecipeList) -> Unit) {
-        fun onClick(recipeList: RecipeList) = clickListener(recipeList)
+    class OnClickListener(val clickListener: (recipeList: ResultMainCourse) -> Unit) {
+        fun onClick(recipeList: ResultMainCourse) = clickListener(recipeList)
     }
 }
 

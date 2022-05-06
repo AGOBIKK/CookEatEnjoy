@@ -1,5 +1,7 @@
 package com.agobikk.cookeatenjoy.model
 
+import com.google.gson.annotations.SerializedName
+
 
 data class DetailRecipe(
     val analyzedInstructions: Array<String>?,
@@ -24,5 +26,25 @@ data class RecipeList(
     val maxReadyTime: Float,
     val imageUrl: String,
     val vegan: Boolean
+)
+data class ModelMainCourse(
+    @SerializedName("number")
+    val number: Int,
+    @SerializedName("offset")
+    val offset: Int,
+    @SerializedName("results")
+    val results: List<ResultMainCourse>,
+    @SerializedName("totalResults")
+    val totalResults: Int)
+
+data class ResultMainCourse(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("image")
+    val image: String,
+    @SerializedName("imageType")
+    val imageType: String,
+    @SerializedName("title")
+    val title: String
 )
 
