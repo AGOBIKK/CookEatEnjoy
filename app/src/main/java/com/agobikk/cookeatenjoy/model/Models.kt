@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class DetailRecipe(
-    val analyzedInstructions: Array<String>?,
+
     val imageUrl: String,
     val recipeId: String,
     val title: String,
@@ -46,5 +46,37 @@ data class ResultMainCourse(
     val imageType: String,
     @SerializedName("title")
     val title: String
+)
+
+data class FoodInformation(
+
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("image")
+    val image: String,
+
+    @SerializedName("summary")
+    val instructions: String,
+
+    @SerializedName("title")
+    val title: String,
+
+    @SerializedName("sourceName")
+    val sourceName: String,
+)
+
+data class ExtendedIngredient(
+    @SerializedName("amount")
+    val amount: Double?,
+    @SerializedName("consistency")
+    val consistency: String?,
+    @SerializedName("image")
+    val image: String?,
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("original")
+    val original: String?,
+    @SerializedName("unit")
+    val unit: String?
 )
 

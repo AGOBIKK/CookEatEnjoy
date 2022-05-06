@@ -11,14 +11,16 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.DetailRecipe
+import com.agobikk.cookeatenjoy.model.FoodInformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
+import retrofit2.Response
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
-    lateinit var mDetailRecipe: DetailRecipe
+    lateinit var mDetailRecipe: FoodInformation
     private var isFavorite: Boolean = false
 
 
@@ -50,19 +52,19 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
             it?.let {
                 Log.i("DetailRecipeFragment", "subscribeUi: $it")
-                setDetails(it)
+                setDetails()
             }
         }
     }
 
-    private fun setDetails(detailRecipe: DetailRecipe) = with(viewBinding) {
+    private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
         Glide.with(requireContext())
             .setDefaultRequestOptions(
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image)
             )
-            .load(detailRecipe.imageUrl)
+            .load(detailRecipe.image)
             .into(recipeDetailImage)
         recipeDetailTitle.text = detailRecipe.title
         sourceNameRecipe.text = detailRecipe.sourceName
