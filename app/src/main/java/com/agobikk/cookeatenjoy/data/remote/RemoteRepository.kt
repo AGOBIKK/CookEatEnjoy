@@ -6,6 +6,6 @@ import retrofit2.Response
 
 class RemoteRepository {
     suspend fun getModelMainCourse(): Response<ModelMainCourse> {
-        return RemoteInstance.
+        return RemoteInstance.api.getFoodMainCourse()
     }
 }

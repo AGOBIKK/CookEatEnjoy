@@ -5,20 +5,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
+import com.agobikk.cookeatenjoy.model.ModelMainCourse
 import com.agobikk.cookeatenjoy.model.RecipeList
 import com.agobikk.cookeatenjoy.model.ResultMainCourse
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 
 class RecipesViewModel() : ViewModel() {
     private val repository = RemoteRepository()
 
-    private val _recipeList = MutableLiveData<List<ResultMainCourse>?>()
-    val recipeList: LiveData<List<ResultMainCourse>?> = _recipeList
+    private val _recipeList = MutableLiveData<Response<ModelMainCourse>?>()
+    val recipeList: LiveData<Response<ModelMainCourse>?> = _recipeList
+
+//    val recipeList: MutableLiveData<Response<ModelMainCourse>> = MutableLiveData()
 
 
-    fun getMovies() {
+    fun getModelMainCourse() {
         viewModelScope.launch {
-            _recipeList.value = repository
+            _recipeList.value = repository.getModelMainCourse()
         }
+    }
 }
