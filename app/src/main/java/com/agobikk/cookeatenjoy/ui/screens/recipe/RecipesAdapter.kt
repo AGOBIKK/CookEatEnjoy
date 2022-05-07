@@ -52,6 +52,7 @@ class RecipesAdapter(private val onClickListener: OnClickListener) :
                             .error(R.drawable.ic_broken_image)
                     )
                     .load(recipe.image)
+                    .centerCrop()
                     .into(this)
             }
         }

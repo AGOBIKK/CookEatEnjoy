@@ -15,9 +15,9 @@ class DetailRecipeViewModel : ViewModel() {
     private val _recipeDetail = MutableLiveData<Response<FoodInformation>?>()
     val recipeDetail: LiveData<Response<FoodInformation>?> = _recipeDetail
 
-    fun getFoodInformation() {
+    private fun getFoodInformation() {
         viewModelScope.launch {
-            _recipeDetail.value = repository.getFoodInformation()
+            _recipeDetail.postValue(repository.getFoodInformation())
         }
     }
 
