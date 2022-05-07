@@ -52,7 +52,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
             it?.let {
                 Log.i("DetailRecipeFragment", "subscribeUi: $it")
-                setDetails()
+                setDetails(mDetailRecipe)
             }
         }
     }
