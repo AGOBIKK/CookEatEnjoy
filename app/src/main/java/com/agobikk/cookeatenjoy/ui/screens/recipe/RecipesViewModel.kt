@@ -16,12 +16,16 @@ class RecipesViewModel() : ViewModel() {
     private val _recipeList = MutableLiveData<Response<ModelMainCourse>?>()
     val recipeList: LiveData<Response<ModelMainCourse>?> = _recipeList
 
-//    val recipeList: MutableLiveData<Response<ModelMainCourse>> = MutableLiveData()
 
 
-    fun getModelMainCourse() {
+
+    private fun getModelMainCourse() {
         viewModelScope.launch {
-            _recipeList.value = repository.getModelMainCourse()
+            _recipeList.postValue(repository.getModelMainCourse())
         }
+    }
+
+    fun onViewCreated() {
+         getModelMainCourse()
     }
 }

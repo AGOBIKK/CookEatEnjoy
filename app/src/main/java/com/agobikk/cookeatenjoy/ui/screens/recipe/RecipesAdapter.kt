@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickListener) :
+class RecipesAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<ResultMainCourse, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
 
 
