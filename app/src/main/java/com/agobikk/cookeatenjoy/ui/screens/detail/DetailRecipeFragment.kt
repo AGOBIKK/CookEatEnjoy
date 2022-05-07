@@ -28,7 +28,6 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         viewModel.onViewCreated()
-
         setScrollListener()
         subscribeUi()
         with(viewBinding) {
