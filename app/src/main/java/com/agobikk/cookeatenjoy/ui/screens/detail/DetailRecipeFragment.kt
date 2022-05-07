@@ -10,18 +10,14 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
-import com.agobikk.cookeatenjoy.model.DetailRecipe
 import com.agobikk.cookeatenjoy.model.FoodInformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
-import retrofit2.Response
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
-
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,7 +55,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     }
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
-        context?.let{
+        context?.let {
             Glide.with(it)
                 .setDefaultRequestOptions(
                     RequestOptions()
