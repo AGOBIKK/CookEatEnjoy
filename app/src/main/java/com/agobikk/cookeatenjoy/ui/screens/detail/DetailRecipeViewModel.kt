@@ -19,4 +19,8 @@ class DetailRecipeViewModel : ViewModel() {
             _recipeDetail.value = repository.getFoodInformation()
         }
     }
+   fun onViewCreated(){
+       getFoodInformation()
+   }
+
 }

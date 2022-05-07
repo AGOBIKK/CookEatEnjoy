@@ -20,13 +20,15 @@ import retrofit2.Response
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
-    lateinit var mDetailRecipe: FoodInformation
-    private var isFavorite: Boolean = false
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        viewModel.onViewCreated()
+
         setScrollListener()
         subscribeUi()
         with(viewBinding) {
@@ -50,22 +52,24 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
     private fun subscribeUi() {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
-            it?.let {
+            it?.body()?.let {
                 Log.i("DetailRecipeFragment", "subscribeUi: $it")
-                setDetails(mDetailRecipe)
+                setDetails(it)
             }
         }
     }
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
-        Glide.with(requireContext())
-            .setDefaultRequestOptions(
-                RequestOptions()
-                    .placeholder(R.drawable.loading_animation)
-                    .error(R.drawable.ic_broken_image)
-            )
-            .load(detailRecipe.image)
-            .into(recipeDetailImage)
+        context?.let{
+            Glide.with(it)
+                .setDefaultRequestOptions(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_broken_image)
+                )
+                .load(detailRecipe.image)
+                .into(recipeDetailImage)
+        }
         recipeDetailTitle.text = detailRecipe.title
         sourceNameRecipe.text = detailRecipe.sourceName
         instructions.text = detailRecipe.instructions
