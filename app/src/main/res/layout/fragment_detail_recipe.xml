@@ -27,7 +27,6 @@
                 android:layout_height="@dimen/recipe_image_height"
                 android:contentDescription="@string/recipe_image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dessert"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

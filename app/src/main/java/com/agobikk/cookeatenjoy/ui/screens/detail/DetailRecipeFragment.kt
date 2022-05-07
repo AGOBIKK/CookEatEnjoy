@@ -11,20 +11,23 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.DetailRecipe
+import com.agobikk.cookeatenjoy.model.FoodInformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
+import retrofit2.Response
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
-    lateinit var mDetailRecipe: DetailRecipe
-    private var isFavorite: Boolean = false
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        viewModel.onViewCreated()
         setScrollListener()
         subscribeUi()
         with(viewBinding) {
@@ -48,22 +51,24 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
     private fun subscribeUi() {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
-            it?.let {
+            it?.body()?.let {
                 Log.i("DetailRecipeFragment", "subscribeUi: $it")
                 setDetails(it)
             }
         }
     }
 
-    private fun setDetails(detailRecipe: DetailRecipe) = with(viewBinding) {
-        Glide.with(requireContext())
-            .setDefaultRequestOptions(
-                RequestOptions()
-                    .placeholder(R.drawable.loading_animation)
-                    .error(R.drawable.ic_broken_image)
-            )
-            .load(detailRecipe.imageUrl)
-            .into(recipeDetailImage)
+    private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
+        context?.let{
+            Glide.with(it)
+                .setDefaultRequestOptions(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_broken_image)
+                )
+                .load(detailRecipe.image)
+                .into(recipeDetailImage)
+        }
         recipeDetailTitle.text = detailRecipe.title
         sourceNameRecipe.text = detailRecipe.sourceName
         instructions.text = detailRecipe.instructions
