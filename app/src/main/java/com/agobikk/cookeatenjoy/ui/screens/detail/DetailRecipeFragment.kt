@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
 import retrofit2.Response
+import timber.log.Timber
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
@@ -39,10 +40,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private fun setScrollListener() = with(viewBinding) {
         val appBarLayout = recipeDetailAppBarLayout
         val offsetChangedListener = AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-            Log.i(
-                "DetailRecipeFragment",
-                "setScrollListener: $verticalOffset \nrange:  ${appBarLayout.totalScrollRange}"
-            )
+            Timber.i("setScrollListener: " + verticalOffset + " " + "\n" + "range:  " + appBarLayout.totalScrollRange)
             val seekPosition = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
             recipeDetailMotionLayout.progress = seekPosition
         }
@@ -52,10 +50,11 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private fun subscribeUi() {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
             it?.body()?.let {
-                Log.i("DetailRecipeFragment", "subscribeUi: $it")
+                Timber.i("subscribeUi: $it")
                 setDetails(it)
             }
         }
+
     }
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
