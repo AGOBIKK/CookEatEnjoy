@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.ui.adapters
+package com.agobikk.cookeatenjoy.ui.screens.category
 
 import android.view.LayoutInflater
 import android.view.View

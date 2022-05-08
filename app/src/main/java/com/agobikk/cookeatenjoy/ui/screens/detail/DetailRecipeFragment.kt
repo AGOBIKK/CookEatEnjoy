@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
 import retrofit2.Response
-import timber.log.Timber
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
@@ -31,10 +30,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         viewModel.onViewCreated()
         setScrollListener()
         subscribeUi()
-        with(viewBinding) {
-            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener { findNavController().navigateUp() }
-            ingredientImage.setOnClickListener { findNavController().navigate(R.id.action_detailRecipeFragment_to_ingredientFragment) }
-        }
+        navigate()
     }
 
     private fun setScrollListener() = with(viewBinding) {
@@ -54,11 +50,10 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                 setDetails(it)
             }
         }
-
     }
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
-        context?.let{
+        context?.let {
             Glide.with(it)
                 .setDefaultRequestOptions(
                     RequestOptions()
@@ -66,10 +61,18 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                         .error(R.drawable.ic_broken_image)
                 )
                 .load(detailRecipe.image)
+                .centerCrop()
                 .into(recipeDetailImage)
         }
         recipeDetailTitle.text = detailRecipe.title
         sourceNameRecipe.text = detailRecipe.sourceName
-        instructions.text = detailRecipe.instructions
+        includeLayoutCardInstruction.cookingInstructions.text = detailRecipe.instructions
+    }
+
+    private fun navigate() {
+        with(viewBinding) {
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener { findNavController().navigateUp() }
+            ingredientImage.setOnClickListener { findNavController().navigate(R.id.action_detailRecipeFragment_to_ingredientFragment) }
+        }
     }
 }

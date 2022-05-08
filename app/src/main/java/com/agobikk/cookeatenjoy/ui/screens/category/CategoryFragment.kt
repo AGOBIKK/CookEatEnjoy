@@ -8,8 +8,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentCategoryBinding
 import com.agobikk.cookeatenjoy.model.Category
-import com.agobikk.cookeatenjoy.ui.adapters.CategoryAdapter
-import com.agobikk.cookeatenjoy.ui.adapters.OnCategoryClick
 import com.agobikk.cookeatenjoy.util.Const
 
 
@@ -23,7 +21,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
     }
 
     private fun initRecyclerView() = with(viewBinding) {
-        adapter = CategoryAdapter(OnCategoryClick {  navigateToRecipeList() })
+        adapter = CategoryAdapter(OnCategoryClick { navigateToRecipeList() })
         categoryListRecyclerView.adapter = adapter
 
         val categoryList: List<Category> = List(Const.DEFAULT_CATEGORIES_NAMES.size) { index ->
