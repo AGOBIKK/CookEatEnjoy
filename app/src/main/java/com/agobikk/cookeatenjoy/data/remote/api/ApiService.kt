@@ -6,9 +6,9 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("recipes/complexSearch?type=main course&number=100&apiKey=f78cce0f5c43408db48b637be428697a")
+    @GET("recipes/complexSearch?type=main course&number=100")
     suspend fun getFoodMainCourse(): Response<ModelMainCourse>
 
-    @GET("/recipes/716429/information?includeNutrition=false&apiKey=f78cce0f5c43408db48b637be428697a")
+    @GET("/recipes/716429/information?includeNutrition=false")
     suspend fun getFoodInformation(): Response<FoodInformation>
 }
