@@ -10,14 +10,18 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
+import com.agobikk.cookeatenjoy.model.DetailRecipe
 import com.agobikk.cookeatenjoy.model.FoodInformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
+import retrofit2.Response
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,10 +36,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private fun setScrollListener() = with(viewBinding) {
         val appBarLayout = recipeDetailAppBarLayout
         val offsetChangedListener = AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-            Log.i(
-                "DetailRecipeFragment",
-                "setScrollListener: $verticalOffset \nrange:  ${appBarLayout.totalScrollRange}"
-            )
+            Timber.i("setScrollListener: " + verticalOffset + " " + "\n" + "range:  " + appBarLayout.totalScrollRange)
             val seekPosition = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
             recipeDetailMotionLayout.progress = seekPosition
         }
@@ -45,7 +46,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private fun subscribeUi() {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
             it?.body()?.let {
-                Log.i("DetailRecipeFragment", "subscribeUi: $it")
+                Timber.i("subscribeUi: $it")
                 setDetails(it)
             }
         }

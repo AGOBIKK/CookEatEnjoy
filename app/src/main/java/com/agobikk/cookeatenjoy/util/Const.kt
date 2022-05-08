@@ -4,9 +4,6 @@ import com.agobikk.cookeatenjoy.R
 
 
 object Const {
-    val BASE_URL = "https://api.spoonacular.com/"
-
-    const val NO_RESULTS = "no_results"
 
     val DEFAULT_CATEGORIES_NAMES = arrayOf(
         R.string.mainCourse,

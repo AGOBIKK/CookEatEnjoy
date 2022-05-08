@@ -17,6 +17,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        /* get it here -> https://spoonacular.com */
+        def apiKey = properties.getProperty("API_KEY", "")
+        it.buildConfigField "String", "API_KEY", apiKey
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -90,4 +98,8 @@ dependencies {
 
     //splashScreen
     implementation "androidx.core:core-splashscreen:1.0.0-beta02"
+
+    //Timber+Logger for Log
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+    implementation 'com.orhanobut:logger:2.2.0'
 }
