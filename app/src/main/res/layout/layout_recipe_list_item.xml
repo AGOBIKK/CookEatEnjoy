@@ -41,7 +41,7 @@
                 android:layout_weight="100"
                 android:ellipsize="end"
                 android:fontFamily="@font/courgette"
-                android:textColor="@color/teal_200"
+                android:textColor="@color/purple_700"
                 android:textSize="@dimen/recipe_title_text_size"
                 tools:text="Title" />
 
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_clock"
-                app:tint="@color/teal_200" />
+                android:textColor="@color/purple_700" />
 
 
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:gravity="center"
-                android:textColor="@color/teal_200"
+                android:textColor="@color/purple_700"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="45" />

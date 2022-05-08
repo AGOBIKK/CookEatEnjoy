@@ -10,14 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
-import com.agobikk.cookeatenjoy.model.RecipeList
 import com.agobikk.cookeatenjoy.model.ResultMainCourse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlin.math.roundToInt
 
 
-class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickListener) :
+class RecipesAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<ResultMainCourse, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
 
 
@@ -30,8 +28,7 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
 
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        holder.cardView.animation =
-            AnimationUtils.loadAnimation(holder.cardView.context, R.anim.anim_item)
+        holder.cardView.animation = AnimationUtils.loadAnimation(holder.cardView.context, R.anim.anim_item)
         val item = getItem(position)
         holder.itemView.setOnClickListener { onClickListener.onClick(item) }
         holder.bind(item)
@@ -46,9 +43,6 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
 
         fun bind(recipe: ResultMainCourse) = with(viewBinding) {
             recipeListTitleTextView.text = recipe.title
-//            recipeListTitleTextView.text = recipe.title
-//            descriptionTextView.text = recipe.description
-//            maxReadyTimeTextView.text = recipe.maxReadyTime.roundToInt().toString()
             recipeListImage.apply {
                 Glide
                     .with(context)
@@ -58,6 +52,7 @@ class RecipesAdapter(private val onClickListener: RecipeListFragment.OnClickList
                             .error(R.drawable.ic_broken_image)
                     )
                     .load(recipe.image)
+                    .centerCrop()
                     .into(this)
             }
         }
