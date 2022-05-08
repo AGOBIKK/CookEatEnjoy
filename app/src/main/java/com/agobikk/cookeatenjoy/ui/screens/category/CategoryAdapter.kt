@@ -10,7 +10,7 @@ import com.agobikk.cookeatenjoy.databinding.LayoutCategoryListItemBinding
 import com.agobikk.cookeatenjoy.model.Category
 import com.bumptech.glide.Glide
 
-class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
+class CategoryAdapter(private val onCategoryClickListener: OnCategoryClickListener) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
 
@@ -29,7 +29,8 @@ class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val item = categoryData[position]
-        holder.bind(onCategoryClick, item)
+        holder.itemView.setOnClickListener { onCategoryClickListener.onClick(item) }
+        holder.bind(onCategoryClickListener, item)
     }
 
     override fun getItemCount() = categoryData.size
@@ -38,7 +39,7 @@ class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
 
         private val viewBinding: LayoutCategoryListItemBinding by viewBinding()
 
-        fun bind(categoryClick: OnCategoryClick, item: Category) = with(viewBinding) {
+        fun bind(onCategoryClickListener: OnCategoryClickListener, item: Category) = with(viewBinding) {
             categoryTitle.text = item.categoryName
             categoryImage.apply {
                 Glide
@@ -46,12 +47,8 @@ class CategoryAdapter(val onCategoryClick: OnCategoryClick) :
                     .load(item.imageUrl)
                     .into(this)
             }
-            itemView.setOnClickListener { categoryClick.onClick(item) }
+            itemView.setOnClickListener { onCategoryClickListener.onClick(item) }
         }
     }
 }
 
-
-class OnCategoryClick(val clickListener: (string: String) -> Unit) {
-    fun onClick(category: Category) = clickListener(category.categoryName)
-}
