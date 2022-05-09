@@ -1,8 +1,12 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
+import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,8 +22,6 @@ import timber.log.Timber
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
-
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,9 +45,9 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
     private fun subscribeUi() {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
-            it?.body()?.let {
+            it?.body()?.let { foodInformation ->
                 Timber.i("subscribeUi: $it")
-                setDetails(it)
+                setDetails(foodInformation)
             }
         }
     }
@@ -64,8 +66,16 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         }
         recipeDetailTitle.text = detailRecipe.title
         sourceNameRecipe.text = detailRecipe.sourceName
-        includeLayoutCardInstruction.cookingInstructions.text = detailRecipe.instructions
+        includeLayoutCardInstruction.cookingInstructions.text =
+            detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                includeLayoutCardInstruction.cookingInstructions.justificationMode =
+                    JUSTIFICATION_MODE_INTER_WORD
+            }
+        }
     }
+
 
     private fun navigate() {
         with(viewBinding) {

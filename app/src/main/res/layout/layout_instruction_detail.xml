@@ -17,14 +17,17 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_4"
-        android:background="@color/purple_200" />
+        android:background="@color/purple_700" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/cooking_instructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_8"
-        android:orientation="vertical">
-    </TextView>
+        android:fontFamily="@font/courgette"
+        android:orientation="vertical"
+        android:textColorLink="@android:color/tertiary_text_dark">
+
+    </androidx.appcompat.widget.AppCompatTextView>
 
 </androidx.cardview.widget.CardView>

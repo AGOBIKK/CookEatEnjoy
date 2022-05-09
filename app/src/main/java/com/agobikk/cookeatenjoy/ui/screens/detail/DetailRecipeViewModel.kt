@@ -25,4 +25,5 @@ class DetailRecipeViewModel : ViewModel() {
         getFoodInformation()
     }
 
+
 }
