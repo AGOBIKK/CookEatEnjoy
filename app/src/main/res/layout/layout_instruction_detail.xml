@@ -24,8 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_8"
+        android:fontFamily="@font/courgette"
         android:orientation="vertical"
-        android:textColorLink="#1132EF">
+        android:textColorLink="@android:color/tertiary_text_dark">
 
     </androidx.appcompat.widget.AppCompatTextView>
 

@@ -3,7 +3,6 @@ package com.agobikk.cookeatenjoy.ui.screens.detail
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
@@ -23,6 +22,7 @@ import timber.log.Timber
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,10 +45,9 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
     private fun subscribeUi() {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
-            it?.body()?.let {
+            it?.body()?.let { foodInformation ->
                 Timber.i("subscribeUi: $it")
-                setDetails(it)
-                wordProcessing()
+                setDetails(foodInformation)
             }
         }
     }
@@ -69,17 +68,12 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         sourceNameRecipe.text = detailRecipe.sourceName
         includeLayoutCardInstruction.cookingInstructions.text =
             detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
-    }
-
-    private fun wordProcessing() = with(viewBinding) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 includeLayoutCardInstruction.cookingInstructions.justificationMode =
                     JUSTIFICATION_MODE_INTER_WORD
             }
         }
-        includeLayoutCardInstruction.cookingInstructions.movementMethod =
-            LinkMovementMethod.getInstance()
     }
 
 
