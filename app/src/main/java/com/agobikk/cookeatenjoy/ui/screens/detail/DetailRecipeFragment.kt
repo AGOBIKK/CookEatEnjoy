@@ -20,15 +20,18 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewModel: DetailRecipeViewModel by viewModels()
 
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-        viewModel.onViewCreated()
+        val foodId = getFoodId()
+        viewModel.onViewCreated(id = foodId )
         setScrollListener()
         subscribeUi()
         navigate()
+    }
+
+    private fun getFoodId(): Int {
+        return arguments?.getString(ID_FOOD_RECIPE_DETAIL)!!.toInt()
     }
 
     private fun setScrollListener() = with(viewBinding) {
@@ -63,7 +66,10 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                 .into(recipeDetailImage)
         }
         recipeDetailTitle.text = detailRecipe.title
+        Timber.d("setDetails:> ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
         sourceNameRecipe.text = detailRecipe.sourceName
+        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
+
         includeLayoutCardInstruction.cookingInstructions.text = detailRecipe.instructions
     }
 
@@ -72,5 +78,9 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
             includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener { findNavController().navigateUp() }
             ingredientImage.setOnClickListener { findNavController().navigate(R.id.action_detailRecipeFragment_to_ingredientFragment) }
         }
+    }
+
+    companion object {
+        const val ID_FOOD_RECIPE_DETAIL = "ID_FOOD_RECIPE_DETAIL"
     }
 }

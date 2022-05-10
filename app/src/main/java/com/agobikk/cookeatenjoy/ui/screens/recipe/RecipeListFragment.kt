@@ -3,13 +3,17 @@ package com.agobikk.cookeatenjoy.ui.screens.recipe
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.model.ResultMainCourse
+import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
+import timber.log.Timber
 
 
 class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
@@ -21,12 +25,15 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         init()
+
     }
 
     private fun init() {
         adapter = RecipesAdapter(object : OnClickListener {
             override fun onClick(resultMainCourse: ResultMainCourse) {
+                ID_FOOD_RECIPE = resultMainCourse.id.toString()
                 navigateToRecipeList()
+                Timber.d("onViewCreated------>>>>>>>>${ID_FOOD_RECIPE}:")
             }
         })
         viewBinding.recipeListRecyclerView.adapter = adapter
@@ -34,11 +41,25 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         viewModel.recipeList.observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list?.body()?.results)
         }
+
     }
+
 
     private fun navigateToRecipeList() {
-        findNavController().navigate(R.id.action_RecipeListFragment_to_detailRecipeFragment)
+
+        findNavController()
+            .navigate(
+                R.id.action_RecipeListFragment_to_detailRecipeFragment,
+                bundleOf(
+                    DetailRecipeFragment.ID_FOOD_RECIPE_DETAIL to ID_FOOD_RECIPE
+                )
+            )
     }
 
+    companion object {
+        var ID_FOOD_RECIPE = "ID_FOOD_RECIPE"
+    }
 }
+
+
 

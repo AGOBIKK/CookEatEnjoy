@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.navArgument
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.model.FoodInformation
 import kotlinx.coroutines.launch
@@ -15,14 +16,16 @@ class DetailRecipeViewModel : ViewModel() {
     private val _recipeDetail = MutableLiveData<Response<FoodInformation>?>()
     val recipeDetail: LiveData<Response<FoodInformation>?> = _recipeDetail
 
-    private fun getFoodInformation() {
+    private fun getFoodInformation(id:Int) {
         viewModelScope.launch {
-            _recipeDetail.postValue(repository.getFoodInformation())
+            _recipeDetail.postValue(repository.getFoodInformation(id = id))
         }
     }
 
-    fun onViewCreated() {
-        getFoodInformation()
+    fun onViewCreated(id:Int) {
+
+        getFoodInformation(id = id)
     }
+
 
 }

@@ -10,7 +10,8 @@ class RemoteRepository {
         return RemoteInstance.api.getFoodMainCourse()
     }
 
-    suspend fun getFoodInformation(): Response<FoodInformation> {
-        return RemoteInstance.api.getFoodInformation()
+    suspend fun getFoodInformation(id: Int): Response<FoodInformation> {
+        return RemoteInstance.api.getFoodInformation(id = id)
     }
+
 }
