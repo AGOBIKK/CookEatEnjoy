@@ -18,54 +18,28 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        adapter = IngredientListAdapter(OnClickListener {})
-        viewBinding.ingredientsRecyclerview.adapter = adapter
+        init()
 
 
         /**'
          * Временное решение для иницилизации списка, после того как данные будут приходить по сети удалить!!!
-         *
          */
-
         val Ing1 = ExtendedIngredient(1.00, "consistency", "image", "name", "original", "unit")
         val Ing2 = ExtendedIngredient(2.00, "consistency", "image", "name", "original", "unit")
         val Ing3 = ExtendedIngredient(12.00, "consistency", "image", "name", "original", "unit")
         val Ing4 = ExtendedIngredient(14.00, "consistency", "image", "name", "original", "unit")
-        val Ing5 = ExtendedIngredient(15.00, "consistency", "image", "name", "original", "unit")
-        val Ing6 = ExtendedIngredient(12.00, "consistency", "image", "name", "original", "unit")
-        val Ing7 = ExtendedIngredient(12.00, "consistency", "image", "name", "original", "unit")
-        val Ing8 = ExtendedIngredient(11.00, "consistency", "image", "name", "original", "unit")
-        val Ing9 = ExtendedIngredient(12.00, "consistency", "image", "name", "original", "unit")
-        val Ing10 = ExtendedIngredient(51.00, "consistency", "image", "name", "original", "unit")
-        val Ing11 = ExtendedIngredient(12.00, "consistency", "image", "name", "original", "unit")
-        val Ing12 = ExtendedIngredient(16.00, "consistency", "image", "name", "original", "unit")
-        val Ing13 = ExtendedIngredient(12.00, "consistency", "image", "name", "original", "unit")
-        val Ing14 = ExtendedIngredient(18.00, "consistency", "image", "name", "original", "unit")
-        adapter.submitList(
-            listOf(
-                Ing1,
-                Ing1,
-                Ing2,
-                Ing3,
-                Ing4,
-                Ing5,
-                Ing6,
-                Ing7,
-                Ing8,
-                Ing9,
-                Ing10,
-                Ing11,
-                Ing12,
-                Ing13,
-                Ing14
-            )
-        )
+        adapter.submitList(listOf(Ing1, Ing1, Ing2, Ing3, Ing4))
     }
 
+    private fun init() = with(viewBinding) {
+        adapter = IngredientListAdapter(object : OnIngredientClickListener {
+            override fun onClick(extendedIngredient: ExtendedIngredient) {
 
-    class OnClickListener(val clickListener: (ingredientList: ExtendedIngredient) -> Unit) {
-        fun onClick(ingredientList: ExtendedIngredient) = clickListener(ingredientList)
+            }
+        })
+        viewBinding.ingredientsRecyclerview.adapter = adapter
     }
+
 }
 
 

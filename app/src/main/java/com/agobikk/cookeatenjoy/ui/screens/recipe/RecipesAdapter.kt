@@ -1,7 +1,5 @@
 package com.agobikk.cookeatenjoy.ui.screens.recipe
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +13,6 @@ import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
 import com.agobikk.cookeatenjoy.model.ResultMainCourse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.coroutines.NonDisposableHandle.parent
-import timber.log.Timber
 
 
 class RecipesAdapter(private val onClickListener: OnClickListener) :
@@ -59,11 +55,9 @@ class RecipesAdapter(private val onClickListener: OnClickListener) :
                             .error(R.drawable.ic_broken_image)
                     )
                     .load(recipe.image)
-                    .centerCrop()
                     .into(this)
             }
         }
     }
 }
-
 

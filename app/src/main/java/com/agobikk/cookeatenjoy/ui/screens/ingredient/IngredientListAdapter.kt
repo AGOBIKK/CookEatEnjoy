@@ -11,11 +11,12 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutIngredientsItemBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
+import com.agobikk.cookeatenjoy.ui.screens.recipe.OnClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class IngredientListAdapter(private val onClickListener: IngredientListFragment.OnClickListener) :
+class IngredientListAdapter(private val onIngredientClickListener: OnIngredientClickListener) :
     ListAdapter<ExtendedIngredient, IngredientListAdapter.IngredientViewHolder>(IngredientDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder =
@@ -29,7 +30,7 @@ class IngredientListAdapter(private val onClickListener: IngredientListFragment.
         holder.cardView.animation =
             AnimationUtils.loadAnimation(holder.cardView.context, R.anim.anim_item)
         val item = getItem(position)
-        holder.itemView.setOnClickListener { onClickListener.onClick(item) }
+        holder.itemView.setOnClickListener { onIngredientClickListener.onClick(item) }
         holder.bind(item)
 
     }

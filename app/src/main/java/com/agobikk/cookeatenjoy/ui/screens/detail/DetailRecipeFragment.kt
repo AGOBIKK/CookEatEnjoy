@@ -66,32 +66,34 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                         .error(R.drawable.ic_broken_image)
                 )
                 .load(detailRecipe.image)
-                .centerCrop()
                 .into(recipeDetailImage)
         }
         recipeDetailTitle.text = detailRecipe.title
         Timber.d("setDetails:> ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
         sourceNameRecipe.text = detailRecipe.sourceName
+        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
+        wordProcessing(detailRecipe)
+    }
+
+    private fun wordProcessing(detailRecipe: FoodInformation) = with(viewBinding) {
         includeLayoutCardInstruction.cookingInstructions.text =
             detailRecipe
                 .instructions
                 .parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                includeLayoutCardInstruction.cookingInstructions
-                    .justificationMode = JUSTIFICATION_MODE_INTER_WORD
+                includeLayoutCardInstruction.cookingInstructions.justificationMode =
+                    JUSTIFICATION_MODE_INTER_WORD
             }
         }
-        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
-
-        includeLayoutCardInstruction.cookingInstructions.text = detailRecipe.instructions
     }
 
     private fun navigate() {
         with(viewBinding) {
             includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
                 findNavController()
-                    .navigateUp() }
+                    .navigateUp()
+            }
             ingredientImage.setOnClickListener {
                 findNavController()
                     .navigate(
