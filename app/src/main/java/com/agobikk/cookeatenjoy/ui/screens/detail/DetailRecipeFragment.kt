@@ -1,7 +1,5 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
-import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -24,13 +22,20 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewModel: DetailRecipeViewModel by viewModels()
 
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-        viewModel.onViewCreated()
+        val foodId = getFoodId()
+        viewModel.onViewCreated(id = foodId )
         setScrollListener()
         subscribeUi()
         navigate()
+    }
+
+    private fun getFoodId(): Int {
+        return arguments?.getString(ID_FOOD_RECIPE_DETAIL)!!.toInt()
     }
 
     private fun setScrollListener() = with(viewBinding) {
@@ -65,6 +70,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                 .into(recipeDetailImage)
         }
         recipeDetailTitle.text = detailRecipe.title
+        Timber.d("setDetails:> ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
         sourceNameRecipe.text = detailRecipe.sourceName
         includeLayoutCardInstruction.cookingInstructions.text =
             detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
@@ -74,13 +80,19 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                     JUSTIFICATION_MODE_INTER_WORD
             }
         }
-    }
+        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
 
+        includeLayoutCardInstruction.cookingInstructions.text = detailRecipe.instructions
+    }
 
     private fun navigate() {
         with(viewBinding) {
             includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener { findNavController().navigateUp() }
             ingredientImage.setOnClickListener { findNavController().navigate(R.id.action_detailRecipeFragment_to_ingredientFragment) }
         }
+    }
+
+    companion object {
+        const val ID_FOOD_RECIPE_DETAIL = "ID_FOOD_RECIPE_DETAIL"
     }
 }

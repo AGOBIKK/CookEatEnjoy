@@ -27,5 +27,8 @@ class RecipesViewModel() : ViewModel() {
 
     fun onViewCreated() {
          getModelMainCourse()
+
     }
+
+
 }
