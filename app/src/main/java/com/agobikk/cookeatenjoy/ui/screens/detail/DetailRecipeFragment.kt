@@ -1,5 +1,7 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
+import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -22,13 +24,11 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewModel: DetailRecipeViewModel by viewModels()
 
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val foodId = getFoodId()
-        viewModel.onViewCreated(id = foodId )
+        viewModel.onViewCreated(id = foodId)
         setScrollListener()
         subscribeUi()
         navigate()
@@ -73,11 +73,13 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         Timber.d("setDetails:> ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
         sourceNameRecipe.text = detailRecipe.sourceName
         includeLayoutCardInstruction.cookingInstructions.text =
-            detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
+            detailRecipe
+                .instructions
+                .parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                includeLayoutCardInstruction.cookingInstructions.justificationMode =
-                    JUSTIFICATION_MODE_INTER_WORD
+                includeLayoutCardInstruction.cookingInstructions
+                    .justificationMode = JUSTIFICATION_MODE_INTER_WORD
             }
         }
         Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
@@ -87,8 +89,15 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
     private fun navigate() {
         with(viewBinding) {
-            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener { findNavController().navigateUp() }
-            ingredientImage.setOnClickListener { findNavController().navigate(R.id.action_detailRecipeFragment_to_ingredientFragment) }
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
+                findNavController()
+                    .navigateUp() }
+            ingredientImage.setOnClickListener {
+                findNavController()
+                    .navigate(
+                        R.id.action_detailRecipeFragment_to_ingredientFragment
+                    )
+            }
         }
     }
 
