@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
+import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
 
 class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private val viewBinding: FragmentListIngredientBinding by viewBinding()
@@ -20,15 +21,8 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         init()
 
-
-        /**'
-         * Временное решение для иницилизации списка, после того как данные будут приходить по сети удалить!!!
-         */
-        val Ing1 = ExtendedIngredient(1.00, "consistency", "image", "name", "original", "unit")
-        val Ing2 = ExtendedIngredient(2.00, "consistency", "image", "name", "original", "unit")
-        val Ing3 = ExtendedIngredient(12.00, "consistency", "image", "name", "original", "unit")
-        val Ing4 = ExtendedIngredient(14.00, "consistency", "image", "name", "original", "unit")
-        adapter.submitList(listOf(Ing1, Ing1, Ing2, Ing3, Ing4))
+        adapter.submitList(DetailRecipeFragment.ingredientsList)
+//        DetailRecipeFragment.ingredientsList
     }
 
     private fun init() = with(viewBinding) {
