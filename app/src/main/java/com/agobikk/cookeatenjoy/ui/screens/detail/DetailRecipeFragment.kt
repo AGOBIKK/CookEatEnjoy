@@ -86,6 +86,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                     JUSTIFICATION_MODE_INTER_WORD
             }
         }
+        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
     }
 
     private fun navigate() {

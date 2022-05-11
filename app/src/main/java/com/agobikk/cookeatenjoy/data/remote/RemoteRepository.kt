@@ -6,8 +6,8 @@ import com.agobikk.cookeatenjoy.model.ModelMainCourse
 import retrofit2.Response
 
 class RemoteRepository {
-    suspend fun getModelMainCourse(): Response<ModelMainCourse> {
-        return RemoteInstance.api.getFoodMainCourse()
+    suspend fun getModelMainCourse(typeOfDish: String): Response<ModelMainCourse> {
+        return RemoteInstance.api.getFoodMainCourse(typeOfDish = typeOfDish)
     }
 
     suspend fun getFoodInformation(id: Int): Response<FoodInformation> {

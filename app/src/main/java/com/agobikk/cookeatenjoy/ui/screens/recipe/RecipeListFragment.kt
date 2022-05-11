@@ -37,7 +37,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
             }
         })
         viewBinding.recipeListRecyclerView.adapter = adapter
-        viewModel.onViewCreated()
+        viewModel.onViewCreated(typeOfDish = "main course")
         viewModel.recipeList.observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list?.body()?.results)
         }

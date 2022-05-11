@@ -9,6 +9,7 @@ import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutCategoryListItemBinding
 import com.agobikk.cookeatenjoy.model.Category
 import com.bumptech.glide.Glide
+import timber.log.Timber
 
 class CategoryAdapter(private val onCategoryClickListener: OnCategoryClickListener) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -31,6 +32,7 @@ class CategoryAdapter(private val onCategoryClickListener: OnCategoryClickListen
         val item = categoryData[position]
         holder.itemView.setOnClickListener { onCategoryClickListener.onClick(item) }
         holder.bind(onCategoryClickListener, item)
+        Timber.d("onBindViewHolder>>>>>>>>:$item")
     }
 
     override fun getItemCount() = categoryData.size

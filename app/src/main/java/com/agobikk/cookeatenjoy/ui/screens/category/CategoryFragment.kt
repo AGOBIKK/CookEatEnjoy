@@ -24,6 +24,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
         adapter = CategoryAdapter(object : OnCategoryClickListener {
             override fun onClick(category: Category) {
                 navigateToRecipeList()
+
             }
         })
         categoryListRecyclerView.adapter = adapter

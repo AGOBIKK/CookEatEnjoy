@@ -17,16 +17,14 @@ class RecipesViewModel() : ViewModel() {
     val recipeList: LiveData<Response<ModelMainCourse>?> = _recipeList
 
 
-
-
-    private fun getModelMainCourse() {
+    private fun getModelMainCourse(typeOfDish: String) {
         viewModelScope.launch {
-            _recipeList.postValue(repository.getModelMainCourse())
+            _recipeList.postValue(repository.getModelMainCourse(typeOfDish = typeOfDish))
         }
     }
 
-    fun onViewCreated() {
-         getModelMainCourse()
+    fun onViewCreated(typeOfDish: String) {
+        getModelMainCourse(typeOfDish)
 
     }
 
