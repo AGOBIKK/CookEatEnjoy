@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
+import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -54,8 +55,20 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                 Timber.i("subscribeUi: $it")
                 setDetails(foodInformation)
             }
+            viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
+
+//                list?.body()?.ExtendedIngredient?.toMutableList()
+                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.ExtendedIngredient?.size}")
+                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.ExtendedIngredient}")
+                ingredientsList = list?.body()?.ExtendedIngredient?.toMutableList()!!
+
+            }
+
         }
+
     }
+
+
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
         context?.let {
@@ -106,5 +119,9 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
     companion object {
         const val ID_FOOD_RECIPE_DETAIL = "ID_FOOD_RECIPE_DETAIL"
+        var ingredientsList: MutableList<ExtendedIngredient> =
+            MutableList(1){
+                ExtendedIngredient(1.0,"","","","","")
+            }
     }
 }

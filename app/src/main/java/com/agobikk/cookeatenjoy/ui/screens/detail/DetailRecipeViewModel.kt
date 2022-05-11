@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.navArgument
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
+import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -23,9 +24,7 @@ class DetailRecipeViewModel : ViewModel() {
     }
 
     fun onViewCreated(id:Int) {
-
         getFoodInformation(id = id)
     }
-
 
 }

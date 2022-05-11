@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("recipes/complexSearch?")
     suspend fun getFoodMainCourse(
-        @Query("typeOfDish") typeOfDish: String,
+        @Query("type") typeOfDish: String,
         @Query("number") number: Int = 100
     ): Response<ModelMainCourse>
 

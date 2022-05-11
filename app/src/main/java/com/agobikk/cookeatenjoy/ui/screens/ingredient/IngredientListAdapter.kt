@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.data.remote.NetworkConstants
 import com.agobikk.cookeatenjoy.databinding.LayoutIngredientsItemBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.ui.screens.recipe.OnClickListener
@@ -49,12 +50,13 @@ class IngredientListAdapter(private val onIngredientClickListener: OnIngredientC
             ingredientImageView.apply {
                 Glide
                     .with(context)
-                    .setDefaultRequestOptions(
-                        RequestOptions()
-                            .placeholder(R.drawable.loading_animation)
-                            .error(R.drawable.ic_broken_image)
-                    )
-                    .load(extendedIngredient.image)
+//                    .load(extendedIngredient.image)
+//                    .setDefaultRequestOptions(
+//                        RequestOptions()
+//                            .placeholder(R.drawable.loading_animation)
+//                            .error(R.drawable.ic_broken_image)
+//                    )
+                    .load(NetworkConstants.BASE_IMAGE_URL + extendedIngredient.image)
                     .into(this)
             }
         }

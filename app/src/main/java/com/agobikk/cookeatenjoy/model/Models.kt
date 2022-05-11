@@ -42,6 +42,8 @@ data class FoodInformation(
     val title: String,
     @SerializedName("sourceName")
     val sourceName: String,
+    @SerializedName("extendedIngredients")
+    val ExtendedIngredient: List<ExtendedIngredient>,
 )
 
 data class ExtendedIngredient(
