@@ -43,7 +43,7 @@ data class FoodInformation(
     @SerializedName("sourceName")
     val sourceName: String,
     @SerializedName("extendedIngredients")
-    val ExtendedIngredient: List<ExtendedIngredient>,
+    val extendedIngredient: List<ExtendedIngredient>,
 )
 
 data class ExtendedIngredient(
