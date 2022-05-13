@@ -2,10 +2,10 @@ package com.agobikk.cookeatenjoy
 
 import android.os.Bundle
 import android.view.Menu
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
+import com.agobikk.cookeatenjoy.data.local.Database
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)
+        Database.createDatabase(applicationContext)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

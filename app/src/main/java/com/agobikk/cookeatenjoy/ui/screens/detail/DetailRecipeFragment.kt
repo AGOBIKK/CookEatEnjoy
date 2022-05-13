@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
@@ -33,6 +34,9 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         setScrollListener()
         subscribeUi()
         navigate()
+
+
+
     }
 
     private fun getFoodId(): Int {
@@ -118,8 +122,8 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         const val ID_FOOD_RECIPE_DETAIL = "ID_FOOD_RECIPE_DETAIL"
 
         var ingredientsList: MutableList<ExtendedIngredient> =
-            MutableList(1){
-                ExtendedIngredient(1.0,"","","","","")
+            MutableList(1) {
+                ExtendedIngredient(1, 1.0, "", "", "", "", "")
             }
     }
 }

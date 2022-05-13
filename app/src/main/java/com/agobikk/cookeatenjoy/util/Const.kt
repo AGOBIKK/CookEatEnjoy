@@ -5,6 +5,8 @@ import com.agobikk.cookeatenjoy.R
 
 object Const {
 
+
+
     val DEFAULT_CATEGORIES_NAMES = arrayOf(
         R.string.mainCourse,
         R.string.sideDish,

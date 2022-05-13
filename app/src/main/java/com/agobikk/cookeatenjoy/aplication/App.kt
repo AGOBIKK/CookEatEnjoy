@@ -1,6 +1,10 @@
 package com.agobikk.cookeatenjoy.aplication
 
 import android.app.Application
+import android.content.Context
+import androidx.room.Room
+import com.agobikk.cookeatenjoy.data.local.Database
+import com.agobikk.cookeatenjoy.data.local.RoomConstants.DATABASE_NAME
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
@@ -33,4 +37,7 @@ class App : Application() {
         // Usage
         Timber.d("onCreate: Inside Application!")
     }
+
+
+
 }
