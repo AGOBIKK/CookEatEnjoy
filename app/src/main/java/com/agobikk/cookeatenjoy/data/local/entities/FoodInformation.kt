@@ -7,65 +7,68 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = RoomConstants.FOOD_INFO_TABLE)
 data class FoodInformation(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+
+    @ColumnInfo(name = "id food")
     @SerializedName("id")
     var id: Int,
 
-    @ColumnInfo
+    @ColumnInfo(name = "image food")
     @SerializedName("image")
     var image: String,
 
-    @ColumnInfo
+    @ColumnInfo(name = "summary food")
     @SerializedName("summary")
     var instructions: String,
 
-    @ColumnInfo
+    @ColumnInfo(name = "title food")
     @SerializedName("title")
     var title: String,
 
-    @ColumnInfo
+    @ColumnInfo(name = "sourceName food")
     @SerializedName("sourceName")
     var sourceName: String,
 
-    @Ignore
+    @Embedded
     @SerializedName("extendedIngredients")
-    var extendedIngredient: List<ExtendedIngredient>,
-){
-    constructor() : this(0,"","","","", extendedIngredient = emptyList())
+    var extendedIngredient: ExtendedIngredient
+) {
+    constructor() : this(
+        0, "", "", "", "", extendedIngredient = ExtendedIngredient()
+    )
 }
-
 
 data class ExtendedIngredient(
 
-    @ColumnInfo
+    @ColumnInfo(name = "id ingredient")
     @SerializedName("id")
     var idExtendedIngredient: Int,
 
-    @ColumnInfo
+    @ColumnInfo(name = "amount ingredient")
     @SerializedName("amount")
     var amount: Double?,
 
-    @ColumnInfo
-    @SerializedName("consistency")
+    @ColumnInfo(name = "consistency ingredient")
+    @SerializedName("consistency ")
     var consistency: String?,
 
-    @ColumnInfo
+    @ColumnInfo(name = "image ingredient")
     @SerializedName("image")
-    var image: String?,
+    var image_ingredient: String?,
 
-    @ColumnInfo
+    @ColumnInfo(name = "name ingredient")
     @SerializedName("name")
     var name: String?,
 
-    @ColumnInfo
+    @ColumnInfo(name = "original ingredient")
     @SerializedName("original")
     var original: String?,
 
-    @ColumnInfo
+    @ColumnInfo(name = "unit ingredient")
     @SerializedName("unit")
     var unit: String?
-){
-    constructor() : this(0,0.0,"","","","","")
+) {
+    constructor() : this(0, 0.0, "", "", "", "", "")
 }
 
 
