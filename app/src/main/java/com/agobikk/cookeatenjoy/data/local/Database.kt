@@ -13,7 +13,7 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformation
         FoodInformation::class
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class Database : RoomDatabase(){
     abstract fun getFoodInformation(): FoodInformationDao

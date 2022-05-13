@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
@@ -31,6 +32,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val foodId = getFoodId()
         viewModel.onViewCreated(id = foodId)
+
         setScrollListener()
         subscribeUi()
         navigate()
