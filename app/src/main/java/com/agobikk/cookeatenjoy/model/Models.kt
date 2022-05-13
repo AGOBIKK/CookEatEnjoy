@@ -1,5 +1,7 @@
 package com.agobikk.cookeatenjoy.model
 
+import androidx.room.Embedded
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 
@@ -31,6 +33,7 @@ data class ResultMainCourse(
     val title: String
 )
 
+
 data class FoodInformation(
     @SerializedName("id")
     val id: Int,
@@ -43,10 +46,13 @@ data class FoodInformation(
     @SerializedName("sourceName")
     val sourceName: String,
     @SerializedName("extendedIngredients")
-    val ExtendedIngredient: List<ExtendedIngredient>,
+    val extendedIngredient: List<ExtendedIngredient>,
 )
 
+
 data class ExtendedIngredient(
+    @SerializedName("id")
+    val idExtendedIngredient: Int,
     @SerializedName("amount")
     val amount: Double?,
     @SerializedName("consistency")

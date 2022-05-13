@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.data.local.Database
+import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
@@ -30,13 +32,17 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val foodId = getFoodId()
         viewModel.onViewCreated(id = foodId)
+
         setScrollListener()
         subscribeUi()
         navigate()
+
+
+
     }
 
     private fun getFoodId(): Int {
-        return arguments?.getString(ID_FOOD_RECIPE_DETAIL)!!.toInt()
+        return arguments?.getInt(ID_FOOD_RECIPE_DETAIL) ?: 1
     }
 
     private fun setScrollListener() = with(viewBinding) {
@@ -58,17 +64,14 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
 
 //                list?.body()?.ExtendedIngredient?.toMutableList()
-                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.ExtendedIngredient?.size}")
-                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.ExtendedIngredient}")
-                ingredientsList = list?.body()?.ExtendedIngredient?.toMutableList()!!
+                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient?.size}")
+                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
+                ingredientsList = list?.body()?.extendedIngredient?.toMutableList()!!
 
             }
 
         }
-
     }
-
-
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
         context?.let {
@@ -119,9 +122,10 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
     companion object {
         const val ID_FOOD_RECIPE_DETAIL = "ID_FOOD_RECIPE_DETAIL"
+
         var ingredientsList: MutableList<ExtendedIngredient> =
-            MutableList(1){
-                ExtendedIngredient(1.0,"","","","","")
+            MutableList(1) {
+                ExtendedIngredient(1, 1.0, "", "", "", "", "")
             }
     }
 }

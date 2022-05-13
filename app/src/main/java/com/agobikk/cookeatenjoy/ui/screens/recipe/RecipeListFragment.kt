@@ -33,9 +33,8 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
     private fun init() {
         adapter = RecipesAdapter(object : OnClickListener {
             override fun onClick(resultMainCourse: ResultMainCourse) {
-                ID_FOOD_RECIPE = resultMainCourse.id.toString()
-                navigateToRecipeList()
-                Timber.d("onViewCreated------>>>>>>>>${ID_FOOD_RECIPE}:")
+
+                navigateToRecipeList(resultMainCourse.id)
             }
         })
         viewBinding.recipeListRecyclerView.adapter = adapter
@@ -43,25 +42,20 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         viewModel.recipeList.observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list?.body()?.results)
         }
-
     }
 
-
-    private fun navigateToRecipeList() {
-
+    private fun navigateToRecipeList(value: Int) {
         findNavController()
             .navigate(
                 R.id.action_RecipeListFragment_to_detailRecipeFragment,
                 bundleOf(
-                    DetailRecipeFragment.ID_FOOD_RECIPE_DETAIL to ID_FOOD_RECIPE
+                    DetailRecipeFragment.ID_FOOD_RECIPE_DETAIL to value
                 )
             )
     }
-
-    companion object {
-        var ID_FOOD_RECIPE = "ID_FOOD_RECIPE"
-    }
 }
+
+
 
 
 

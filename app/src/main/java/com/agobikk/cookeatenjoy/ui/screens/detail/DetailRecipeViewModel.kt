@@ -25,6 +25,7 @@ class DetailRecipeViewModel : ViewModel() {
 
     fun onViewCreated(id:Int) {
         getFoodInformation(id = id)
+
     }
 
 }
