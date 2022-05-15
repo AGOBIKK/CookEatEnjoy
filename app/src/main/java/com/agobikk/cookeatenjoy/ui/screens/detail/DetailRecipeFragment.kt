@@ -13,23 +13,32 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.aplication.App
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
+
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
+import kotlinx.coroutines.*
 import timber.log.Timber
+import kotlin.coroutines.coroutineContext
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
     private val args: DetailRecipeFragmentArgs by navArgs()
+    private val coroutineExceptionHandler =
+        CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
+    private val scope =
+        CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
+    private var job: Job? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-        Timber.d("sdkhfskhfshfkshdfkhsdfjhskdfhsdfkhs:")
         val foodId = getFoodId()
         viewModel.onViewCreated(id = foodId)
 
@@ -61,7 +70,42 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                 setDetails(foodInformation)
             }
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
+
+
                 Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
+
+                val ingredient =
+                    com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredient(
+                        idExtendedIngredient =  list?.body()?.extendedIngredient?.get(0)?.idExtendedIngredient,
+                        amount = list?.body()?.extendedIngredient?.get(1)?.amount,
+                        consistency = list?.body()?.extendedIngredient?.get(2)?.consistency,
+                        image_ingredient = list?.body()?.extendedIngredient?.get(3)?.image,
+                        name = list?.body()?.extendedIngredient?.get(4)?.name,
+                        original = list?.body()?.extendedIngredient?.get(5)?.original,
+                        unit = list?.body()?.extendedIngredient?.get(6)?.unit.toString()
+                    )
+                val foodInformation = com.agobikk.cookeatenjoy.data.local.entities.FoodInformation(
+                    id = list?.body()?.id ?: 1,
+                    image = list?.body()?.image ?: "image_food_url",
+                    instructions = list?.body()?.instructions ?: "instructions",
+                    title = list?.body()?.title ?: "title",
+                    sourceName = list?.body()?.sourceName ?: "sourceName",
+                    extendedIngredient = ingredient
+                )
+
+                job?.cancel()
+                job = scope.launch {
+                    App
+                        .instance
+                        .databaseService
+                        .getFoodInformation()
+                        .insertFoodInfo(foodInformation)
+
+                    Timber.d(
+                        "VVV:${App.instance.databaseService.getFoodInformation().getFoodInfo()}"
+                    )
+                }
+
                 ingredientsList = list?.body()?.extendedIngredient?.toMutableList()!!
             }
 
@@ -110,6 +154,12 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                     )
             }
         }
+    }
+
+    override fun onDestroy() {
+        scope.cancel()
+        super.onDestroy()
+
     }
 
     companion object {

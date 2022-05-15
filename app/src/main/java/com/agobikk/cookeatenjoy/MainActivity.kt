@@ -21,51 +21,12 @@ import kotlin.coroutines.coroutineContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-    private val scope = CoroutineScope(Dispatchers.IO)
-    private var job: Job? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)
-
-
-//        val db = Room.databaseBuilder(
-//            applicationContext,
-//            Database::class.java,
-//            RoomConstants.DATABASE_NAME
-//        )
-////            .fallbackToDestructiveMigration() // удаляет базу данных
-////            .allowMainThreadQueries()     //запуск запросов в основном потоке
-//            .build()
-//
-
-        val ingredient =
-            ExtendedIngredient(3, 5.0, "url_122222222", "url_122222", "22222", "66666", "massa")
-        val foodInformation = FoodInformation(
-            3,
-            "image_food_url",
-            "insgjgjhgjhgjhgjgjhjggjhgghjgjhghjgjgjhjgjgjgjghjgjhhjgjghhjgghghjgjhgjhggjgjhghjghjgjghjgt",
-            "titledhfksdh",
-            "sorceNamehsdkfh",
-            extendedIngredient = ingredient
-        )
-
-        //        Executors.newSingleThreadExecutor().execute{
-//
-//        }
-        fun printLog() {
-            job?.cancel()
-            job = scope.launch {
-                App.instance.databaseService.getFoodInformation().insertFoodInfo(foodInformation)
-
-                Timber.d("VVV:${App.instance.databaseService.getFoodInformation().getFoodInfo()}")
-            }
-        }
-        printLog()
-
-//        db.getFoodInformation().getFoodInfo(foodInformation)
-
 
     }
 
@@ -73,10 +34,6 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
-    override fun onDestroy() {
-        scope.cancel()
-        super.onDestroy()
 
-    }
 
 }
