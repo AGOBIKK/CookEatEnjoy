@@ -76,13 +76,13 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
                 val ingredient =
                     com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredient(
-                        idExtendedIngredient =  list?.body()?.extendedIngredient?.get(0)?.idExtendedIngredient,
-                        amount = list?.body()?.extendedIngredient?.get(1)?.amount,
-                        consistency = list?.body()?.extendedIngredient?.get(2)?.consistency,
-                        image_ingredient = list?.body()?.extendedIngredient?.get(3)?.image,
-                        name = list?.body()?.extendedIngredient?.get(4)?.name,
-                        original = list?.body()?.extendedIngredient?.get(5)?.original,
-                        unit = list?.body()?.extendedIngredient?.get(6)?.unit.toString()
+                        idExtendedIngredient =  list?.body()?.extendedIngredient?.get(0)?.idExtendedIngredient ?: 0,
+                        amount = list?.body()?.extendedIngredient?.get(1)?.amount ?: 0.0,
+                        consistency = list?.body()?.extendedIngredient?.get(2)?.consistency ?: "not info",
+                        image_ingredient = list?.body()?.extendedIngredient?.get(3)?.image ?: "not info",
+                        name = list?.body()?.extendedIngredient?.get(4)?.name ?: "not info",
+                        original = list?.body()?.extendedIngredient?.get(5)?.original ?: "not info",
+                        unit = list?.body()?.extendedIngredient?.get(6)?.unit ?: "not info"
                     )
                 val foodInformation = com.agobikk.cookeatenjoy.data.local.entities.FoodInformation(
                     id = list?.body()?.id ?: 1,
@@ -102,7 +102,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                         .insertFoodInfo(foodInformation)
 
                     Timber.d(
-                        "VVV:${App.instance.databaseService.getFoodInformation().getFoodInfo()}"
+                        "VVV:${App.instance.databaseService.getFoodInformation().searchFoodById(getFoodId())}"
                     )
                 }
 

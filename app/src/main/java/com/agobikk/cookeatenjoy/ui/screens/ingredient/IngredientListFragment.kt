@@ -10,17 +10,25 @@ import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
+import kotlinx.coroutines.*
+import timber.log.Timber
 
 
 class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private val viewBinding: FragmentListIngredientBinding by viewBinding()
     private lateinit var adapter: IngredientListAdapter
     private val viewModel: IngredientViewModel by viewModels()
+    private val coroutineExceptionHandler =
+        CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
+    private val scope =
+        CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
+    private var job: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         init()
+
 
         adapter.submitList(DetailRecipeFragment.ingredientsList)
 
@@ -35,6 +43,10 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
         viewBinding.ingredientsRecyclerview.adapter = adapter
     }
 
+    override fun onDestroy() {
+        scope.cancel()
+        super.onDestroy()
+    }
 }
 
 
