@@ -10,21 +10,30 @@ import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.data.local.Database
-import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
+import com.agobikk.cookeatenjoy.aplication.App
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
+
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
+import kotlinx.coroutines.*
 import timber.log.Timber
+import kotlin.coroutines.coroutineContext
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
+    private val args: DetailRecipeFragmentArgs by navArgs()
+    private val coroutineExceptionHandler =
+        CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
+    private val scope =
+        CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
+    private var job: Job? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,11 +47,10 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         navigate()
 
 
-
     }
 
     private fun getFoodId(): Int {
-        return arguments?.getInt(ID_FOOD_RECIPE_DETAIL) ?: 1
+        return args.idFood
     }
 
     private fun setScrollListener() = with(viewBinding) {
@@ -63,11 +71,42 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
             }
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
 
-//                list?.body()?.ExtendedIngredient?.toMutableList()
-                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient?.size}")
-                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
-                ingredientsList = list?.body()?.extendedIngredient?.toMutableList()!!
 
+                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
+
+                val ingredient =
+                    com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredient(
+                        idExtendedIngredient =  list?.body()?.extendedIngredient?.get(0)?.idExtendedIngredient ?: 0,
+                        amount = list?.body()?.extendedIngredient?.get(1)?.amount ?: 0.0,
+                        consistency = list?.body()?.extendedIngredient?.get(2)?.consistency ?: "not info",
+                        image_ingredient = list?.body()?.extendedIngredient?.get(3)?.image ?: "not info",
+                        name = list?.body()?.extendedIngredient?.get(4)?.name ?: "not info",
+                        original = list?.body()?.extendedIngredient?.get(5)?.original ?: "not info",
+                        unit = list?.body()?.extendedIngredient?.get(6)?.unit ?: "not info"
+                    )
+                val foodInformation = com.agobikk.cookeatenjoy.data.local.entities.FoodInformation(
+                    id = list?.body()?.id ?: 1,
+                    image = list?.body()?.image ?: "image_food_url",
+                    instructions = list?.body()?.instructions ?: "instructions",
+                    title = list?.body()?.title ?: "title",
+                    sourceName = list?.body()?.sourceName ?: "sourceName",
+                    extendedIngredient = ingredient
+                )
+
+                job?.cancel()
+                job = scope.launch {
+                    App
+                        .instance
+                        .databaseService
+                        .getFoodInformation()
+                        .insertFoodInfo(foodInformation)
+
+                    Timber.d(
+                        "VVV:${App.instance.databaseService.getFoodInformation().searchFoodById(getFoodId())}"
+                    )
+                }
+
+                ingredientsList = list?.body()?.extendedIngredient?.toMutableList()!!
             }
 
         }
@@ -85,9 +124,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                 .into(recipeDetailImage)
         }
         recipeDetailTitle.text = detailRecipe.title
-        Timber.d("setDetails:> ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
         sourceNameRecipe.text = detailRecipe.sourceName
-        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
         wordProcessing(detailRecipe)
     }
 
@@ -102,7 +139,6 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                     JUSTIFICATION_MODE_INTER_WORD
             }
         }
-        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
     }
 
     private fun navigate() {
@@ -120,8 +156,14 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         }
     }
 
+    override fun onDestroy() {
+        scope.cancel()
+        super.onDestroy()
+
+    }
+
     companion object {
-        const val ID_FOOD_RECIPE_DETAIL = "ID_FOOD_RECIPE_DETAIL"
+
 
         var ingredientsList: MutableList<ExtendedIngredient> =
             MutableList(1) {

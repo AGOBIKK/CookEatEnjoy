@@ -42,7 +42,7 @@ data class ExtendedIngredient(
 
     @ColumnInfo(name = "id ingredient")
     @SerializedName("id")
-    var idExtendedIngredient: Int,
+    var idExtendedIngredient: Int?,
 
     @ColumnInfo(name = "amount ingredient")
     @SerializedName("amount")
