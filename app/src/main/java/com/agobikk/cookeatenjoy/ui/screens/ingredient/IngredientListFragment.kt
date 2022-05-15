@@ -11,6 +11,7 @@ import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
 
+
 class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private val viewBinding: FragmentListIngredientBinding by viewBinding()
     private lateinit var adapter: IngredientListAdapter
@@ -22,7 +23,7 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
         init()
 
         adapter.submitList(DetailRecipeFragment.ingredientsList)
-//        DetailRecipeFragment.ingredientsList
+
     }
 
     private fun init() = with(viewBinding) {

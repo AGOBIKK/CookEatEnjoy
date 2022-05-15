@@ -8,10 +8,10 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformation
 @Dao
 interface FoodInformationDao {
     @Query("SELECT * FROM $FOOD_INFO_TABLE")
-    fun getFoodInfo(): FoodInformation
+    suspend fun getFoodInfo(): List<FoodInformation>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFoodInfo(foodInformation: FoodInformation)
+    suspend fun insertFoodInfo(foodInformation: FoodInformation)
 
     @Delete
     suspend fun deleteFoodInformation(foodInformation: List<FoodInformation>)

@@ -10,10 +10,9 @@ import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.data.local.Database
-import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
@@ -25,11 +24,12 @@ import timber.log.Timber
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val viewModel: DetailRecipeViewModel by viewModels()
-
+    private val args: DetailRecipeFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        Timber.d("sdkhfskhfshfkshdfkhsdfjhskdfhsdfkhs:")
         val foodId = getFoodId()
         viewModel.onViewCreated(id = foodId)
 
@@ -38,11 +38,10 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         navigate()
 
 
-
     }
 
     private fun getFoodId(): Int {
-        return arguments?.getInt(ID_FOOD_RECIPE_DETAIL) ?: 1
+        return args.idFood
     }
 
     private fun setScrollListener() = with(viewBinding) {
@@ -62,12 +61,8 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                 setDetails(foodInformation)
             }
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
-
-//                list?.body()?.ExtendedIngredient?.toMutableList()
-                Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient?.size}")
                 Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
                 ingredientsList = list?.body()?.extendedIngredient?.toMutableList()!!
-
             }
 
         }
@@ -85,9 +80,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                 .into(recipeDetailImage)
         }
         recipeDetailTitle.text = detailRecipe.title
-        Timber.d("setDetails:> ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
         sourceNameRecipe.text = detailRecipe.sourceName
-        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
         wordProcessing(detailRecipe)
     }
 
@@ -102,7 +95,6 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                     JUSTIFICATION_MODE_INTER_WORD
             }
         }
-        Timber.d("subscribeUi: ${arguments?.getString(ID_FOOD_RECIPE_DETAIL)}")
     }
 
     private fun navigate() {
@@ -121,7 +113,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     }
 
     companion object {
-        const val ID_FOOD_RECIPE_DETAIL = "ID_FOOD_RECIPE_DETAIL"
+
 
         var ingredientsList: MutableList<ExtendedIngredient> =
             MutableList(1) {
