@@ -7,19 +7,19 @@ import com.agobikk.cookeatenjoy.data.local.RoomConstants
 data class FoodInformation(
     @PrimaryKey(autoGenerate = true)
 
-    @ColumnInfo(name = "id food")
+    @ColumnInfo(name = "id_food")
     var id: Long,
 
-    @ColumnInfo(name = "image food")
+    @ColumnInfo(name = "image_food")
     var image: String,
 
-    @ColumnInfo(name = "summary food")
+    @ColumnInfo(name = "summary_food")
     var instructions: String,
 
-    @ColumnInfo(name = "title food")
+    @ColumnInfo(name = "title_food")
     var title: String,
 
-    @ColumnInfo(name = "sourceName food")
+    @ColumnInfo(name = "source_name_food")
     var sourceName: String,
 
     @ColumnInfo(name = "extended_ingredients")
@@ -28,25 +28,25 @@ data class FoodInformation(
 
 data class ExtendedIngredientEntity(
 
-    @ColumnInfo(name = "id ingredient")
+    @ColumnInfo(name = "id_ingredient")
     var idExtendedIngredient: Long,
 
-    @ColumnInfo(name = "amount ingredient")
+    @ColumnInfo(name = "amount_ingredient")
     var amount: Double?,
 
     @ColumnInfo(name = "consistency_ingredient")
     var consistency: String?,
 
-    @ColumnInfo(name = "image ingredient")
+    @ColumnInfo(name = "image_ingredient")
     var image_ingredient: String?,
 
-    @ColumnInfo(name = "name ingredient")
+    @ColumnInfo(name = "name_ingredient")
     var name: String?,
 
-    @ColumnInfo(name = "original ingredient")
+    @ColumnInfo(name = "original_ingredient")
     var original: String?,
 
-    @ColumnInfo(name = "unit ingredient")
+    @ColumnInfo(name = "unit_ingredient")
     var unit: String?
 )
 

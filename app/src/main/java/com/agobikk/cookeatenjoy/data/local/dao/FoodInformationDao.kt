@@ -19,7 +19,7 @@ interface FoodInformationDao {
     @Query("DELETE FROM $FOOD_INFO_TABLE")
     suspend fun deleteAllFoodInformation()
 
-    @Query("SELECT * FROM $FOOD_INFO_TABLE WHERE `id food` LIKE :searchId ")
+    @Query("SELECT * FROM $FOOD_INFO_TABLE WHERE id_food LIKE :searchId ")
     suspend fun searchFoodById(searchId : Int) : FoodInformation
 
 }
