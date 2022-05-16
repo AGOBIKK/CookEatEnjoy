@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformation
 
@@ -15,6 +16,7 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformation
     version = 1,
     exportSchema = true
 )
+@TypeConverters(RoomConverters::class)
 abstract class Database : RoomDatabase(){
     abstract fun getFoodInformation(): FoodInformationDao
 

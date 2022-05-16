@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.aplication.App
+import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
@@ -23,7 +24,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.*
 import timber.log.Timber
-import kotlin.coroutines.coroutineContext
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
@@ -73,24 +73,15 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
 
                 Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
-
-                val ingredient =
-                    com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredient(
-                        idExtendedIngredient =  list?.body()?.extendedIngredient?.get(0)?.idExtendedIngredient ?: 0,
-                        amount = list?.body()?.extendedIngredient?.get(1)?.amount ?: 0.0,
-                        consistency = list?.body()?.extendedIngredient?.get(2)?.consistency ?: "not info",
-                        image_ingredient = list?.body()?.extendedIngredient?.get(3)?.image ?: "not info",
-                        name = list?.body()?.extendedIngredient?.get(4)?.name ?: "not info",
-                        original = list?.body()?.extendedIngredient?.get(5)?.original ?: "not info",
-                        unit = list?.body()?.extendedIngredient?.get(6)?.unit ?: "not info"
-                    )
+                val converter = ExtendedIngredientImpl()
+                val ingredients = list?.body()?.extendedIngredient?.map { converter.convert(it) } ?: emptyList()
                 val foodInformation = com.agobikk.cookeatenjoy.data.local.entities.FoodInformation(
                     id = list?.body()?.id ?: 1,
                     image = list?.body()?.image ?: "image_food_url",
                     instructions = list?.body()?.instructions ?: "instructions",
                     title = list?.body()?.title ?: "title",
                     sourceName = list?.body()?.sourceName ?: "sourceName",
-                    extendedIngredient = ingredient
+                    extendedIngredientEntity = ingredients
                 )
 
                 job?.cancel()
@@ -102,7 +93,10 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                         .insertFoodInfo(foodInformation)
 
                     Timber.d(
-                        "VVV:${App.instance.databaseService.getFoodInformation().searchFoodById(getFoodId())}"
+                        "VVV:${
+                            App.instance.databaseService.getFoodInformation()
+                                .searchFoodById(getFoodId())
+                        }"
                     )
                 }
 
@@ -163,8 +157,6 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     }
 
     companion object {
-
-
         var ingredientsList: MutableList<ExtendedIngredient> =
             MutableList(1) {
                 ExtendedIngredient(1, 1.0, "", "", "", "", "")

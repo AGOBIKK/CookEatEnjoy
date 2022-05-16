@@ -37,7 +37,6 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private fun init() = with(viewBinding) {
         adapter = IngredientListAdapter(object : OnIngredientClickListener {
             override fun onClick(extendedIngredient: ExtendedIngredient) {
-
             }
         })
         viewBinding.ingredientsRecyclerview.adapter = adapter
