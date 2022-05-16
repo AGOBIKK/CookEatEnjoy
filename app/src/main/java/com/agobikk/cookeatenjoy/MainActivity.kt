@@ -5,18 +5,6 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
-import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.agobikk.cookeatenjoy.aplication.App
-import com.agobikk.cookeatenjoy.data.local.Database
-import com.agobikk.cookeatenjoy.data.local.RoomConstants
-import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredient
-import com.agobikk.cookeatenjoy.data.local.entities.FoodInformation
-import kotlinx.coroutines.*
-import timber.log.Timber
-import java.util.concurrent.Executors
-import kotlin.coroutines.coroutineContext
 
 
 class MainActivity : AppCompatActivity() {

@@ -37,7 +37,7 @@ data class ResultMainCourse(
 
 data class FoodInformation(
     @SerializedName("id")
-    val id: Int,
+    val id: Long,
     @SerializedName("image")
     val image: String,
     @SerializedName("summary")
@@ -53,7 +53,7 @@ data class FoodInformation(
 
 data class ExtendedIngredient(
     @SerializedName("id")
-    val idExtendedIngredient: Int,
+    val idExtendedIngredient: Long,
     @SerializedName("amount")
     val amount: Double?,
     @SerializedName("consistency")
