@@ -17,26 +17,30 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
     private val viewBinding: FragmentListRecipeBinding by viewBinding()
     private var adapter: RecipesAdapter? = null
     private val viewModel: RecipesViewModel by viewModels()
+    private var isFirst = true
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         init()
-
     }
 
     private fun init() {
-        adapter = RecipesAdapter(object : OnClickListener {
-            override fun onClick(resultMainCourse: ResultMainCourse) {
-
-                navigateToRecipeList(resultMainCourse.id)
-            }
-        })
+        if (isFirst ) {
+            adapter = RecipesAdapter(object : OnClickListener {
+                override fun onClick(resultMainCourse: ResultMainCourse) {
+                    navigateToRecipeList(resultMainCourse.id)
+                }
+            })
+        }
         viewBinding.recipeListRecyclerView.adapter = adapter
-        viewModel.onViewCreated(typeOfDish = ChooseCategoryDish.chooseDishOfType)
-        viewModel.recipeList.observe(viewLifecycleOwner) { list ->
-            adapter?.submitList(list?.body()?.results)
+        if (isFirst) {
+            viewModel.onViewCreated(typeOfDish = ChooseCategoryDish.chooseDishOfType)
+            isFirst = false
+            viewModel.recipeList.observe(viewLifecycleOwner) { list ->
+                adapter?.submitList(list?.body()?.results)
+            }
         }
     }
 
