@@ -18,6 +18,7 @@ import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
+import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragmentDirections
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -41,12 +42,9 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val foodId = getFoodId()
         viewModel.onViewCreated(id = foodId)
-
         setScrollListener()
         subscribeUi()
-        navigate()
-
-
+        navigate(foodId)
     }
 
     private fun getFoodId(): Long {
@@ -74,7 +72,8 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
                 Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
                 val converter = ExtendedIngredientImpl()
-                val ingredients = list?.body()?.extendedIngredient?.map { converter.convert(it) } ?: emptyList()
+                val ingredients =
+                    list?.body()?.extendedIngredient?.map { converter.convert(it) } ?: emptyList()
                 val foodInformation = com.agobikk.cookeatenjoy.data.local.entities.FoodInformation(
                     id = list?.body()?.id ?: 1,
                     image = list?.body()?.image ?: "image_food_url",
@@ -91,7 +90,6 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                         .databaseService
                         .getFoodInformation()
                         .insertFoodInfo(foodInformation)
-
                     Timber.d(
                         "VVV--------<<<<<<<<:${
                             App.instance.databaseService.getFoodInformation()
@@ -99,10 +97,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                         }"
                     )
                 }
-
-                ingredientsList = list?.body()?.extendedIngredient?.toMutableList()!!
             }
-
         }
     }
 
@@ -135,31 +130,24 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         }
     }
 
-    private fun navigate() {
+    private fun navigate(value: Long) {
         with(viewBinding) {
             includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
                 findNavController()
                     .navigateUp()
             }
             ingredientImage.setOnClickListener {
-                findNavController()
-                    .navigate(
-                        R.id.action_detailRecipeFragment_to_ingredientFragment
-                    )
+                val direction =
+            DetailRecipeFragmentDirections.actionDetailRecipeFragmentToIngredientFragment(value)
+
+            findNavController()
+                .navigate(direction)
             }
         }
     }
+        override fun onDestroy() {
+            scope.cancel()
+            super.onDestroy()
 
-    override fun onDestroy() {
-        scope.cancel()
-        super.onDestroy()
-
-    }
-
-    companion object {
-        var ingredientsList: MutableList<ExtendedIngredient> =
-            MutableList(1) {
-                ExtendedIngredient(1, 1.0, "", "", "", "", "")
-            }
-    }
+        }
 }
