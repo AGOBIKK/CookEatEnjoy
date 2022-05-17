@@ -45,7 +45,7 @@
             app:destination="@id/ingredientFragment" />
         <argument
             android:name="idFood"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/ingredientFragment"

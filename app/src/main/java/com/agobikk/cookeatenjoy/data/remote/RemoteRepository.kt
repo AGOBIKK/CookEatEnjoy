@@ -10,8 +10,8 @@ class RemoteRepository {
         return RemoteInstance.api.getFoodMainCourse(typeOfDish = typeOfDish)
     }
 
-    suspend fun getFoodInformation(id: Int): Response<FoodInformation> {
-        return RemoteInstance.api.getFoodInformation(id = id)
+    suspend fun getFoodInformation(id: Long): Response<FoodInformation> {
+        return RemoteInstance.api.getFoodInformation(id)
     }
 
 }

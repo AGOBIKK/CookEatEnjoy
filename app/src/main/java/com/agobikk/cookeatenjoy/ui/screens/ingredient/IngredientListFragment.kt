@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.aplication.App
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
@@ -24,6 +25,7 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
@@ -31,7 +33,21 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
 
 
         adapter.submitList(DetailRecipeFragment.ingredientsList)
+        job?.cancel()
+        job = scope.launch {
+//            var list = App.instance.databaseService.getFoodInformation()
+//                .getIngredients(729366).extendedIngredientEntity
+//
+//            Timber.d("getIngredients this list:----->${
+//                list
+//            }")
 
+            Timber.d("getIngredients:----->${
+                App.instance.databaseService.getFoodInformation()
+                    .getIngredients(729366)
+            }")
+
+        }
     }
 
     private fun init() = with(viewBinding) {

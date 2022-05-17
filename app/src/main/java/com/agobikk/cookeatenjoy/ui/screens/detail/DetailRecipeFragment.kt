@@ -49,7 +49,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
     }
 
-    private fun getFoodId(): Int {
+    private fun getFoodId(): Long {
         return args.idFood
     }
 
@@ -93,9 +93,9 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                         .insertFoodInfo(foodInformation)
 
                     Timber.d(
-                        "VVV:${
+                        "VVV--------<<<<<<<<:${
                             App.instance.databaseService.getFoodInformation()
-                                .searchFoodById(getFoodId())
+                                .getIngredients(getFoodId())
                         }"
                     )
                 }
