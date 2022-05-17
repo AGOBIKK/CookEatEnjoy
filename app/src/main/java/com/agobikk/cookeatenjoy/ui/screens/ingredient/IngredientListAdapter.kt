@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.data.remote.NetworkConstants
 import com.agobikk.cookeatenjoy.databinding.LayoutIngredientsItemBinding
 import com.agobikk.cookeatenjoy.model.ExtendedIngredient
@@ -17,7 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 
 
 class IngredientListAdapter(private val onIngredientClickListener: OnIngredientClickListener) :
-    ListAdapter<ExtendedIngredient, IngredientListAdapter.IngredientViewHolder>(IngredientDiffUtil()) {
+    ListAdapter<ExtendedIngredientEntity, IngredientListAdapter.IngredientViewHolder>(IngredientDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder =
         IngredientViewHolder(
@@ -36,11 +37,13 @@ class IngredientListAdapter(private val onIngredientClickListener: OnIngredientC
     }
 
 
+
+
     class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cardView: CardView = itemView.findViewById(R.id.ingredients_cardView)
 
         private val viewBinding: LayoutIngredientsItemBinding by viewBinding()
-        fun bind(extendedIngredient: ExtendedIngredient) = with(viewBinding) {
+        fun bind(extendedIngredient: ExtendedIngredientEntity) = with(viewBinding) {
             ingredientName.text = extendedIngredient.name
             ingredientAmount.text = extendedIngredient.amount.toString()
             ingredientUnit.text = extendedIngredient.unit
@@ -49,7 +52,7 @@ class IngredientListAdapter(private val onIngredientClickListener: OnIngredientC
             ingredientImageView.apply {
                 Glide
                     .with(context)
-                    .load(NetworkConstants.BASE_IMAGE_URL + extendedIngredient.image)
+                    .load(NetworkConstants.BASE_IMAGE_URL + extendedIngredient.image_ingredient)
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image)
                     .into(this)

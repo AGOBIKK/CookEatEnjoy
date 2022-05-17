@@ -15,5 +15,5 @@ interface ApiService {
     ): Response<ModelMainCourse>
 
     @GET("/recipes/{id}/information?includeNutrition=false")
-    suspend fun getFoodInformation(@Path("id") id: Int): Response<FoodInformation>
+    suspend fun getFoodInformation(@Path("id") Long: Long): Response<FoodInformation>
 }

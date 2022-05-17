@@ -40,7 +40,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         }
     }
 
-    private fun navigateToRecipeList(value: Int) {
+    private fun navigateToRecipeList(value: Long) {
         val direction =
             RecipeListFragmentDirections.actionRecipeListFragmentToDetailRecipeFragment(value)
         findNavController()

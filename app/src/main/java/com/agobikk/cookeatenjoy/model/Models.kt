@@ -25,7 +25,7 @@ data class ModelMainCourse(
 
 data class ResultMainCourse(
     @SerializedName("id")
-    val id: Int,
+    val id: Long,
     @SerializedName("image")
     val image: String,
     @SerializedName("imageType")
