@@ -1,11 +1,10 @@
 package com.agobikk.cookeatenjoy.aplication
 
 import android.app.Application
-import android.content.Context
-import androidx.room.Room
+import com.agobikk.cookeatenjoy.aplication.di.AppComponent
+import com.agobikk.cookeatenjoy.aplication.di.AppModule
+import com.agobikk.cookeatenjoy.aplication.di.DaggerAppComponent
 import com.agobikk.cookeatenjoy.data.local.Database
-import com.agobikk.cookeatenjoy.data.local.RoomConstants
-import com.agobikk.cookeatenjoy.data.local.RoomConstants.DATABASE_NAME
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
@@ -13,8 +12,16 @@ import com.orhanobut.logger.PrettyFormatStrategy
 import timber.log.Timber
 
 class App : Application() {
+    lateinit var appComponent: AppComponent
+
     override fun onCreate() {
         super.onCreate()
+        appComponent = DaggerAppComponent
+            .builder()
+            .appModule(AppModule(this))
+            .buildAppComp()
+
+
 
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
             .showThreadInfo(true) // (Optional) Whether to show thread info or not. Default true
