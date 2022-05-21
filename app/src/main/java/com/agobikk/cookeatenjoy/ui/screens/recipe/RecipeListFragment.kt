@@ -4,20 +4,24 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.aplication.di.AppComponent
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.model.ResultMainCourse
 import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
 
 
-class RecipeListFragment() : Fragment(R.layout.fragment_list_recipe) {
+class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
     private val viewBinding: FragmentListRecipeBinding by viewBinding()
     private var adapter: RecipesAdapter? = null
     private val viewModel: RecipesViewModel by viewModels()
     private var isFirst = true
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

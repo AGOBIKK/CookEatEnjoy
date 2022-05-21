@@ -12,6 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Scope
 import javax.inject.Singleton
 
 @Module
@@ -19,23 +20,23 @@ class NetworkModule {
 
 
     @Provides
-    @Singleton
+    @NetworkModuleScope
      fun provideApi(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
 
     @Provides
-    @Singleton
-     fun Retrofit.Builder.retrofit() = apply {
-            Retrofit.Builder()
-                .baseUrl(NetworkConstants.BASE_URL)
-                .setClient()
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
+   @NetworkModuleScope
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(NetworkConstants.BASE_URL)
+            .setClient()
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
+
     @Provides
-    @Singleton
+    @NetworkModuleScope
     fun Retrofit.Builder.setClient() = apply {
         val okHttpClient = OkHttpClient.Builder()
             .addHeaderInterceptor()
@@ -46,7 +47,7 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
+    @NetworkModuleScope
     fun OkHttpClient.Builder.addHeaderInterceptor() = apply {
         val interceptor = Interceptor { chain ->
             val request = chain.request()
@@ -60,7 +61,7 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
+    @NetworkModuleScope
     fun OkHttpClient.Builder.addHttpLoggingInterceptor() = apply {
         if (BuildConfig.DEBUG) {
             val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -68,3 +69,7 @@ class NetworkModule {
         }
     }
 }
+
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class NetworkModuleScope

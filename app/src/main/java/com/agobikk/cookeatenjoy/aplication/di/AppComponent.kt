@@ -1,17 +1,22 @@
 package com.agobikk.cookeatenjoy.aplication.di
 
-import com.agobikk.cookeatenjoy.ui.screens.ViewModelFactory
 import dagger.Component
+import javax.inject.Singleton
 
+@NetworkModuleScope
 @Component(
     modules = [
         AppModule::class,
         StorageModule::class,
         NetworkModule::class,
-        AppBindModule::class
+        AppBindModule::class,
+        ViewModelModule::class
     ]
 )
+@Singleton
 interface AppComponent {
+
+    fun getViewModelFactory(): ViewModelFactory
 
 
     @Component.Builder
