@@ -13,7 +13,7 @@ import com.agobikk.cookeatenjoy.model.ResultMainCourse
 import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
 
 
-class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
+class RecipeListFragment() : Fragment(R.layout.fragment_list_recipe) {
     private val viewBinding: FragmentListRecipeBinding by viewBinding()
     private var adapter: RecipesAdapter? = null
     private val viewModel: RecipesViewModel by viewModels()

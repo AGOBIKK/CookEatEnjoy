@@ -21,6 +21,7 @@ import timber.log.Timber
 
 class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private val viewBinding: FragmentListIngredientBinding by viewBinding()
+
     private lateinit var adapter: IngredientListAdapter
     private val viewModel: IngredientViewModel by viewModels()
     private val args: IngredientListFragmentArgs by navArgs()

@@ -18,4 +18,6 @@ class AppModule(private val context: Context) {
     fun getResources(): Resources {
         return context.resources
     }
+
+
 }

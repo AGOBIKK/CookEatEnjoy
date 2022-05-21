@@ -1,24 +1,18 @@
 package com.agobikk.cookeatenjoy.aplication.di
 
-import com.agobikk.cookeatenjoy.MainActivity
-import com.agobikk.cookeatenjoy.data.remote.RemoteRepositoryImpl
-import com.agobikk.cookeatenjoy.data.remote.api.ApiService
-import com.agobikk.cookeatenjoy.data.remote.api.RemoteInstance
+import com.agobikk.cookeatenjoy.ui.screens.ViewModelFactory
 import dagger.Component
-import dagger.Provides
 
 @Component(
     modules = [
         AppModule::class,
         StorageModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        AppBindModule::class
     ]
 )
 interface AppComponent {
 
-    fun injectMainActivity(activity: MainActivity)
-//    fun injectObject(remoteInstance: RemoteInstance)
-//    fun injectRemoteRepositoryImpl(api:ApiService)
 
     @Component.Builder
     interface AppCompBuilder {
@@ -26,3 +20,4 @@ interface AppComponent {
         fun appModule(appModule: AppModule): AppCompBuilder
     }
 }
+
