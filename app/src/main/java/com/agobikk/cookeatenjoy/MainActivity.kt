@@ -8,6 +8,8 @@ import androidx.navigation.NavController
 
 
 class MainActivity : AppCompatActivity() {
+
+
     private lateinit var navController: NavController
 
 
@@ -15,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)
+
+
 
     }
 
