@@ -4,7 +4,6 @@ package com.agobikk.cookeatenjoy.aplication.di
 import com.agobikk.cookeatenjoy.BuildConfig
 import com.agobikk.cookeatenjoy.data.remote.NetworkConstants
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
-
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -20,6 +19,8 @@ class NetworkModule {
 
 
     @Provides
+    @NetworkModuleScope
+     fun provideApi(retrofit: Retrofit): ApiService =
     @NetworkModuleScope
     fun provideApi(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)

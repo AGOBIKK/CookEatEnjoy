@@ -8,6 +8,10 @@ import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesViewModel
 import javax.inject.Inject
 import javax.inject.Provider
 
+import javax.inject.Inject
+import javax.inject.Provider
+
+
 class ViewModelFactory @Inject constructor(
     private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
@@ -18,4 +22,7 @@ class ViewModelFactory @Inject constructor(
             ?: throw IllegalArgumentException("ViewModel $modelClass not found")
         return viewModelProvider.get() as T
     }
+}
+
+
 }

@@ -8,17 +8,22 @@ import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment
 import dagger.Component
 
+@NetworkModuleScope
 
 @Component(
     modules = [
         AppModule::class,
         StorageModule::class,
         NetworkModule::class,
+        AppBindModule::class,
+        ViewModelModule::class
         ViewModelModule::class,
         CommonViewModelModule::class
     ]
 )
 interface AppComponent {
+
+    fun getViewModelFactory(): ViewModelFactory
 
     fun getNetworkApi(): ApiService
 
@@ -33,3 +38,4 @@ interface AppComponent {
         fun appModule(appModule: AppModule): AppCompBuilder
     }
 }
+
