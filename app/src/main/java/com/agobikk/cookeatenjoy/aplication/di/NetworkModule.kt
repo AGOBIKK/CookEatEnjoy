@@ -2,12 +2,10 @@ package com.agobikk.cookeatenjoy.aplication.di
 
 
 import com.agobikk.cookeatenjoy.BuildConfig
-import com.agobikk.cookeatenjoy.data.remote.NetworkConstants
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
-import com.agobikk.cookeatenjoy.data.remote.setClient
+
 import dagger.Module
 import dagger.Provides
-import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,10 +16,9 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-
     @Provides
     @Singleton
-     fun api(retrofit: Retrofit): ApiService =
+     fun provideApi(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
 
     @Provides
