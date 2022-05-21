@@ -18,8 +18,6 @@ import dagger.Component
         CommonViewModelModule::class
     ]
 )
-
-@NetworkModuleScope
 interface AppComponent {
 
     fun getNetworkApi(): ApiService
