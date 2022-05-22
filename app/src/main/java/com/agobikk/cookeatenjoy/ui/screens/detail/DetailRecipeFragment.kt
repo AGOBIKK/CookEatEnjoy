@@ -8,21 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.aplication.App
-import com.agobikk.cookeatenjoy.aplication.di.ViewModelFactory
 import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
-import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.agobikk.cookeatenjoy.model.FoodInformation
-import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragmentDirections
-import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesViewModel
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
@@ -32,22 +26,25 @@ import javax.inject.Inject
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
-    private val viewModel: DetailRecipeViewModel by viewModels()
     private val args: DetailRecipeFragmentArgs by navArgs()
-
-    //val model = ViewModelProvider(this, viewModelFactory)[DetailRecipeViewModel::class.java]
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
     private val coroutineExceptionHandler =
         CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
     private val scope =
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModel: DetailRecipeViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.instance.appComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailRecipeViewModel::class.java]
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModelFactory.create(DetailRecipeViewModel::class.java)
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val foodId = getFoodId()

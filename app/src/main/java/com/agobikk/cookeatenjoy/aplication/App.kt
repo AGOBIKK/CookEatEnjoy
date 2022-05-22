@@ -23,6 +23,7 @@ import timber.log.Timber
 
 
 
+
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
             .showThreadInfo(true) // (Optional) Whether to show thread info or not. Default true
             .methodCount(1) // (Optional) How many method line to show. Default 2

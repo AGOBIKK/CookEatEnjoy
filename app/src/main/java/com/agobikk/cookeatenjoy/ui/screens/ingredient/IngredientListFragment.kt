@@ -2,17 +2,13 @@ package com.agobikk.cookeatenjoy.ui.screens.ingredient
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.aplication.App
-import com.agobikk.cookeatenjoy.data.local.dao.Ingredients
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
 import kotlinx.coroutines.*
@@ -21,7 +17,6 @@ import timber.log.Timber
 
 class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private val viewBinding: FragmentListIngredientBinding by viewBinding()
-
     private lateinit var adapter: IngredientListAdapter
     private val viewModel: IngredientViewModel by viewModels()
     private val args: IngredientListFragmentArgs by navArgs()
@@ -38,9 +33,6 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private val scopeMain =
         CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
-    private var deferred: List<ExtendedIngredientEntity> = emptyList()
-    private var jobMain: Job? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
