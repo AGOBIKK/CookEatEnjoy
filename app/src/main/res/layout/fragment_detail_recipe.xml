@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/recipe_detail_app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="@android:color/transparent">
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/recipe_detail_motion_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/recipe_detail_top_bar_size"
+            app:layoutDescription="@xml/recipe_details_anim"
+            app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/recipe_detail_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/recipe_image_height"
+                android:contentDescription="@string/recipe_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/dessert" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/source_name_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/courgette"
+                android:text="@string/source_name"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/recipe_publisher_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/ingredient_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/source_name_recipe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:fontFamily="@font/courgette"
+                android:textSize="@dimen/recipe_publisher_text_size"
+                android:textStyle="italic"
+                android:textColor="@color/purple_700"
+                app:layout_constraintEnd_toStartOf="@+id/ingredient_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/source_name_label"
+                tools:text="Full Belly Sisters" />
+
+
+            <TextView
+                android:id="@+id/recipe_detail_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/courgette"
+                android:layout_marginStart="@dimen/dp_16"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/recipe_publisher_text_size"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@+id/informationRecipe"
+                app:layout_constraintTop_toBottomOf="@+id/source_name_recipe"
+                app:layout_constraintEnd_toEndOf="parent "
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Recipe Detail Title" />
+
+            <TextView
+                android:id="@+id/informationRecipe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/courgette"
+                android:text="@string/information"
+                android:textColor="@color/purple_700"
+                android:textSize="@dimen/recipe_publisher_text_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recipe_detail_title"
+                app:layout_constraintBottom_toTopOf="@+id/ingredient_image"/>
+
+            <ImageView
+                android:id="@+id/ingredient_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:src="@drawable/ic_ingredients"
+                app:backgroundTint="@android:color/transparent"
+                app:layout_constraintBottom_toTopOf="@+id/include_layout_card_instruction"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/informationRecipe"
+                app:tint="@null" />
+
+            <include
+                android:id="@+id/include_layout_card_instruction"
+                layout="@layout/layout_instruction_detail" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/include_layout_detail_icon"
+        layout="@layout/layout_icon_detail" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
