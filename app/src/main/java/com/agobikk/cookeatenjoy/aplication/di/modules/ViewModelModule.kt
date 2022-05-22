@@ -1,8 +1,7 @@
-package com.agobikk.cookeatenjoy.aplication.di
+package com.agobikk.cookeatenjoy.aplication.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
-import com.agobikk.cookeatenjoy.data.remote.api.ApiService
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeViewModel
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesViewModel
 import dagger.MapKey
@@ -21,7 +20,7 @@ annotation class ViewModelKey(val value: KClass<out ViewModel>)
 @Module
 class ViewModelModule {
     @IntoMap
-    @ViewModelKey (RecipesViewModel::class)
+    @ViewModelKey(RecipesViewModel::class)
     @Provides
     fun provideRecipesViewModel(remoteRepository: RemoteRepository): ViewModel {
         return RecipesViewModel(remoteRepository)

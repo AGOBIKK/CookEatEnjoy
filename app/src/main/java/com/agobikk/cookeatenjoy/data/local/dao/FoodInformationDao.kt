@@ -1,6 +1,5 @@
 package com.agobikk.cookeatenjoy.data.local.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.agobikk.cookeatenjoy.data.local.RoomConstants.FOOD_INFO_TABLE
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
