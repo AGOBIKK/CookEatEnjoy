@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.aplication.di
+package com.agobikk.cookeatenjoy.aplication.di.modules
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

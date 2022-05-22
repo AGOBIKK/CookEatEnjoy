@@ -32,7 +32,7 @@ import javax.inject.Inject
 
 class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
-    private val viewModel: DetailRecipeViewModel by viewModels()
+//    private val viewModel: DetailRecipeViewModel by viewModels()
     private val args: DetailRecipeFragmentArgs by navArgs()
 
     //val model = ViewModelProvider(this, viewModelFactory)[DetailRecipeViewModel::class.java]
@@ -46,8 +46,18 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModel: DetailRecipeViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.instance.appComponent.inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory)[DetailRecipeViewModel::class.java]
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModelFactory.create(DetailRecipeViewModel::class.java)
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val foodId = getFoodId()

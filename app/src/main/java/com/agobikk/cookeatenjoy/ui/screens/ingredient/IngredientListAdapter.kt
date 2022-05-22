@@ -9,12 +9,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.aplication.di.NetworkConstants
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
-import com.agobikk.cookeatenjoy.data.remote.NetworkConstants
 import com.agobikk.cookeatenjoy.databinding.LayoutIngredientsItemBinding
-import com.agobikk.cookeatenjoy.model.ExtendedIngredient
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 
 class IngredientListAdapter(private val onIngredientClickListener: OnIngredientClickListener) :
