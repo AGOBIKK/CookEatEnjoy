@@ -1,24 +1,29 @@
 package com.agobikk.cookeatenjoy.aplication.di
 
 import com.agobikk.cookeatenjoy.MainActivity
-import com.agobikk.cookeatenjoy.data.remote.RemoteRepositoryImpl
-import com.agobikk.cookeatenjoy.data.remote.api.ApiService
-import com.agobikk.cookeatenjoy.data.remote.api.RemoteInstance
+import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
+import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment
 import dagger.Component
-import dagger.Provides
+import javax.inject.Singleton
 
+@NetworkModuleScope
 @Component(
     modules = [
         AppModule::class,
         StorageModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        AppBindModule::class,
+        ViewModelModule::class
     ]
 )
+@Singleton
 interface AppComponent {
 
-    fun injectMainActivity(activity: MainActivity)
-//    fun injectObject(remoteInstance: RemoteInstance)
-//    fun injectRemoteRepositoryImpl(api:ApiService)
+
+    fun inject(fragment: DetailRecipeFragment)
+
+
+
 
     @Component.Builder
     interface AppCompBuilder {
@@ -26,3 +31,4 @@ interface AppComponent {
         fun appModule(appModule: AppModule): AppCompBuilder
     }
 }
+
