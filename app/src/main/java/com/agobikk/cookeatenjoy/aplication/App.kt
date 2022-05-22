@@ -2,7 +2,7 @@ package com.agobikk.cookeatenjoy.aplication
 
 import android.app.Application
 import com.agobikk.cookeatenjoy.aplication.di.AppComponent
-import com.agobikk.cookeatenjoy.aplication.di.AppModule
+import com.agobikk.cookeatenjoy.aplication.di.modules.AppModule
 import com.agobikk.cookeatenjoy.aplication.di.DaggerAppComponent
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.orhanobut.logger.AndroidLogAdapter
@@ -20,6 +20,7 @@ class App : Application() {
             .builder()
             .appModule(AppModule(this))
             .buildAppComp()
+
 
 
 

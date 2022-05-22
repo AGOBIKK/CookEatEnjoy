@@ -1,23 +1,33 @@
 package com.agobikk.cookeatenjoy.aplication.di
 
-import com.agobikk.cookeatenjoy.MainActivity
-import com.agobikk.cookeatenjoy.data.remote.RemoteRepositoryImpl
+import com.agobikk.cookeatenjoy.aplication.di.modules.AppModule
+import com.agobikk.cookeatenjoy.aplication.di.modules.CommonViewModelModule
+import com.agobikk.cookeatenjoy.aplication.di.modules.StorageModule
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
+import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
+import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment
 import dagger.Component
-import dagger.Provides
+
 
 @Component(
     modules = [
         AppModule::class,
         StorageModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        ViewModelModule::class,
+        CommonViewModelModule::class
     ]
 )
+
+@NetworkModuleScope
 interface AppComponent {
 
-    fun injectMainActivity(activity: MainActivity)
-    fun getApi(): NetworkModule
+    fun getNetworkApi(): ApiService
 
+
+
+    fun inject(fragment: RecipeListFragment)
+    fun inject(fragment: DetailRecipeFragment)
 
     @Component.Builder
     interface AppCompBuilder {
