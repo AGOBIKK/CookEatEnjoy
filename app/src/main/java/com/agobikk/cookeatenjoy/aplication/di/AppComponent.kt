@@ -1,8 +1,6 @@
 package com.agobikk.cookeatenjoy.aplication.di
 
-import com.agobikk.cookeatenjoy.aplication.di.modules.AppModule
-import com.agobikk.cookeatenjoy.aplication.di.modules.CommonViewModelModule
-import com.agobikk.cookeatenjoy.aplication.di.modules.StorageModule
+import com.agobikk.cookeatenjoy.aplication.di.modules.*
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment

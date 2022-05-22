@@ -1,10 +1,9 @@
-package com.agobikk.cookeatenjoy.aplication.di
+package com.agobikk.cookeatenjoy.aplication.di.modules
 
 
 import com.agobikk.cookeatenjoy.BuildConfig
-
+import com.agobikk.cookeatenjoy.aplication.di.NetworkConstants
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
-
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -13,7 +12,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Scope
-import javax.inject.Singleton
 
 
 @Module

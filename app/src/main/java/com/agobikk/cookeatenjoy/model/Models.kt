@@ -1,11 +1,6 @@
 package com.agobikk.cookeatenjoy.model
 
-import android.os.Parcelable
-import androidx.room.Embedded
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-
-
 
 
 data class Category(
