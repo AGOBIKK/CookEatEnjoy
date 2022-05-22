@@ -6,10 +6,13 @@ import com.agobikk.cookeatenjoy.aplication.di.modules.StorageModule
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment
+import com.agobikk.cookeatenjoy.MainActivity
+import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
+import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment
 import dagger.Component
+import javax.inject.Singleton
 
 @NetworkModuleScope
-
 @Component(
     modules = [
         AppModule::class,
@@ -17,20 +20,13 @@ import dagger.Component
         NetworkModule::class,
         AppBindModule::class,
         ViewModelModule::class
-        ViewModelModule::class,
-        CommonViewModelModule::class
     ]
 )
+@Singleton
 interface AppComponent {
 
     fun getViewModelFactory(): ViewModelFactory
 
-    fun getNetworkApi(): ApiService
-
-
-
-    fun inject(fragment: RecipeListFragment)
-    fun inject(fragment: DetailRecipeFragment)
 
     @Component.Builder
     interface AppCompBuilder {

@@ -34,6 +34,12 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
 //    private val viewModel: DetailRecipeViewModel by viewModels()
     private val args: DetailRecipeFragmentArgs by navArgs()
+
+    //val model = ViewModelProvider(this, viewModelFactory)[DetailRecipeViewModel::class.java]
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val coroutineExceptionHandler =
         CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
     private val scope =
