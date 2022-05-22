@@ -11,7 +11,7 @@ import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import timber.log.Timber
 
-class App : Application() {
+    class App : Application() {
     lateinit var appComponent: AppComponent
 
     override fun onCreate() {

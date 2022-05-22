@@ -1,5 +1,8 @@
 package com.agobikk.cookeatenjoy.aplication.di
 
+import com.agobikk.cookeatenjoy.MainActivity
+import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
+import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -16,7 +19,10 @@ import javax.inject.Singleton
 @Singleton
 interface AppComponent {
 
-    fun getViewModelFactory(): ViewModelFactory
+
+    fun inject(fragment: DetailRecipeFragment)
+
+
 
 
     @Component.Builder
