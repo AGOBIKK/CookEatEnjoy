@@ -1,7 +1,7 @@
 package com.agobikk.cookeatenjoy.data.remote
 
-import com.agobikk.cookeatenjoy.model.FoodInformation
-import com.agobikk.cookeatenjoy.model.ModelMainCourse
+import com.agobikk.cookeatenjoy.models.FoodInformation
+import com.agobikk.cookeatenjoy.models.ModelMainCourse
 import retrofit2.Response
 
 interface RemoteRepository {

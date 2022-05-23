@@ -7,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentCategoryBinding
-import com.agobikk.cookeatenjoy.model.Category
+import com.agobikk.cookeatenjoy.models.Category
 import com.agobikk.cookeatenjoy.util.Const
 
 

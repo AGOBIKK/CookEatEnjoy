@@ -1,7 +1,7 @@
 package com.agobikk.cookeatenjoy.data.converters
 
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
-import com.agobikk.cookeatenjoy.model.ExtendedIngredient
+import com.agobikk.cookeatenjoy.models.ExtendedIngredient
 
 interface ExtendedIngredientConverter {
     fun convert(value: ExtendedIngredient): ExtendedIngredientEntity
