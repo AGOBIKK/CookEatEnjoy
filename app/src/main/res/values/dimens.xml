@@ -23,4 +23,12 @@
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_130">130dp</dimen>
     <dimen name="detail_recipe_ingredient_text_size">16sp</dimen>
+    <dimen name="category_fragment_padding_for_textView">8dp</dimen>
+    <dimen name="category_fragment_padding_for_textSize">26sp</dimen>
+    <dimen name="category_fragment_layout_height_for_view">2dp</dimen>
+    <dimen name="category_fragment_marginStart_for_view">8dp</dimen>
+    <dimen name="category_fragment_marginEnd_for_view">8dp</dimen>
+    <dimen name="category_fragment_marginStart_for_recyclerview">4dp</dimen>
+    <dimen name="category_fragment_marginEnd_for_recyclerview">4dp</dimen>
+    <dimen name="category_fragment_paddingBottom_for_recyclerview">80dp</dimen>
 </resources>
