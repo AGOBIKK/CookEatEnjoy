@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
-import com.agobikk.cookeatenjoy.model.ResultMainCourse
+import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 

@@ -1,17 +1,15 @@
 package com.agobikk.cookeatenjoy.data.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
-import com.agobikk.cookeatenjoy.data.local.entities.FoodInformation
+import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 
 
 @Database(
     entities = [
-        FoodInformation::class
+        FoodInformationEntity::class
     ],
     version = 1,
     exportSchema = true

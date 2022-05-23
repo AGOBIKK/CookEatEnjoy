@@ -1,6 +1,6 @@
 package com.agobikk.cookeatenjoy.ui.screens.category
 
-import com.agobikk.cookeatenjoy.model.Category
+import com.agobikk.cookeatenjoy.models.Category
 
 
 interface OnCategoryClickListener {

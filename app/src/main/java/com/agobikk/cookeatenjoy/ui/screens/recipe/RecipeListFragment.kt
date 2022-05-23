@@ -10,7 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.aplication.App
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
-import com.agobikk.cookeatenjoy.model.ResultMainCourse
+import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
 import javax.inject.Inject
 

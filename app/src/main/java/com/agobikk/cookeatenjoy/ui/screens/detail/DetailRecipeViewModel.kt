@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
-import com.agobikk.cookeatenjoy.model.FoodInformation
+import com.agobikk.cookeatenjoy.models.FoodInformation
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

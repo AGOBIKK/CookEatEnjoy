@@ -9,7 +9,6 @@ import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -17,8 +16,9 @@ import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.aplication.App
 import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.Database
+import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
-import com.agobikk.cookeatenjoy.model.FoodInformation
+import com.agobikk.cookeatenjoy.models.FoodInformation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
@@ -38,6 +38,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: DetailRecipeViewModel
+
     @Inject
     lateinit var database: Database
 
@@ -80,17 +81,17 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
             }
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
 
-
+                val body = list?.body()
                 Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
                 val converter = ExtendedIngredientImpl()
                 val ingredients =
                     list?.body()?.extendedIngredient?.map { converter.convert(it) } ?: emptyList()
-                val foodInformation = com.agobikk.cookeatenjoy.data.local.entities.FoodInformation(
-                    id = list?.body()?.id ?: 1,
-                    image = list?.body()?.image ?: "image_food_url",
-                    instructions = list?.body()?.instructions ?: "instructions",
-                    title = list?.body()?.title ?: "title",
-                    sourceName = list?.body()?.sourceName ?: "sourceName",
+                val foodInformation = FoodInformationEntity(
+                    id = body?.id ?: 1,
+                    image = body?.image ?: "image_food_url",
+                    instructions = body?.instructions ?: "instructions",
+                    title = body?.title ?: "title",
+                    sourceName = body?.sourceName ?: "sourceName",
                     extendedIngredientEntity = ingredients
                 )
 
@@ -99,13 +100,6 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
                     database
                         .getFoodInformation()
                         .insertFoodInfo(foodInformation)
-
-//                    Timber.d(
-//                        "VVV--------<<<<<<<<:${
-//                            App.instance.databaseService.getFoodInformation()
-//                                .getIngredients(getFoodId())
-//                        }"
-//                    )
                 }
             }
         }
@@ -148,16 +142,19 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
             }
             ingredientImage.setOnClickListener {
                 val direction =
-            DetailRecipeFragmentDirections.actionDetailRecipeFragmentToIngredientFragment(value)
+                    DetailRecipeFragmentDirections.actionDetailRecipeFragmentToIngredientFragment(
+                        value
+                    )
 
-            findNavController()
-                .navigate(direction)
+                findNavController()
+                    .navigate(direction)
             }
         }
     }
-        override fun onDestroy() {
-            scope.cancel()
-            super.onDestroy()
 
-        }
+    override fun onDestroy() {
+        scope.cancel()
+        super.onDestroy()
+
+    }
 }
