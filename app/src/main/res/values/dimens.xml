@@ -37,4 +37,10 @@
     <dimen name="detail_fragment_marginEnd_for_Ingredient_image">10dp</dimen>
     <dimen name="detail_fragment_marginEnd_for_TextView_ingredient_text">10dp</dimen>
     <dimen name="fragment_list_recipe_paddingTop_for_recyclerview">8dp</dimen>
+    <dimen name="layout_category_layout_margin_for_cardView">4dp</dimen>
+    <dimen name="layout_category_cardCornerRadius_for_cardView">15dp</dimen>
+    <dimen name="layout_category_cardElevation_for_cardView">8dp</dimen>
+    <dimen name="layout_category_height_margin_for_imageView">130dp</dimen>
+    <dimen name="layout_category_paddingTop_for_textView">4dp</dimen>
+    <dimen name="layout_category_paddingBottom_for_textView">4dp</dimen>
 </resources>
