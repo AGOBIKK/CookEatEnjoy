@@ -22,6 +22,7 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private lateinit var adapter: IngredientListAdapter
     private val viewModel: IngredientViewModel by viewModels()
     private val args: IngredientListFragmentArgs by navArgs()
+
     @Inject
     lateinit var database: Database
 
@@ -52,10 +53,8 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
         job = scopeMain.launch() {
 
             listIngredientsBD = withContext(Dispatchers.IO) {
-
-                val i = database.getFoodInformation()
+                return@withContext database.getFoodInformation()
                     .getIngredients(getFoodId()).extendedIngredientEntity
-                i
             }
             Timber.d("list ingredients from BD:${listIngredientsBD}")
             adapter.submitList(listIngredientsBD)

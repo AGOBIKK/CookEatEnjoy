@@ -1,16 +1,15 @@
 package com.agobikk.cookeatenjoy.ui.screens.recipe
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+
+import androidx.lifecycle.*
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.models.ModelMainCourse
+import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 
-class RecipesViewModel(private val repository: RemoteRepository) : ViewModel() {
+class RecipesViewModel(private val repository: RemoteRepository, ) : ViewModel(){
 
 
     private val _recipeList = MutableLiveData<Response<ModelMainCourse>?>()
@@ -23,10 +22,20 @@ class RecipesViewModel(private val repository: RemoteRepository) : ViewModel() {
         }
     }
 
-    fun onViewCreated(typeOfDish: String) {
-        getModelMainCourse(typeOfDish)
-
+    fun onViewCreated() {
+        getModelMainCourse(typeOfDish = ChooseCategoryDish.chooseDishOfType)
     }
 
 
+
+   fun getListRecipe(
+        viewLifecycleOwner: LifecycleOwner,
+        adapter: RecipesAdapter
+    ) {
+        recipeList.observe(viewLifecycleOwner::getLifecycle) { list ->
+            adapter.submitList(list?.body()?.results)
+        }
+
+
+    }
 }
