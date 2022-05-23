@@ -19,23 +19,4 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformation
 @TypeConverters(RoomConverters::class)
 abstract class Database : RoomDatabase(){
     abstract fun getFoodInformation(): FoodInformationDao
-
-
-    companion object {
-        @Volatile
-        private var INSTANCE: com.agobikk.cookeatenjoy.data.local.Database? = null
-
-        fun createDatabase(context: Context): com.agobikk.cookeatenjoy.data.local.Database =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE
-                    ?: buildDatabase(context).also { INSTANCE = it }
-            }
-
-        private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(
-                context.applicationContext,
-                com.agobikk.cookeatenjoy.data.local.Database::class.java,
-                RoomConstants.DATABASE_NAME
-            ).build()
-    }
 }

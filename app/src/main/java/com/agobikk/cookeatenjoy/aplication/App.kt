@@ -4,6 +4,7 @@ import android.app.Application
 import com.agobikk.cookeatenjoy.aplication.di.AppComponent
 import com.agobikk.cookeatenjoy.aplication.di.modules.AppModule
 import com.agobikk.cookeatenjoy.aplication.di.DaggerAppComponent
+import com.agobikk.cookeatenjoy.aplication.di.modules.RoomModule
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
@@ -15,12 +16,13 @@ class App : Application() {
     lateinit var appComponent: AppComponent
 
     override fun onCreate() {
-        super.onCreate()
+
         appComponent = DaggerAppComponent
             .builder()
             .appModule(AppModule(this))
+            .setRoomModule(roomModule = RoomModule(applicationContext))
             .buildAppComp()
-
+        super.onCreate()
 
 
 
@@ -50,8 +52,6 @@ class App : Application() {
     init {
         instance = this
     }
-    val databaseService: Database by lazy { Database.createDatabase(applicationContext)}
-
 
     companion object {
         lateinit var instance: App

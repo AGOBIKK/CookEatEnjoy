@@ -11,5 +11,6 @@ interface StorageModule {
     fun bindRemoteRepositoryImpl_to_RemoteRepository(
         remoteRepositoryImpl: RemoteRepositoryImpl
     ): RemoteRepository
+
 }
 
