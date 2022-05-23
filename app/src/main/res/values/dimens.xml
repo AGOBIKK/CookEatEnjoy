@@ -59,4 +59,10 @@
     <dimen name="layout_ingredients_layout_marginEnd_for_TextView">12dp</dimen>
     <dimen name="layout_ingredients_layout_marginBottom_for_TextView">12dp</dimen>
     <dimen name="layout_ingredients_text_size_for_ingredient_name">20sp</dimen>
+    <dimen name="layout_instruction_marginTop_for_cardView">8dp</dimen>
+    <dimen name="layout_instruction_marginEnd_for_cardView">16dp</dimen>
+    <dimen name="layout_instruction_marginBottom_for_cardView">48dp</dimen>
+    <dimen name="layout_instruction_cardCornerRadius_for_cardView">4dp</dimen>
+    <dimen name="layout_instruction_layout_height_for_View">4dp</dimen>
+    <dimen name="layout_instruction_layout_margin_for_cooking_instruction">8dp</dimen>
 </resources>
