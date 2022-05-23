@@ -7,7 +7,7 @@
     <dimen name="dp_4">4dp</dimen>
     <dimen name="dp_22">24dp</dimen>
     <dimen name="dp_80">80dp</dimen>
-    <dimen name="recipe_title_text_size">20sp</dimen>
+    <dimen name="layout_recipe_title_text_size">20sp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="recipe_image_list_height">150dp</dimen>
     <dimen name="detail_fragment_recipe_publisher_text_size">16sp</dimen>
@@ -65,4 +65,10 @@
     <dimen name="layout_instruction_cardCornerRadius_for_cardView">4dp</dimen>
     <dimen name="layout_instruction_layout_height_for_View">4dp</dimen>
     <dimen name="layout_instruction_layout_margin_for_cooking_instruction">8dp</dimen>
+    <dimen name="layout_recipe_marginStart_for_cardView">8dp</dimen>
+    <dimen name="layout_recipe_marginEnd_for_cardView">8dp</dimen>
+    <dimen name="layout_recipe_marginBottom_for_cardView">8dp</dimen>
+    <dimen name="layout_recipe_cardCornerRadius_for_cardView">4dp</dimen>
+    <dimen name="layout_recipe_cardElevation_for_cardView">2dp</dimen>
+    <dimen name="layout_recipe_padding_for_linearLayout">8dp</dimen>
 </resources>
