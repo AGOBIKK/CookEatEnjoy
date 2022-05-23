@@ -58,7 +58,7 @@
                 android:id="@+id/descriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginStart="@dimen/layout_recipe_marginStart_for_textView"
                 android:layout_weight="100"
                 android:fontFamily="@font/courgette"
                 android:gravity="start"
@@ -69,14 +69,14 @@
 
             <ImageView
                 android:id="@+id/vegan"
-                android:layout_width="22dp"
+                android:layout_width="@dimen/layout_recipe_layout_width_for_imageView"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_leaf" />
 
             <ImageView
                 android:id="@+id/clock"
-                android:layout_width="22dp"
+                android:layout_width="@dimen/layout_recipe_layout_width_for_imageView"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:textColor="@color/purple_700"
@@ -85,7 +85,7 @@
 
             <TextView
                 android:id="@+id/maxReadyTimeTextView"
-                android:layout_width="@dimen/dp_22"
+                android:layout_width="@dimen/layout_recipe_layout_width_for_maxReadyTime_textView"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:gravity="center"
