@@ -31,9 +31,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
-
         init()
-
     }
 
     private fun init() {
@@ -46,14 +44,11 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         }
         viewBinding.recipeListRecyclerView.adapter = adapter
         if (isFirst) {
-            viewModel.onViewCreated(typeOfDish = ChooseCategoryDish.chooseDishOfType)
+            viewModel.onViewCreated()
             isFirst = false
-            viewModel.recipeList.observe(viewLifecycleOwner) { list ->
-                adapter?.submitList(list?.body()?.results)
-            }
+            adapter?.let { viewModel.getListRecipe(viewLifecycleOwner, it) }
         }
     }
-
     private fun navigateToRecipeList(value: Long) {
         val direction =
             RecipeListFragmentDirections.actionRecipeListFragmentToDetailRecipeFragment(value)
