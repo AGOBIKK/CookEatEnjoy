@@ -9,12 +9,14 @@ import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.aplication.App
 import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
+import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.model.FoodInformation
 import com.bumptech.glide.Glide
@@ -36,6 +38,8 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var viewModel: DetailRecipeViewModel
+    @Inject
+    lateinit var database: Database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,17 +96,16 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
 
                 job?.cancel()
                 job = scope.launch {
-                    App
-                        .instance
-                        .databaseService
+                    database
                         .getFoodInformation()
                         .insertFoodInfo(foodInformation)
-                    Timber.d(
-                        "VVV--------<<<<<<<<:${
-                            App.instance.databaseService.getFoodInformation()
-                                .getIngredients(getFoodId())
-                        }"
-                    )
+
+//                    Timber.d(
+//                        "VVV--------<<<<<<<<:${
+//                            App.instance.databaseService.getFoodInformation()
+//                                .getIngredients(getFoodId())
+//                        }"
+//                    )
                 }
             }
         }

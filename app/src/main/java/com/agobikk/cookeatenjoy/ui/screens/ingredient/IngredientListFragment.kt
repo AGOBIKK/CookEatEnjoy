@@ -9,10 +9,12 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.aplication.App
+import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
 import kotlinx.coroutines.*
 import timber.log.Timber
+import javax.inject.Inject
 
 
 class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
@@ -20,6 +22,8 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private lateinit var adapter: IngredientListAdapter
     private val viewModel: IngredientViewModel by viewModels()
     private val args: IngredientListFragmentArgs by navArgs()
+    @Inject
+    lateinit var database: Database
 
     private var listIngredientsBD = emptyList<ExtendedIngredientEntity>()
     private fun getFoodId(): Long {
@@ -33,6 +37,12 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private val scopeMain =
         CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.instance.appComponent.inject(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
@@ -43,7 +53,7 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
 
             listIngredientsBD = withContext(Dispatchers.IO) {
 
-                val i = App.instance.databaseService.getFoodInformation()
+                val i = database.getFoodInformation()
                     .getIngredients(getFoodId()).extendedIngredientEntity
                 i
             }
