@@ -16,27 +16,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="@dimen/category_fragment_padding_for_textView"
             android:fontFamily="@font/courgette"
+            android:textColor="@color/purple_700"
             android:text="@string/categories"
-            android:textSize="26sp" />
+            android:textSize="@dimen/category_fragment_padding_for_textSize" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@color/teal_200" />
+            android:layout_height="@dimen/category_fragment_layout_height_for_view"
+            android:layout_marginStart="@dimen/category_fragment_marginStart_for_view"
+            android:layout_marginEnd="@dimen/category_fragment_marginEnd_for_view"
+            android:background="@color/purple_700" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoryListRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/dp_4"
-            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginStart="@dimen/category_fragment_marginStart_for_recyclerview"
+            android:layout_marginEnd="@dimen/category_fragment_marginEnd_for_recyclerview"
             android:clipToPadding="false"
-            android:paddingBottom="@dimen/dp_80"
+            android:paddingBottom="@dimen/category_fragment_paddingBottom_for_recyclerview"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/layout_category_list_item">

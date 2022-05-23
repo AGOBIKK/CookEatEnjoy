@@ -4,10 +4,10 @@
     android:id="@+id/ingredients_card_layout"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp_8"
-    android:layout_marginEnd="@dimen/dp_16"
-    android:layout_marginBottom="@dimen/dp_48"
-    app:cardCornerRadius="@dimen/dp_4"
+    android:layout_marginTop="@dimen/layout_instruction_marginTop_for_cardView"
+    android:layout_marginEnd="@dimen/layout_instruction_marginEnd_for_cardView"
+    android:layout_marginBottom="@dimen/layout_instruction_marginBottom_for_cardView"
+    app:cardCornerRadius="@dimen/layout_instruction_cardCornerRadius_for_cardView"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="@+id/informationRecipe"
@@ -16,14 +16,14 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_4"
+        android:layout_height="@dimen/layout_instruction_layout_height_for_View"
         android:background="@color/purple_700" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/cooking_instructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_8"
+        android:layout_margin="@dimen/layout_instruction_layout_margin_for_cooking_instruction"
         android:fontFamily="@font/courgette"
         android:orientation="vertical"
         android:textColorLink="@android:color/tertiary_text_dark">
