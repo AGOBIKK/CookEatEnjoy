@@ -29,7 +29,7 @@
             android:paddingTop="@dimen/layout_category_paddingTop_for_textView"
             android:paddingBottom="@dimen/layout_category_paddingBottom_for_textView"
             android:textAlignment="center"
-            android:textColor="@color/teal_200"
+            android:textColor="@color/purple_700"
             android:fontFamily="@font/courgette"
             android:textSize="@dimen/recipe_title_text_size" />
 

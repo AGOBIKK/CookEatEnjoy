@@ -43,4 +43,8 @@
     <dimen name="layout_category_height_margin_for_imageView">130dp</dimen>
     <dimen name="layout_category_paddingTop_for_textView">4dp</dimen>
     <dimen name="layout_category_paddingBottom_for_textView">4dp</dimen>
+    <dimen name="layout_icon_margin_end_for_favorite">24dp</dimen>
+    <dimen name="layout_icon_margin_end_for_share">16dp</dimen>
+    <dimen name="layout_icon_marginStart_for_close">24dp</dimen>
+    <dimen name="layout_icon_elevation_for_constraintLayout">4dp</dimen>
 </resources>

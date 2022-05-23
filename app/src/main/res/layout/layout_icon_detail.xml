@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clipToPadding="false"
-    android:elevation="4dp">
+    android:elevation="@dimen/layout_icon_elevation_for_constraintLayout">
 
     <RelativeLayout
         android:id="@+id/recipe_detail_top_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/recipe_detail_top_bar_size"
-        android:alpha="0.15"
+        android:alpha="0.5"
         android:background="@android:color/holo_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +21,7 @@
     <ImageView
         android:id="@+id/recipe_detail_favorite_icon"
         style="@style/recipe_detail_icon_bar"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="@dimen/layout_icon_margin_end_for_favorite"
         android:contentDescription="@string/make_recipe_favorite"
         android:src="@drawable/ic_not_favorite"
         app:layout_constraintBottom_toBottomOf="@id/recipe_detail_top_bar_layout"
@@ -31,7 +31,7 @@
     <ImageView
         android:id="@+id/recipe_detail_share_icon"
         style="@style/recipe_detail_icon_bar"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/layout_icon_margin_end_for_share"
         android:contentDescription="@string/share_this_recipe"
         android:src="@drawable/ic_share"
         app:layout_constraintBottom_toBottomOf="@id/recipe_detail_top_bar_layout"
@@ -41,7 +41,7 @@
     <ImageView
         android:id="@+id/recipe_detail_close_icon"
         style="@style/recipe_detail_icon_bar"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="@dimen/layout_icon_marginStart_for_close"
         android:contentDescription="@string/close_recipe"
         android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="@id/recipe_detail_top_bar_layout"

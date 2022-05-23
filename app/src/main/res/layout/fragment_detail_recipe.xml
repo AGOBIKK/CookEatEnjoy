@@ -100,7 +100,7 @@
                 android:layout_marginTop="@dimen/detail_fragment_marginTop_for_TextView"
                 android:fontFamily="@font/courgette"
                 android:text="@string/information"
-                android:textColor="@color/purple_700"
+                    android:textColor="@color/purple_700"
                 android:textSize="@dimen/detail_fragment_recipe_publisher_text_size"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/ingredient_image"
