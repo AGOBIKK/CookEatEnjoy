@@ -4,31 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp">
+    android:padding="@dimen/layout_ingredients_padding_for_constraintLayout">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/ingredients_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/layout_ingredients_cardCornerRadius_for_materialCardView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/mediumGray"
-        app:strokeWidth="2dp">
+        app:strokeWidth="@dimen/layout_ingredients_strokeWidth_for_materialCardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ingredient_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:elevation="2dp">
+            android:elevation="@dimen/layout_ingredients_elevation_for_constraintLayout">
 
             <View
                 android:id="@+id/white_background"
-                android:layout_width="120dp"
+                android:layout_width="@dimen/layout_ingredients_layout_width_for_View"
                 android:layout_height="0dp"
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -37,8 +36,8 @@
 
             <ImageView
                 android:id="@+id/ingredient_imageView"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/layout_ingredients_layout_width_for_ImageView"
+                android:layout_height="@dimen/layout_ingredients_layout_height_for_ImageView"
                 app:layout_constraintBottom_toBottomOf="@+id/white_background"
                 app:layout_constraintEnd_toEndOf="@+id/white_background"
                 app:layout_constraintStart_toStartOf="@+id/white_background"
@@ -49,13 +48,13 @@
                 android:id="@+id/ingredient_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginStart="@dimen/layout_ingredients_layout_marginStart_for_TextView"
+                android:layout_marginTop="@dimen/layout_ingredients_layout_marginTop_for_TextView"
+                android:layout_marginEnd="@dimen/layout_ingredients_layout_marginEnd_for_TextView"
                 android:fontFamily="@font/courgette"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/darker"
-                android:textSize="20sp"
+                android:textSize="@dimen/layout_ingredients_text_size_for_ingredient_name"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/white_background"
@@ -65,8 +64,8 @@
                 android:id="@+id/ingredient_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="100"
+                android:layout_marginTop="@dimen/layout_ingredients_layout_marginTop_for_TextView"
+                android:text="@string/_100"
                 app:layout_constraintStart_toStartOf="@+id/ingredient_name"
                 app:layout_constraintTop_toBottomOf="@+id/ingredient_name" />
 
@@ -74,8 +73,8 @@
                 android:id="@+id/ingredient_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Grams"
+                android:layout_marginStart="@dimen/layout_ingredients_layout_marginStart_for_TextView"
+                android:text="@string/grams"
                 app:layout_constraintBottom_toBottomOf="@+id/ingredient_amount"
                 app:layout_constraintStart_toEndOf="@+id/ingredient_amount"
                 app:layout_constraintTop_toTopOf="@+id/ingredient_amount" />
@@ -84,9 +83,9 @@
                 android:id="@+id/ingredient_consistency"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:text="Consistency"
+                android:layout_marginTop="@dimen/layout_ingredients_layout_marginTop_for_TextView"
+                android:layout_marginEnd="@dimen/layout_ingredients_layout_marginEnd_for_TextView"
+                android:text="@string/consistency"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/ingredient_amount"
                 app:layout_constraintTop_toBottomOf="@+id/ingredient_amount" />
@@ -95,10 +94,10 @@
                 android:id="@+id/ingredient_original"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
-                android:text="Original"
+                android:layout_marginTop="@dimen/layout_ingredients_layout_marginTop_for_TextView"
+                android:layout_marginEnd="@dimen/layout_ingredients_layout_marginEnd_for_TextView"
+                android:layout_marginBottom="@dimen/layout_ingredients_layout_marginBottom_for_TextView"
+                android:text="@string/original"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/ingredient_consistency"

@@ -47,4 +47,16 @@
     <dimen name="layout_icon_margin_end_for_share">16dp</dimen>
     <dimen name="layout_icon_marginStart_for_close">24dp</dimen>
     <dimen name="layout_icon_elevation_for_constraintLayout">4dp</dimen>
+    <dimen name="layout_ingredients_padding_for_constraintLayout">4dp</dimen>
+    <dimen name="layout_ingredients_cardCornerRadius_for_materialCardView">10dp</dimen>
+    <dimen name="layout_ingredients_strokeWidth_for_materialCardView">2dp</dimen>
+    <dimen name="layout_ingredients_elevation_for_constraintLayout">2dp</dimen>
+    <dimen name="layout_ingredients_layout_width_for_View">120dp</dimen>
+    <dimen name="layout_ingredients_layout_width_for_ImageView">100dp</dimen>
+    <dimen name="layout_ingredients_layout_height_for_ImageView">100dp</dimen>
+    <dimen name="layout_ingredients_layout_marginStart_for_TextView">12dp</dimen>
+    <dimen name="layout_ingredients_layout_marginTop_for_TextView">12dp</dimen>
+    <dimen name="layout_ingredients_layout_marginEnd_for_TextView">12dp</dimen>
+    <dimen name="layout_ingredients_layout_marginBottom_for_TextView">12dp</dimen>
+    <dimen name="layout_ingredients_text_size_for_ingredient_name">20sp</dimen>
 </resources>
