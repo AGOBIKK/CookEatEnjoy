@@ -10,10 +10,10 @@
     <dimen name="recipe_title_text_size">20sp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="recipe_image_list_height">150dp</dimen>
-    <dimen name="recipe_publisher_text_size">16sp</dimen>
+    <dimen name="detail_fragment_recipe_publisher_text_size">16sp</dimen>
     <dimen name="recycler_loading_view_height">80dp</dimen>
     <dimen name="recipe_detail_top_bar_size">56dp</dimen>
-    <dimen name="recipe_image_height">250dp</dimen>
+    <dimen name="recipe_detail_image_height">250dp</dimen>
     <dimen name="fav_icon_dimen">32dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="sp_18">18sp</dimen>
@@ -31,4 +31,10 @@
     <dimen name="category_fragment_marginStart_for_recyclerview">4dp</dimen>
     <dimen name="category_fragment_marginEnd_for_recyclerview">4dp</dimen>
     <dimen name="category_fragment_paddingBottom_for_recyclerview">80dp</dimen>
+    <dimen name="detail_fragment_marginStart_for_TextView">16dp</dimen>
+    <dimen name="detail_fragment_marginTop_for_TextView">24dp</dimen>
+    <dimen name="detail_fragment_marginEnd_for_TextView">16dp</dimen>
+    <dimen name="detail_fragment_marginEnd_for_Ingredient_image">10dp</dimen>
+    <dimen name="detail_fragment_marginEnd_for_TextView_ingredient_text">10dp</dimen>
+    <dimen name="fragment_list_recipe_paddingTop_for_recyclerview">8dp</dimen>
 </resources>
