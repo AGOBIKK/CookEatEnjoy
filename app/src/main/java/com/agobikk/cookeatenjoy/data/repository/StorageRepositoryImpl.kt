@@ -12,6 +12,6 @@ class StorageRepositoryImpl : StorageRepository{
     }
 
     override fun insertFoodInfo(foodInformationEntity: FoodInformationEntity) {
-        TODO("Not yet implemented")
+        TODO("нужно подумать над методом insert list")
     }
 }
