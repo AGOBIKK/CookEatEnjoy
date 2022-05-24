@@ -28,7 +28,7 @@ class RecipesViewModel(private val repository: RemoteRepository, ) : ViewModel()
 
 
 
-   fun getListRecipe(
+   fun updateListRecipeInformation(
         viewLifecycleOwner: LifecycleOwner,
         adapter: RecipesAdapter
     ) {
