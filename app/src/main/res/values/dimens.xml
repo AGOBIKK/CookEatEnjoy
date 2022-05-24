@@ -17,9 +17,9 @@
     <dimen name="category_fragment_marginEnd_for_recyclerview">4dp</dimen>
     <dimen name="category_fragment_paddingBottom_for_recyclerview">80dp</dimen>
     <dimen name="detail_fragment_marginStart_for_TextView">16dp</dimen>
-    <dimen name="detail_fragment_marginTop_for_TextView">24dp</dimen>
+    <dimen name="detail_fragment_marginTop_for_TextView">16dp</dimen>
     <dimen name="detail_fragment_marginEnd_for_TextView">16dp</dimen>
-    <dimen name="detail_fragment_marginEnd_for_Ingredient_image">10dp</dimen>
+    <dimen name="detail_fragment_marginEnd_for_Ingredient_image">16dp</dimen>
     <dimen name="detail_fragment_marginEnd_for_TextView_ingredient_text">10dp</dimen>
     <dimen name="fragment_list_recipe_paddingTop_for_recyclerview">8dp</dimen>
     <dimen name="layout_category_layout_margin_for_cardView">4dp</dimen>
@@ -59,4 +59,8 @@
     <dimen name="layout_recipe_marginStart_for_textView">8dp</dimen>
     <dimen name="layout_recipe_layout_width_for_imageView">22dp</dimen>
     <dimen name="layout_recipe_layout_width_for_maxReadyTime_textView">22dp</dimen>
+    <dimen name="detail_fragment_layout_width_for_imageView">60dp</dimen>
+    <dimen name="detail_fragment_layout_height_for_imageView">50dp</dimen>
+    <dimen name="detail_fragment_marginBottom_for_imageView">16dp</dimen>
+    <dimen name="detail_fragment_marginTop_for_imageView">12dp</dimen>
 </resources>

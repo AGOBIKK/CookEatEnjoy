@@ -36,6 +36,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -58,7 +59,7 @@
                 android:textColor="@color/purple_700"
                 android:textSize="@dimen/detail_fragment_recipe_publisher_text_size"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/ingredient_image"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +72,7 @@
                 android:textColor="@color/purple_700"
                 android:textSize="@dimen/detail_fragment_recipe_publisher_text_size"
                 android:textStyle="italic"
-                app:layout_constraintEnd_toStartOf="@+id/ingredient_image"
+                app:layout_constraintEnd_toEndOf="@+id/source_name_label"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/source_name_label"
                 tools:text="Full Belly Sisters" />
@@ -86,8 +87,8 @@
                 android:textColor="@color/purple_700"
                 android:textSize="@dimen/detail_fragment_recipe_publisher_text_size"
                 android:textStyle="italic"
-                app:layout_constraintBottom_toTopOf="@+id/informationRecipe"
-                app:layout_constraintEnd_toEndOf="parent "
+                app:layout_constraintBottom_toTopOf="@+id/ingredient_image"
+                app:layout_constraintEnd_toEndOf="@+id/source_name_recipe"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/source_name_recipe"
                 tools:text="Recipe Detail Title" />
@@ -100,39 +101,38 @@
                 android:layout_marginTop="@dimen/detail_fragment_marginTop_for_TextView"
                 android:fontFamily="@font/courgette"
                 android:text="@string/information"
-                    android:textColor="@color/purple_700"
+                android:textColor="@color/purple_700"
                 android:textSize="@dimen/detail_fragment_recipe_publisher_text_size"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/ingredient_image"
+                app:layout_constraintBottom_toTopOf="@+id/include_layout_card_instruction"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_detail_title" />
+                app:layout_constraintTop_toBottomOf="@+id/ingredient_image" />
 
             <ImageView
                 android:id="@+id/ingredient_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/detail_fragment_layout_width_for_imageView"
+                android:layout_height="@dimen/detail_fragment_layout_height_for_imageView"
+                android:layout_marginBottom="@dimen/detail_fragment_marginBottom_for_imageView"
                 android:layout_marginEnd="@dimen/detail_fragment_marginEnd_for_Ingredient_image"
                 android:src="@drawable/ic_ingredients"
                 app:backgroundTint="@android:color/transparent"
-                app:layout_constraintBottom_toTopOf="@+id/ingredient_text"
+                app:layout_constraintBottom_toTopOf="@+id/informationRecipe"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/informationRecipe"
+                app:layout_constraintTop_toBottomOf="@+id/recipe_detail_title"
+                android:layout_marginTop="@dimen/detail_fragment_marginTop_for_imageView"
                 app:tint="@null" />
+
 
             <TextView
                 android:id="@+id/ingredient_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/detail_fragment_marginEnd_for_TextView_ingredient_text"
-                android:fontFamily="@font/courgette"
-                android:text="@string/ingredient"
+                android:text="@string/Ingredients"
                 android:textColor="@color/purple_700"
-                android:textSize="@dimen/detail_recipe_ingredient_text_size"
-                app:backgroundTint="@android:color/transparent"
-                app:layout_constraintBottom_toTopOf="@+id/include_layout_card_instruction"
+                android:fontFamily="@font/courgette"
+                app:layout_constraintTop_toBottomOf="@id/ingredient_image"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredient_image"
-                app:tint="@null" />
+                android:layout_marginEnd="@dimen/detail_fragment_marginEnd_for_TextView"/>
 
             <include
                 android:id="@+id/include_layout_card_instruction"
