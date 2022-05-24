@@ -9,7 +9,7 @@
         android:title="@string/title_feed" />
 
     <item
-        android:id="@+id/likesFragment"
+        android:id="@+id/favorite"
         android:icon="@drawable/ic_likes"
         android:title="@string/title_like" />
 

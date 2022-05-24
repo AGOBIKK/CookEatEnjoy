@@ -7,10 +7,10 @@
 
 
     <fragment
-        android:id="@+id/likesFragment"
-        android:name="com.agobikk.cookeatenjoy.ui.screens.likes.LikesFragment"
-        android:label="LikesFragment"
-        tools:layout="@layout/fragment_likes" />
+        android:id="@+id/favorite"
+        android:name="com.agobikk.cookeatenjoy.ui.screens.favorite.FavoriteFragment"
+        android:label="favoriteFragment"
+        tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/searchFragment"
