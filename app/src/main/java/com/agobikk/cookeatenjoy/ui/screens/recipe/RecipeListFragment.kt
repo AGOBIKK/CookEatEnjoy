@@ -46,7 +46,7 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         if (isFirst) {
             viewModel.onViewCreated()
             isFirst = false
-            adapter?.let { viewModel.getListRecipe(viewLifecycleOwner, it) }
+            adapter?.let { viewModel.updateListRecipeInformation(viewLifecycleOwner, it) }
         }
     }
     private fun navigateToRecipeList(value: Long) {
