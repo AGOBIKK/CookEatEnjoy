@@ -1,12 +1,13 @@
 package com.agobikk.cookeatenjoy.aplication
 
+import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
 import com.agobikk.cookeatenjoy.aplication.di.AppComponent
-import com.agobikk.cookeatenjoy.aplication.di.modules.AppModule
 import com.agobikk.cookeatenjoy.aplication.di.DaggerAppComponent
+
+import com.agobikk.cookeatenjoy.aplication.di.modules.AppModule
 import com.agobikk.cookeatenjoy.aplication.di.modules.RoomModule
-import com.agobikk.cookeatenjoy.data.local.Database
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
@@ -23,10 +24,7 @@ class App : Application() {
             .appModule(AppModule(this))
             .setRoomModule(roomModule = RoomModule(applicationContext))
             .buildAppComp()
-
         super.onCreate()
-
-
 
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
             .showThreadInfo(true) // (Optional) Whether to show thread info or not. Default true
@@ -37,7 +35,6 @@ class App : Application() {
 
         Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
 
-
         Timber.plant(object : Timber.DebugTree() {
 
             override fun log(
@@ -46,10 +43,9 @@ class App : Application() {
                 Logger.log(priority, "-$tag", message, t)
             }
         })
-
-        // Usage
-        Timber.d("onCreate: Inside Application!")
     }
+
+
 
     init {
         instance = this
@@ -60,4 +56,6 @@ class App : Application() {
             private set
     }
 }
+val Activity.appComponent get() = (application as App).appComponent
+
 val Fragment.appComponent get() = (requireActivity().application as App).appComponent

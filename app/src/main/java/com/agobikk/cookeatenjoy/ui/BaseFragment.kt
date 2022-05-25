@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModelProvider
 import com.agobikk.cookeatenjoy.aplication.di.InjectingSavedStateViewModelFactory
+import dagger.android.support.DaggerFragment
+import timber.log.Timber
 import javax.inject.Inject
 
 abstract class BaseFragment : Fragment(), HasDefaultViewModelProviderFactory {
@@ -21,7 +23,7 @@ abstract class BaseFragment : Fragment(), HasDefaultViewModelProviderFactory {
      */
     override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory =
         defaultViewModelFactory.get().create(this, arguments)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+
+
+
 }

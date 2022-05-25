@@ -1,20 +1,20 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
+import android.content.Context
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.aplication.App
+import com.agobikk.cookeatenjoy.aplication.appComponent
 import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
@@ -29,7 +29,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class DetailRecipeFragment : BaseFragment() {
-    private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
+    private var _binding: FragmentDetailRecipeBinding? = null
+    private val viewBinding get() = _binding!!
     private val args: DetailRecipeFragmentArgs by navArgs()
     private val coroutineExceptionHandler =
         CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
@@ -41,11 +42,19 @@ class DetailRecipeFragment : BaseFragment() {
     @Inject
     lateinit var database: Database
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.instance.appComponent.inject(this)
-
+    override fun onAttach(context: Context) {
+        appComponent.inject(this)
+        super.onAttach(context)
     }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentDetailRecipeBinding.inflate(inflater, container, false)
+        return viewBinding.root
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -154,6 +163,6 @@ class DetailRecipeFragment : BaseFragment() {
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
-
+            _binding = null
     }
 }

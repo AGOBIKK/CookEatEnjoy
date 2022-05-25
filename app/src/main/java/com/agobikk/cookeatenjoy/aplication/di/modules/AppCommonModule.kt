@@ -11,7 +11,8 @@ import dagger.Provides
 
 @Module
 object AppCommonModule {
-
+    @Provides
+    fun provideAppContext(application: Application): Context = application.applicationContext
     @Provides
     fun provideRemoteRepository(remoteRepositoryImpl: RemoteRepositoryImpl) :RemoteRepository =
         remoteRepositoryImpl

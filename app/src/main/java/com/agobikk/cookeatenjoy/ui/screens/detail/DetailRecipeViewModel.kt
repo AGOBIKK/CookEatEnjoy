@@ -18,10 +18,9 @@ class DetailRecipeViewModel @AssistedInject constructor (
     ) : ViewModel() {
 
     @AssistedFactory
-    interface Factory : AssistedSavedStateViewModelFactory<RecipesViewModel> {
-        override fun create(savedStateHandle: SavedStateHandle): RecipesViewModel
+    interface Factory : AssistedSavedStateViewModelFactory<DetailRecipeViewModel> {
+        override fun create(savedStateHandle: SavedStateHandle): DetailRecipeViewModel
     }
-    val some = savedStateHandle.set("detail_some", 1111111111111111)
     val someValue = savedStateHandle.getLiveData("detail", 45647464)
 
     init {
@@ -41,8 +40,5 @@ class DetailRecipeViewModel @AssistedInject constructor (
 
     fun onViewCreated(id: Long) {
         getFoodInformation(id = id)
-
     }
-
-
 }

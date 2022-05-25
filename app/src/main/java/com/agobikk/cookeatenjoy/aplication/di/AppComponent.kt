@@ -33,8 +33,6 @@ interface AppComponent {
     fun inject(fragment: DetailRecipeFragment)
     fun inject(fragment: IngredientListFragment)
     fun inject(application: App)
-
-
     @Component.Builder
     interface AppCompBuilder {
         fun buildAppComp(): AppComponent
