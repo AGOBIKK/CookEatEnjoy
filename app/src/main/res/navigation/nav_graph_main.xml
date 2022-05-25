@@ -10,7 +10,17 @@
         android:id="@+id/favorite"
         android:name="com.agobikk.cookeatenjoy.ui.screens.favorite.FavoriteFragment"
         android:label="favoriteFragment"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favorite_to_detailRecipeFragment"
+            app:destination="@id/detailRecipeFragment" />
+        <action
+            android:id="@+id/action_favorite_to_RecipeListFragment"
+            app:destination="@id/RecipeListFragment" />
+        <action
+            android:id="@+id/action_favorite_to_CategoryFragment"
+            app:destination="@id/CategoryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"

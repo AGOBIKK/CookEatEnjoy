@@ -36,7 +36,6 @@ class FavoriteAdapter(private val onClickListener: OnFavoriteClickListener) :
 
     }
 
-
     inner class FavoriteRecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var cardView: CardView = itemView.findViewById(R.id.card_view)
         private val viewBinding: LayoutRecipeListItemBinding by viewBinding()
@@ -56,5 +55,6 @@ class FavoriteAdapter(private val onClickListener: OnFavoriteClickListener) :
             }
         }
     }
+
 }
 
