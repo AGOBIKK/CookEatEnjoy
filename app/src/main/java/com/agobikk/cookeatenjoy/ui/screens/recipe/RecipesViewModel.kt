@@ -1,15 +1,39 @@
 package com.agobikk.cookeatenjoy.ui.screens.recipe
 
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.agobikk.cookeatenjoy.aplication.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.models.ModelMainCourse
 import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import timber.log.Timber
+import javax.inject.Inject
 
 
-class RecipesViewModel(private val repository: RemoteRepository, ) : ViewModel(){
+class RecipesViewModel @AssistedInject constructor(
+    private val repository: RemoteRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
+    @AssistedFactory
+    interface Factory : AssistedSavedStateViewModelFactory<RecipesViewModel> {
+        override fun create(savedStateHandle: SavedStateHandle): RecipesViewModel
+    }
+
+
+    val some = savedStateHandle.getLiveData("some", 45647464)
+
+    init {
+
+        Timber.d("-------------some.value:${some.value}")
+
+    }
 
 
     private val _recipeList = MutableLiveData<Response<ModelMainCourse>?>()
@@ -19,6 +43,7 @@ class RecipesViewModel(private val repository: RemoteRepository, ) : ViewModel()
     private fun getModelMainCourse(typeOfDish: String) {
         viewModelScope.launch {
             _recipeList.postValue(repository.getModelMainCourse(typeOfDish = typeOfDish))
+            Timber.d("-------------some.value:${repository}")
         }
     }
 
@@ -27,8 +52,7 @@ class RecipesViewModel(private val repository: RemoteRepository, ) : ViewModel()
     }
 
 
-
-   fun updateListRecipeInformation(
+    fun updateListRecipeInformation(
         viewLifecycleOwner: LifecycleOwner,
         adapter: RecipesAdapter
     ) {

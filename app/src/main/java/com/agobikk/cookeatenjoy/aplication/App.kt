@@ -1,6 +1,7 @@
 package com.agobikk.cookeatenjoy.aplication
 
 import android.app.Application
+import androidx.fragment.app.Fragment
 import com.agobikk.cookeatenjoy.aplication.di.AppComponent
 import com.agobikk.cookeatenjoy.aplication.di.modules.AppModule
 import com.agobikk.cookeatenjoy.aplication.di.DaggerAppComponent
@@ -22,6 +23,7 @@ class App : Application() {
             .appModule(AppModule(this))
             .setRoomModule(roomModule = RoomModule(applicationContext))
             .buildAppComp()
+
         super.onCreate()
 
 
@@ -58,3 +60,4 @@ class App : Application() {
             private set
     }
 }
+val Fragment.appComponent get() = (requireActivity().application as App).appComponent

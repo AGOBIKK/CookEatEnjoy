@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -19,6 +20,7 @@ import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.models.FoodInformation
+import com.agobikk.cookeatenjoy.ui.BaseFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
@@ -26,7 +28,7 @@ import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
+class DetailRecipeFragment : BaseFragment() {
     private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
     private val args: DetailRecipeFragmentArgs by navArgs()
     private val coroutineExceptionHandler =
@@ -34,10 +36,7 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val scope =
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel: DetailRecipeViewModel
+    private val viewModel: DetailRecipeViewModel by viewModels()
 
     @Inject
     lateinit var database: Database
@@ -45,11 +44,11 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.inject(this)
-        viewModel = ViewModelProvider(this, viewModelFactory)[DetailRecipeViewModel::class.java]
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModelFactory.create(DetailRecipeViewModel::class.java)
+
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val foodId = getFoodId()
