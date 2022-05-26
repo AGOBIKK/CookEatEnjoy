@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.agobikk.cookeatenjoy.aplication.appComponent
+import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.agobikk.cookeatenjoy.ui.BaseFragment
@@ -22,7 +22,6 @@ private var _binding: FragmentListRecipeBinding? = null
     lateinit var adapter: RecipesAdapter
     private var isFirst = true
     private val viewModel: RecipesViewModel by viewModels()
-
     override fun onAttach(context: Context) {
         appComponent.inject(this)
         super.onAttach(context)
@@ -57,6 +56,7 @@ private var _binding: FragmentListRecipeBinding? = null
             viewModel.onViewCreated()
             isFirst = false
             adapter.let { viewModel.updateListRecipeInformation(viewLifecycleOwner, it) }
+
         }
     }
 

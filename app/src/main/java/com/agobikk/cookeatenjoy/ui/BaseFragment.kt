@@ -1,13 +1,9 @@
 package com.agobikk.cookeatenjoy.ui
 
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModelProvider
-import com.agobikk.cookeatenjoy.aplication.di.InjectingSavedStateViewModelFactory
-import dagger.android.support.DaggerFragment
-import timber.log.Timber
+import com.agobikk.cookeatenjoy.application.di.InjectingSavedStateViewModelFactory
 import javax.inject.Inject
 
 abstract class BaseFragment : Fragment(), HasDefaultViewModelProviderFactory {

@@ -1,10 +1,9 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
 import androidx.lifecycle.*
-import com.agobikk.cookeatenjoy.aplication.di.AssistedSavedStateViewModelFactory
+import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.models.FoodInformation
-import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

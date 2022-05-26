@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.aplication.App
+import com.agobikk.cookeatenjoy.application.App
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding

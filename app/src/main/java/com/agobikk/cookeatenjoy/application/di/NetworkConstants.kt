@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.aplication.di
+package com.agobikk.cookeatenjoy.application.di
 
 object NetworkConstants {
 

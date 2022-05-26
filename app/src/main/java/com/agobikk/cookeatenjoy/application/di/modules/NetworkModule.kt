@@ -1,8 +1,8 @@
-package com.agobikk.cookeatenjoy.aplication.di.modules
+package com.agobikk.cookeatenjoy.application.di.modules
 
 
 import com.agobikk.cookeatenjoy.BuildConfig
-import com.agobikk.cookeatenjoy.aplication.di.NetworkConstants
+import com.agobikk.cookeatenjoy.application.di.NetworkConstants
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
 import dagger.Module
 import dagger.Provides

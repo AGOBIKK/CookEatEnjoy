@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.aplication.di.modules
+package com.agobikk.cookeatenjoy.application.di.modules
 
 import android.content.Context
 import androidx.room.Room

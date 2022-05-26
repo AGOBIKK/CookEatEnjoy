@@ -1,13 +1,13 @@
-package com.agobikk.cookeatenjoy.aplication
+package com.agobikk.cookeatenjoy.application
 
 import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
-import com.agobikk.cookeatenjoy.aplication.di.AppComponent
-import com.agobikk.cookeatenjoy.aplication.di.DaggerAppComponent
+import com.agobikk.cookeatenjoy.application.di.AppComponent
+import com.agobikk.cookeatenjoy.application.di.DaggerAppComponent
 
-import com.agobikk.cookeatenjoy.aplication.di.modules.AppModule
-import com.agobikk.cookeatenjoy.aplication.di.modules.RoomModule
+import com.agobikk.cookeatenjoy.application.di.modules.AppModule
+import com.agobikk.cookeatenjoy.application.di.modules.RoomModule
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger

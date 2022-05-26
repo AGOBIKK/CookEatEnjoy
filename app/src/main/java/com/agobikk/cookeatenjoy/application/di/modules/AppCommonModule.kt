@@ -1,9 +1,7 @@
-package com.agobikk.cookeatenjoy.aplication.di.modules
+package com.agobikk.cookeatenjoy.application.di.modules
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepositoryImpl
 import dagger.Module
