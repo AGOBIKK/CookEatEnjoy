@@ -6,6 +6,7 @@ import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
+import com.agobikk.cookeatenjoy.ui.screens.favorite.FavoriteFragment
 import com.agobikk.cookeatenjoy.ui.screens.ingredient.IngredientListFragment
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment
 import dagger.Component
@@ -32,6 +33,7 @@ interface AppComponent {
     fun inject(fragment: RecipeListFragment)
     fun inject(fragment: DetailRecipeFragment)
     fun inject(fragment: IngredientListFragment)
+    fun inject(fragment: FavoriteFragment)
     fun inject(application: App)
     @Component.Builder
     interface AppCompBuilder {

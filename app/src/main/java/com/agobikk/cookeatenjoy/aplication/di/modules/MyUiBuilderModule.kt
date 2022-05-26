@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.agobikk.cookeatenjoy.aplication.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.aplication.di.ViewModelKey
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeViewModel
+import com.agobikk.cookeatenjoy.ui.screens.favorite.FavoriteViewModel
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesViewModel
 import dagger.Binds
 import dagger.Module
@@ -21,4 +22,10 @@ abstract class MyUiBuilderModule {
     @IntoMap
     @ViewModelKey(RecipesViewModel::class)
     abstract fun bindsRecipesViewModel(f: RecipesViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavoriteViewModel::class)
+    abstract fun bindsFavoriteViewModelViewModel(f: FavoriteViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
+
 }
