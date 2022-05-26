@@ -84,19 +84,6 @@ class DetailRecipeFragment : BaseFragment() {
         appBarLayout.addOnOffsetChangedListener(offsetChangedListener)
     }
 
-    private fun iconSelected () = with(viewBinding) {
-        includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener{
-            isFavorite = if (!isFavorite) {
-                includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite)
-                true
-            } else {
-                includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite_border)
-                false
-            }
-        }
-
-    }
-
     private fun subscribeUi() {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
             it?.body()?.let { foodInformation ->
@@ -104,7 +91,6 @@ class DetailRecipeFragment : BaseFragment() {
                 setDetails(foodInformation)
             }
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
-
                 val body = list?.body()
                 Timber.d("ExtendedIngredient--->>>>>>:${list?.body()?.extendedIngredient}")
                 val converter = ExtendedIngredientImpl()
@@ -128,6 +114,20 @@ class DetailRecipeFragment : BaseFragment() {
             }
         }
     }
+
+    private fun iconSelected () = with(viewBinding) {
+        includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener{
+            isFavorite = if (!isFavorite) {
+                includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite)
+                true
+            } else {
+                includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite_border)
+                false
+            }
+        }
+
+    }
+
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
         context?.let {

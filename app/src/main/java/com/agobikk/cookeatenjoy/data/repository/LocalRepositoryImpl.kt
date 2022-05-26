@@ -15,13 +15,18 @@ class LocalRepositoryImpl @Inject constructor(
         return foodInformationDao.searchFoodById(searchId)
     }
 
-    override suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity){
+    override suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity, onSuccess: () -> Unit){
         return foodInformationDao.insertFoodInfo(foodInformationEntity)
     }
 
     override suspend fun getIngredients(searchId: Long): Ingredients {
         return foodInformationDao.getIngredients(searchId)
     }
+
+    override suspend fun deleteFoodInformation(foodInformationEntity: List<FoodInformationEntity>, onSuccess: () -> Unit) {
+        return foodInformationDao.deleteFoodInformation(foodInformationEntity)
+    }
+
 
 
 //    private var foodInformationRepo: List<FoodInformation> = emptyList()
