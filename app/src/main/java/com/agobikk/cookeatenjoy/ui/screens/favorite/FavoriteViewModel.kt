@@ -7,16 +7,19 @@ import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import javax.inject.Inject
+
 
 class FavoriteViewModel @AssistedInject constructor(
     private val repository: RemoteRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
-    ) : ViewModel() {
-
+) : ViewModel() {
 
     @AssistedFactory
     interface Factory : AssistedSavedStateViewModelFactory<FavoriteViewModel> {
         override fun create(savedStateHandle: SavedStateHandle): FavoriteViewModel
+    }
+
+    fun getFavoriteRecipe() {
+
     }
 }

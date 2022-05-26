@@ -12,7 +12,6 @@ import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.aplication.appComponent
 import com.agobikk.cookeatenjoy.databinding.FragmentFavoriteBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
-import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeViewModel
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesAdapter
 
 
