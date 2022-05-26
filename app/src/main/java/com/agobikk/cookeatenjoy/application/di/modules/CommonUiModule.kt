@@ -1,7 +1,7 @@
-package com.agobikk.cookeatenjoy.aplication.di.modules
+package com.agobikk.cookeatenjoy.application.di.modules
 
 import androidx.lifecycle.ViewModel
-import com.agobikk.cookeatenjoy.aplication.di.AssistedSavedStateViewModelFactory
+import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
 import dagger.Module
 import dagger.multibindings.Multibinds
 

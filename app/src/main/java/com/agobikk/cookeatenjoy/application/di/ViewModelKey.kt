@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.aplication.di
+package com.agobikk.cookeatenjoy.application.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

@@ -1,11 +1,11 @@
 package com.agobikk.cookeatenjoy.ui.screens.recipe
 
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.agobikk.cookeatenjoy.aplication.di.AssistedSavedStateViewModelFactory
+import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.models.ModelMainCourse
+import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -13,7 +13,6 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import timber.log.Timber
-import javax.inject.Inject
 
 
 class RecipesViewModel @AssistedInject constructor(
