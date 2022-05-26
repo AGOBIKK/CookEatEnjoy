@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.aplication.appComponent
+import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.databinding.FragmentFavoriteBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesAdapter

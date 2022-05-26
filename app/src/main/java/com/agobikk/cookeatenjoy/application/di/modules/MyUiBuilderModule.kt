@@ -23,9 +23,10 @@ abstract class MyUiBuilderModule {
     @ViewModelKey(RecipesViewModel::class)
     abstract fun bindsRecipesViewModel(f: RecipesViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
+
     @Binds
     @IntoMap
     @ViewModelKey(FavoriteViewModel::class)
-    abstract fun bindsFavoriteViewModelViewModel(f: FavoriteViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
+    abstract fun bindsFavoriteViewModel(f: FavoriteViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 
 }
