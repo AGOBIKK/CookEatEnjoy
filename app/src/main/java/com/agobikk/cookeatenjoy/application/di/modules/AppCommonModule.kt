@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepositoryImpl
+import com.agobikk.cookeatenjoy.data.repository.LocalRepository
+import com.agobikk.cookeatenjoy.data.repository.LocalRepositoryImpl
 import dagger.Module
 import dagger.Provides
 
@@ -14,4 +16,5 @@ object AppCommonModule {
     @Provides
     fun provideRemoteRepository(remoteRepositoryImpl: RemoteRepositoryImpl) :RemoteRepository =
         remoteRepositoryImpl
+
 }
