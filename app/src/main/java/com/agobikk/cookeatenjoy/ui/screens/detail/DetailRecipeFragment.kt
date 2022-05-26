@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.SaveShared
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.Database
@@ -47,6 +48,7 @@ class DetailRecipeFragment : BaseFragment() {
         appComponent.inject(this)
         super.onAttach(context)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,8 +68,6 @@ class DetailRecipeFragment : BaseFragment() {
         setScrollListener()
         subscribeUi()
         navigate(foodId)
-        iconSelected ()
-
     }
 
     private fun getFoodId(): Long {
@@ -111,23 +111,30 @@ class DetailRecipeFragment : BaseFragment() {
                         .getFoodInformation()
                         .insertFoodInfo(foodInformation)
                 }
+                val valueBool = SaveShared.getFavorite(requireContext(), foodInformation.id.toString())
+
+                if (isFavorite != valueBool) {
+                    viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite)
+                } else {
+                    viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite_border)
+                }
+                viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
+                    isFavorite = if (isFavorite == valueBool) {
+                        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite)
+                        SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), true)
+                        viewModel.insert(foodInformation) {}
+                        true
+                    } else {
+                        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite_border)
+                        viewModel.delete(listOf(foodInformation)) {}
+                        SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), false)
+                        false
+                    }
+                }
             }
+
         }
     }
-
-    private fun iconSelected () = with(viewBinding) {
-        includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener{
-            isFavorite = if (!isFavorite) {
-                includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite)
-                true
-            } else {
-                includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite_border)
-                false
-            }
-        }
-
-    }
-
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
         context?.let {
@@ -144,6 +151,7 @@ class DetailRecipeFragment : BaseFragment() {
         sourceNameRecipe.text = detailRecipe.sourceName
         wordProcessing(detailRecipe)
     }
+
 
     private fun wordProcessing(detailRecipe: FoodInformation) = with(viewBinding) {
         includeLayoutCardInstruction.cookingInstructions.text =
@@ -179,6 +187,6 @@ class DetailRecipeFragment : BaseFragment() {
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
-            _binding = null
+        _binding = null
     }
 }
