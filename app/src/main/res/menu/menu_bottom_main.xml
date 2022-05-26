@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/favorite"
-        android:icon="@drawable/ic_likes"
+        android:icon="@drawable/ic_baseline_favorite"
         android:title="@string/title_like" />
 
     <item
