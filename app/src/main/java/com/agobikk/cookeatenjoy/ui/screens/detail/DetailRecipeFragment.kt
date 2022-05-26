@@ -1,24 +1,26 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
+import android.content.Context
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.aplication.App
+import com.agobikk.cookeatenjoy.aplication.appComponent
 import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.models.FoodInformation
+import com.agobikk.cookeatenjoy.ui.BaseFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
@@ -26,8 +28,9 @@ import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
-    private val viewBinding: FragmentDetailRecipeBinding by viewBinding()
+class DetailRecipeFragment : BaseFragment() {
+    private var _binding: FragmentDetailRecipeBinding? = null
+    private val viewBinding get() = _binding!!
     private val args: DetailRecipeFragmentArgs by navArgs()
     private var isFavorite = false
     private val coroutineExceptionHandler =
@@ -35,23 +38,27 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     private val scope =
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
-
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var viewModel: DetailRecipeViewModel
+    private val viewModel: DetailRecipeViewModel by viewModels()
 
     @Inject
     lateinit var database: Database
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.instance.appComponent.inject(this)
-        viewModel = ViewModelProvider(this, viewModelFactory)[DetailRecipeViewModel::class.java]
+    override fun onAttach(context: Context) {
+        appComponent.inject(this)
+        super.onAttach(context)
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentDetailRecipeBinding.inflate(inflater, container, false)
+        return viewBinding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModelFactory.create(DetailRecipeViewModel::class.java)
+
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val foodId = getFoodId()
@@ -172,6 +179,6 @@ class DetailRecipeFragment : Fragment(R.layout.fragment_detail_recipe) {
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
-
+            _binding = null
     }
 }

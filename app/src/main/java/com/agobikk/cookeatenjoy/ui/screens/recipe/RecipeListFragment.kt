@@ -1,35 +1,45 @@
 package com.agobikk.cookeatenjoy.ui.screens.recipe
 
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
-import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.aplication.App
+import com.agobikk.cookeatenjoy.aplication.appComponent
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.models.ResultMainCourse
-import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
-import javax.inject.Inject
+import com.agobikk.cookeatenjoy.ui.BaseFragment
+import timber.log.Timber
 
 
-class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewBinding: FragmentListRecipeBinding by viewBinding()
-    private var adapter: RecipesAdapter? = null
+class RecipeListFragment : BaseFragment() {
+
+private var _binding: FragmentListRecipeBinding? = null
+    private val viewBinding get() = _binding!!
+    lateinit var adapter: RecipesAdapter
     private var isFirst = true
-    lateinit var viewModel: RecipesViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.instance.appComponent.inject(this)
-        viewModel = ViewModelProvider(this, viewModelFactory)[RecipesViewModel::class.java]
+    private val viewModel: RecipesViewModel by viewModels()
+
+    override fun onAttach(context: Context) {
+        appComponent.inject(this)
+        super.onAttach(context)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentListRecipeBinding.inflate(inflater, container, false)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Timber.d("-------------some.value:${viewModel.some.value}")
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         init()
     }
@@ -46,14 +56,20 @@ class RecipeListFragment : Fragment(R.layout.fragment_list_recipe) {
         if (isFirst) {
             viewModel.onViewCreated()
             isFirst = false
-            adapter?.let { viewModel.updateListRecipeInformation(viewLifecycleOwner, it) }
+            adapter.let { viewModel.updateListRecipeInformation(viewLifecycleOwner, it) }
         }
     }
+
     private fun navigateToRecipeList(value: Long) {
         val direction =
             RecipeListFragmentDirections.actionRecipeListFragmentToDetailRecipeFragment(value)
         findNavController()
             .navigate(direction)
+
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 

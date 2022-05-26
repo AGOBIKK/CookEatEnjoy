@@ -1,15 +1,33 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.agobikk.cookeatenjoy.aplication.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.models.FoodInformation
+import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesViewModel
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import timber.log.Timber
 
-class DetailRecipeViewModel( private  val repository: RemoteRepository) : ViewModel() {
+class DetailRecipeViewModel @AssistedInject constructor (
+    private  val repository: RemoteRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle
+    ) : ViewModel() {
+
+    @AssistedFactory
+    interface Factory : AssistedSavedStateViewModelFactory<DetailRecipeViewModel> {
+        override fun create(savedStateHandle: SavedStateHandle): DetailRecipeViewModel
+    }
+    val someValue = savedStateHandle.getLiveData("detail", 45647464)
+
+    init {
+        Timber.d("-------------some.value:${someValue.value}")
+        Timber.d("-------------some.value:${savedStateHandle.get<Long>("detail_some")}")
+
+    }
 
     private val _recipeDetail = MutableLiveData<Response<FoodInformation>?>()
     val recipeDetail: LiveData<Response<FoodInformation>?> = _recipeDetail
@@ -22,8 +40,5 @@ class DetailRecipeViewModel( private  val repository: RemoteRepository) : ViewMo
 
     fun onViewCreated(id: Long) {
         getFoodInformation(id = id)
-
     }
-
-
 }
