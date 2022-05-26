@@ -4,9 +4,7 @@ package com.agobikk.cookeatenjoy.ui.screens.recipe
 import androidx.lifecycle.*
 import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.Repository
-import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.models.ModelMainCourse
-import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory

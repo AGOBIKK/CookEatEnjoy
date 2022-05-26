@@ -4,27 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
-
-import com.agobikk.cookeatenjoy.application.appComponent
-import com.agobikk.cookeatenjoy.databinding.FragmentFavoriteBinding
-import com.agobikk.cookeatenjoy.ui.BaseFragment
-
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
-import com.agobikk.cookeatenjoy.models.ResultMainCourse
-import com.agobikk.cookeatenjoy.ui.screens.recipe.OnClickListener
-
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesAdapter
 
 
 class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     private val viewBinding: FragmentListRecipeBinding by viewBinding()
     private var adapter: RecipesAdapter? = null
-
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

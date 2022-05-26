@@ -16,12 +16,12 @@ import timber.log.Timber
 
 
 class RecipeListFragment : BaseFragment() {
-
-private var _binding: FragmentListRecipeBinding? = null
+    private var _binding: FragmentListRecipeBinding? = null
     private val viewBinding get() = _binding!!
-    lateinit var adapter: RecipesAdapter
+    private var adapter: RecipesAdapter? = null
     private var isFirst = true
     private val viewModel: RecipesViewModel by viewModels()
+
     override fun onAttach(context: Context) {
         appComponent.inject(this)
         super.onAttach(context)
@@ -55,7 +55,7 @@ private var _binding: FragmentListRecipeBinding? = null
         if (isFirst) {
             viewModel.onViewCreated()
             isFirst = false
-            adapter.let { viewModel.updateListRecipeInformation(viewLifecycleOwner, it) }
+            adapter?.let { viewModel.updateListRecipeInformation(viewLifecycleOwner, it) }
 
         }
     }
@@ -67,6 +67,7 @@ private var _binding: FragmentListRecipeBinding? = null
             .navigate(direction)
 
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
