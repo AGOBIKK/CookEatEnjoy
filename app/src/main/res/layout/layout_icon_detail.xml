@@ -23,7 +23,7 @@
         style="@style/recipe_detail_icon_bar"
         android:layout_marginEnd="@dimen/layout_icon_margin_end_for_favorite"
         android:contentDescription="@string/make_recipe_favorite"
-        android:src="@drawable/ic_not_favorite"
+        android:src="@drawable/ic_baseline_favorite_border"
         app:layout_constraintBottom_toBottomOf="@id/recipe_detail_top_bar_layout"
         app:layout_constraintEnd_toStartOf="@id/recipe_detail_share_icon"
         app:layout_constraintTop_toTopOf="@id/recipe_detail_top_bar_layout" />

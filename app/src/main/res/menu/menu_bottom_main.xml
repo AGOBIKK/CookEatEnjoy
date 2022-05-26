@@ -9,8 +9,8 @@
         android:title="@string/title_feed" />
 
     <item
-        android:id="@+id/likesFragment"
-        android:icon="@drawable/ic_likes"
+        android:id="@+id/favorite"
+        android:icon="@drawable/ic_baseline_favorite"
         android:title="@string/title_like" />
 
     <item

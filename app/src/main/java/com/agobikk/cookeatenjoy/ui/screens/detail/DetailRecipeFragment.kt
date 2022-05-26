@@ -32,6 +32,7 @@ class DetailRecipeFragment : BaseFragment() {
     private var _binding: FragmentDetailRecipeBinding? = null
     private val viewBinding get() = _binding!!
     private val args: DetailRecipeFragmentArgs by navArgs()
+    private var isFavorite = false
     private val coroutineExceptionHandler =
         CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
     private val scope =
@@ -65,6 +66,8 @@ class DetailRecipeFragment : BaseFragment() {
         setScrollListener()
         subscribeUi()
         navigate(foodId)
+        iconSelected ()
+
     }
 
     private fun getFoodId(): Long {
@@ -79,6 +82,19 @@ class DetailRecipeFragment : BaseFragment() {
             recipeDetailMotionLayout.progress = seekPosition
         }
         appBarLayout.addOnOffsetChangedListener(offsetChangedListener)
+    }
+
+    private fun iconSelected () = with(viewBinding) {
+        includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener{
+            isFavorite = if (!isFavorite) {
+                includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite)
+                true
+            } else {
+                includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite_border)
+                false
+            }
+        }
+
     }
 
     private fun subscribeUi() {
