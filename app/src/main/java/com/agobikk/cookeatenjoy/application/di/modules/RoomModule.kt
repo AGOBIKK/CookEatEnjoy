@@ -1,13 +1,19 @@
-package com.agobikk.cookeatenjoy.aplication.di.modules
+package com.agobikk.cookeatenjoy.application.di.modules
 
 import android.content.Context
+import androidx.lifecycle.ViewModel
 import androidx.room.Room
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.RoomConstants
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
+import com.agobikk.cookeatenjoy.data.repository.LocalRepository
+import com.agobikk.cookeatenjoy.data.repository.LocalRepositoryImpl
+import dagger.MapKey
 import dagger.Module
 import dagger.Provides
+import javax.inject.Scope
 import javax.inject.Singleton
+import kotlin.reflect.KClass
 
 @Module
 class RoomModule(private val context: Context) {
@@ -17,6 +23,10 @@ class RoomModule(private val context: Context) {
 
     }
 
+    @Provides
+    @NetworkModuleScope
+    fun provideLocalRepository(localRepositoryImpl: LocalRepositoryImpl) : LocalRepository =
+        localRepositoryImpl
 
     @Provides
     fun provideDatabase(): Database =
@@ -33,7 +43,9 @@ class RoomModule(private val context: Context) {
         ).build()
 
     @Provides
-    @Singleton
+    @NetworkModuleScope
     fun provideDao(database: Database): FoodInformationDao =
         database.getFoodInformation()
 }
+
+

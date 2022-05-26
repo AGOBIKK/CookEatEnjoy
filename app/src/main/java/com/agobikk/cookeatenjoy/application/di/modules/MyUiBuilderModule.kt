@@ -1,8 +1,8 @@
-package com.agobikk.cookeatenjoy.aplication.di.modules
+package com.agobikk.cookeatenjoy.application.di.modules
 
 import androidx.lifecycle.ViewModel
-import com.agobikk.cookeatenjoy.aplication.di.AssistedSavedStateViewModelFactory
-import com.agobikk.cookeatenjoy.aplication.di.ViewModelKey
+import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
+import com.agobikk.cookeatenjoy.application.di.ViewModelKey
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeViewModel
 import com.agobikk.cookeatenjoy.ui.screens.favorite.FavoriteViewModel
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesViewModel

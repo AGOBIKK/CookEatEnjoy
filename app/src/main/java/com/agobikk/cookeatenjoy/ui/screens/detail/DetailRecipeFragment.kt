@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.aplication.appComponent
+import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity

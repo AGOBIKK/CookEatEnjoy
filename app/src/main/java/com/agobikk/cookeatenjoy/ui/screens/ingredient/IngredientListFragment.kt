@@ -8,7 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.aplication.App
+import com.agobikk.cookeatenjoy.application.App
+import com.agobikk.cookeatenjoy.data.Repository
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
@@ -24,7 +25,7 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
     private val args: IngredientListFragmentArgs by navArgs()
 
     @Inject
-    lateinit var database: Database
+    lateinit var repository: Repository
 
     private var listIngredientsBD = emptyList<ExtendedIngredientEntity>()
     private fun getFoodId(): Long {
@@ -53,8 +54,7 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
         job = scopeMain.launch() {
 
             listIngredientsBD = withContext(Dispatchers.IO) {
-                return@withContext database.getFoodInformation()
-                    .getIngredients(getFoodId()).extendedIngredientEntity
+                return@withContext repository.local.getIngredients(getFoodId()).extendedIngredientEntity
             }
             Timber.d("list ingredients from BD:${listIngredientsBD}")
             adapter.submitList(listIngredientsBD)

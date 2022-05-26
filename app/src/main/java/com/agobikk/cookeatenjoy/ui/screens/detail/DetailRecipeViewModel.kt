@@ -1,10 +1,9 @@
 package com.agobikk.cookeatenjoy.ui.screens.detail
 
 import androidx.lifecycle.*
-import com.agobikk.cookeatenjoy.aplication.di.AssistedSavedStateViewModelFactory
-import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
+import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
+import com.agobikk.cookeatenjoy.data.Repository
 import com.agobikk.cookeatenjoy.models.FoodInformation
-import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipesViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -13,7 +12,7 @@ import retrofit2.Response
 import timber.log.Timber
 
 class DetailRecipeViewModel @AssistedInject constructor (
-    private  val repository: RemoteRepository,
+    private  val repository: Repository,
     @Assisted private val savedStateHandle: SavedStateHandle
     ) : ViewModel() {
 
@@ -34,7 +33,7 @@ class DetailRecipeViewModel @AssistedInject constructor (
 
     private fun getFoodInformation(id: Long) {
         viewModelScope.launch {
-            _recipeDetail.postValue(repository.getFoodInformation(id = id))
+            _recipeDetail.postValue(repository.remote.getFoodInformation(id = id))
         }
     }
 
