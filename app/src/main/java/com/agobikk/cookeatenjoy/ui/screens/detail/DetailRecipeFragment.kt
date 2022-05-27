@@ -22,6 +22,8 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.models.FoodInformation
 import com.agobikk.cookeatenjoy.ui.BaseFragment
+import com.agobikk.cookeatenjoy.util.Const.FAVORITE_BTN_IS_ACTIVE
+import com.agobikk.cookeatenjoy.util.Const.FAVORITE_BTN_NOT_ACTIVE
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
@@ -40,6 +42,7 @@ class DetailRecipeFragment : BaseFragment() {
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
     private val viewModel: DetailRecipeViewModel by viewModels()
+
 
     @Inject
     lateinit var database: Database
@@ -105,29 +108,37 @@ class DetailRecipeFragment : BaseFragment() {
                     extendedIngredientEntity = ingredients
                 )
 
-                job?.cancel()
-                job = scope.launch {
-                    database
-                        .getFoodInformation()
-                        .insertFoodInfo(foodInformation)
+                viewModel.insert(foodInformation)
+                fun saveStateFavoriteValue(boolean: Boolean) {
+                    SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), boolean)
                 }
-                val valueBool = SaveShared.getFavorite(requireContext(), foodInformation.id.toString())
 
-                if (isFavorite != valueBool) {
-                    viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite)
-                } else {
-                    viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite_border)
+                fun getStateFavoriteButtonBoolean(string: String): Boolean {
+                    return SaveShared.getFavorite(requireContext(), string)
                 }
+
+                val valueBool = getStateFavoriteButtonBoolean(foodInformation.id.toString())
+
+
+
+                fun updateFavoriteButton(isFavorite: Boolean, valueBool: Boolean) {
+                    when {
+                        isFavorite != valueBool -> viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(FAVORITE_BTN_IS_ACTIVE)
+                        else -> viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(FAVORITE_BTN_NOT_ACTIVE)
+                    }
+                }
+
+                updateFavoriteButton(isFavorite, valueBool)
+
                 viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
                     isFavorite = if (isFavorite == valueBool) {
-                        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite)
-                        SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), true)
-                        viewModel.insert(foodInformation) {}
+                        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(FAVORITE_BTN_IS_ACTIVE)
+                        saveStateFavoriteValue(true)
+                        viewModel.insert(foodInformation)
                         true
                     } else {
-                        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(R.drawable.ic_baseline_favorite_border)
-                        viewModel.delete(listOf(foodInformation)) {}
-                        SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), false)
+                        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(FAVORITE_BTN_NOT_ACTIVE)
+                        saveStateFavoriteValue(false)
                         false
                     }
                 }
