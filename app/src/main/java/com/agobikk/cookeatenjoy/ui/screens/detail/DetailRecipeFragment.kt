@@ -97,8 +97,8 @@ class DetailRecipeFragment : BaseFragment() {
                     sourceName = body?.sourceName ?: "",
                     extendedIngredientEntity = ingredients
                 )
-
                 viewModel.insert(foodInformation)
+
                 fun saveStateFavoriteValue(boolean: Boolean) {
                     SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), boolean)
                 }
@@ -121,23 +121,23 @@ class DetailRecipeFragment : BaseFragment() {
                     valueBool: Boolean
                 ): Boolean {
                     return when {
-                        isFavorite != valueBool -> {
-                            updateBtnFavoriteIsNotActive()
-                            saveStateFavoriteValue(false)
-                            false
+                        isFavorite == valueBool -> {
+                            updateBtnFavoriteIsActive()
+                            saveStateFavoriteValue(true)
+                            viewModel.insert(foodInformation)
+                            true
                         }
                         else -> {
 
-                            updateBtnFavoriteIsActive()
-                            saveStateFavoriteValue(true)
+                            updateBtnFavoriteIsNotActive()
+                            saveStateFavoriteValue(false)
                             viewModel.delete(listOf(foodInformation))
-                            true
+                            false
                         }
                     }
                 }
 
                 updateFavoriteButton(isFavorite, valueBool)
-
                 viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
                     onClickListenerAndUpdateFavoriteButton(isFavorite, valueBool)
                 }
