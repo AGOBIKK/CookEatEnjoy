@@ -10,9 +10,8 @@ class LocalRepositoryImpl @Inject constructor(
     private val foodInformationDao: FoodInformationDao
 ) : LocalRepository {
 
-    override suspend fun getFoodInfo(): LiveData<List<FoodInformationEntity>> {
-        return foodInformationDao.getFoodInfo()
-    }
+    override val getFoodInfo: LiveData<List<FoodInformationEntity>>
+        get() = foodInformationDao.getFoodInfo()
 
 
     override suspend fun searchFoodById(searchId: Long): FoodInformationEntity {

@@ -11,7 +11,7 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 interface FoodInformationDao {
 
     @Query("SELECT * FROM $FOOD_INFO_TABLE")
-    suspend fun getFoodInfo(): LiveData<List<FoodInformationEntity>>
+    fun getFoodInfo(): LiveData<List<FoodInformationEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity)

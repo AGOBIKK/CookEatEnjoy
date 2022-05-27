@@ -205,9 +205,13 @@ class DetailRecipeFragment : BaseFragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
-        _binding = null
+
     }
 }
