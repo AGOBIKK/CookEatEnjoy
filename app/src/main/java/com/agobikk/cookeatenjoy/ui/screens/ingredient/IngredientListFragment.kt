@@ -1,5 +1,6 @@
 package com.agobikk.cookeatenjoy.ui.screens.ingredient
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.application.App
+import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.Repository
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
@@ -40,9 +42,9 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
         CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private var job: Job? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.instance.appComponent.inject(this)
+    override fun onAttach(context: Context) {
+        appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

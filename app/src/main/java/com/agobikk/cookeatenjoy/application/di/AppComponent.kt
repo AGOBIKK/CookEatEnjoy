@@ -1,5 +1,6 @@
 package com.agobikk.cookeatenjoy.application.di
 
+import android.content.Context
 import com.agobikk.cookeatenjoy.application.App
 import com.agobikk.cookeatenjoy.application.di.modules.*
 import com.agobikk.cookeatenjoy.data.local.Database
@@ -9,6 +10,7 @@ import com.agobikk.cookeatenjoy.data.repository.LocalRepository
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
 import com.agobikk.cookeatenjoy.ui.screens.ingredient.IngredientListFragment
 import com.agobikk.cookeatenjoy.ui.screens.recipe.RecipeListFragment
+import dagger.BindsInstance
 import dagger.Component
 
 

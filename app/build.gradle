@@ -133,6 +133,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
     compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:$assisted_dagger_inject_version"
     kapt "com.squareup.inject:assisted-inject-processor-dagger2:$assisted_dagger_inject_version"
 
