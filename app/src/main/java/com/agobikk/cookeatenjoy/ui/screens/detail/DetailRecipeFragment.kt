@@ -130,7 +130,7 @@ class DetailRecipeFragment : BaseFragment() {
 
                             updateBtnFavoriteIsActive()
                             saveStateFavoriteValue(true)
-                            viewModel.insert(foodInformation)
+                            viewModel.delete(listOf(foodInformation))
                             true
                         }
                     }

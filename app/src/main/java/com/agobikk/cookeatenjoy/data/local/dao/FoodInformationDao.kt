@@ -1,5 +1,6 @@
 package com.agobikk.cookeatenjoy.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.agobikk.cookeatenjoy.data.local.RoomConstants.FOOD_INFO_TABLE
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
@@ -8,8 +9,9 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 
 @Dao
 interface FoodInformationDao {
+
     @Query("SELECT * FROM $FOOD_INFO_TABLE")
-    suspend fun getFoodInfo(): List<FoodInformationEntity>
+    suspend fun getFoodInfo(): LiveData<List<FoodInformationEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity)
