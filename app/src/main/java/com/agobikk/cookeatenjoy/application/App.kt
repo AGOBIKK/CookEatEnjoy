@@ -18,13 +18,12 @@ class App : Application() {
     lateinit var appComponent: AppComponent
 
     override fun onCreate() {
-
+        super.onCreate()
         appComponent = DaggerAppComponent
             .builder()
-            .appModule(AppModule(this))
-            .setRoomModule(roomModule = RoomModule(applicationContext))
+            .context(this)
+            .setRoomModule(RoomModule(applicationContext))
             .buildAppComp()
-        super.onCreate()
 
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
             .showThreadInfo(true) // (Optional) Whether to show thread info or not. Default true
@@ -47,15 +46,7 @@ class App : Application() {
 
 
 
-    init {
-        instance = this
-    }
-
-    companion object {
-        lateinit var instance: App
-            private set
-    }
 }
-val Activity.appComponent get() = (application as App).appComponent
+
 
 val Fragment.appComponent get() = (requireActivity().application as App).appComponent

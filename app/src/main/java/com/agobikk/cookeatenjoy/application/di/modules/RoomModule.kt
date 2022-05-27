@@ -23,6 +23,8 @@ class RoomModule(private val context: Context) {
 
     }
 
+
+
     @Provides
     @NetworkModuleScope
     fun provideLocalRepository(localRepositoryImpl: LocalRepositoryImpl) : LocalRepository =
