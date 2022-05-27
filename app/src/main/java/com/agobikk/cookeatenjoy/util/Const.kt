@@ -5,6 +5,8 @@ import com.agobikk.cookeatenjoy.R
 
 object Const {
 
+    val FAVORITE_BTN_IS_ACTIVE = R.drawable.ic_baseline_favorite
+    val FAVORITE_BTN_NOT_ACTIVE = R.drawable.ic_baseline_favorite_border
 
 
     val DEFAULT_CATEGORIES_NAMES = arrayOf(

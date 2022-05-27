@@ -6,7 +6,7 @@ import com.agobikk.cookeatenjoy.models.ExtendedIngredient
 
 interface LocalRepository {
     suspend fun searchFoodById(searchId: Long): FoodInformationEntity
-    suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity, onSuccess: () -> Unit)
+    suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity)
     suspend fun getIngredients(searchId: Long): Ingredients
-    suspend fun deleteFoodInformation(foodInformationEntity: List<FoodInformationEntity>, onSuccess: () -> Unit)
+    suspend fun deleteFoodInformation(foodInformationEntity: List<FoodInformationEntity>)
 }

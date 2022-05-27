@@ -43,18 +43,15 @@ class DetailRecipeViewModel @AssistedInject constructor(
         getFoodInformation(id = id)
     }
 
-    fun insert(foodInformationEntity: FoodInformationEntity, onSuccess: () -> Unit) =
+
+    fun insert(foodInformationEntity: FoodInformationEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.insertFoodInfo(foodInformationEntity) {
-                onSuccess()
-            }
+            repository.local.insertFoodInfo(foodInformationEntity)
         }
 
-    fun delete(foodInformationEntity: List<FoodInformationEntity>, onSuccess: () -> Unit) {
+    fun delete(foodInformationEntity: List<FoodInformationEntity>) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.deleteFoodInformation(foodInformationEntity) {
-                onSuccess()
+            repository.local.deleteFoodInformation(foodInformationEntity)
             }
         }
     }
-}
