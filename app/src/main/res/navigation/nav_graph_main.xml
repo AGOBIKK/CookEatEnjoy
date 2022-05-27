@@ -37,6 +37,7 @@
             android:id="@+id/action_RecipeListFragment_to_detailRecipeFragment"
             app:destination="@id/detailRecipeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/CategoryFragment"
         android:name="com.agobikk.cookeatenjoy.ui.screens.category.CategoryFragment"
@@ -46,6 +47,7 @@
             android:id="@+id/action_categoryFragment_to_recipeListFragment"
             app:destination="@id/RecipeListFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/detailRecipeFragment"
         android:name="com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment"
@@ -57,6 +59,7 @@
             android:name="idFood"
             app:argType="long" />
     </fragment>
+
     <fragment
         android:id="@+id/ingredientFragment"
         android:name="com.agobikk.cookeatenjoy.ui.screens.ingredient.IngredientListFragment"

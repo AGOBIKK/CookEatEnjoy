@@ -6,19 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
-import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
-import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.databinding.FragmentFavoriteBinding
-import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
-import kotlinx.coroutines.*
-import timber.log.Timber
 
 
 class FavoriteFragment : BaseFragment() {
@@ -51,24 +44,26 @@ class FavoriteFragment : BaseFragment() {
 
     }
 
-    private  fun init() {
-        adapter = FavoriteAdapter(object : OnFavoriteClickListener{
+    private fun init() {
+        adapter = FavoriteAdapter(object : OnFavoriteClickListener {
             override fun onClick(foodInformationEntity: FoodInformationEntity) {
-                navigate()
+                navigateToDetailRecipeFragment(foodInformationEntity.id)
             }
         })
 
-
         viewBinding.recipeFavoriteRecyclerView.adapter = adapter
-        viewModel.getAllRecipe().observe(viewLifecycleOwner) {list ->
+        viewModel.getAllRecipe().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list.asReversed())
         }
 
     }
 
 
-    private fun navigate() {
-        findNavController().navigate(R.id.action_favorite_to_detailRecipeFragment)
+    private fun navigateToDetailRecipeFragment(value: Long) {
+        val direction =
+            FavoriteFragmentDirections.actionFavoriteToDetailRecipeFragment(value)
+        findNavController()
+            .navigate(direction)
     }
 
     override fun onDestroyView() {
