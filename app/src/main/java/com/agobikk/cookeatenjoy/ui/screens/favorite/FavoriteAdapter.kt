@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
 import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.bumptech.glide.Glide
@@ -16,7 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 
 
 class FavoriteAdapter(private val onClickListener: OnFavoriteClickListener) :
-    ListAdapter<ResultMainCourse, FavoriteAdapter.FavoriteRecipeViewHolder>(FavoriteDiffUtil()) {
+    ListAdapter<FoodInformationEntity, FavoriteAdapter.FavoriteRecipeViewHolder>(FavoriteDiffUtil()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteRecipeViewHolder =
@@ -40,7 +41,7 @@ class FavoriteAdapter(private val onClickListener: OnFavoriteClickListener) :
         var cardView: CardView = itemView.findViewById(R.id.card_view)
         private val viewBinding: LayoutRecipeListItemBinding by viewBinding()
 
-        fun bind(recipe: ResultMainCourse) = with(viewBinding) {
+        fun bind(recipe: FoodInformationEntity) = with(viewBinding) {
             recipeListTitleTextView.text = recipe.title
             recipeListImage.apply {
                 Glide

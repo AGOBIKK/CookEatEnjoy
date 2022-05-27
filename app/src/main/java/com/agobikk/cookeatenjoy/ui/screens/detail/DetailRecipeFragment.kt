@@ -97,8 +97,8 @@ class DetailRecipeFragment : BaseFragment() {
                     sourceName = body?.sourceName ?: "",
                     extendedIngredientEntity = ingredients
                 )
-
                 viewModel.insert(foodInformation)
+
                 fun saveStateFavoriteValue(boolean: Boolean) {
                     SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), boolean)
                 }
@@ -121,23 +121,23 @@ class DetailRecipeFragment : BaseFragment() {
                     valueBool: Boolean
                 ): Boolean {
                     return when {
-                        isFavorite != valueBool -> {
-                            updateBtnFavoriteIsNotActive()
-                            saveStateFavoriteValue(false)
-                            false
-                        }
-                        else -> {
-
+                        isFavorite == valueBool -> {
                             updateBtnFavoriteIsActive()
                             saveStateFavoriteValue(true)
                             viewModel.insert(foodInformation)
                             true
                         }
+                        else -> {
+
+                            updateBtnFavoriteIsNotActive()
+                            saveStateFavoriteValue(false)
+                            viewModel.delete(listOf(foodInformation))
+                            false
+                        }
                     }
                 }
 
                 updateFavoriteButton(isFavorite, valueBool)
-
                 viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
                     onClickListenerAndUpdateFavoriteButton(isFavorite, valueBool)
                 }
@@ -205,9 +205,13 @@ class DetailRecipeFragment : BaseFragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
-        _binding = null
+
     }
 }

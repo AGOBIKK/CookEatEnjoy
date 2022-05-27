@@ -1,21 +1,24 @@
 package com.agobikk.cookeatenjoy.data.repository
 
+import androidx.lifecycle.LiveData
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
 import com.agobikk.cookeatenjoy.data.local.dao.Ingredients
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
-import com.agobikk.cookeatenjoy.models.ExtendedIngredient
-import com.agobikk.cookeatenjoy.models.FoodInformation
 import javax.inject.Inject
 
 class LocalRepositoryImpl @Inject constructor(
     private val foodInformationDao: FoodInformationDao
-) : LocalRepository{
+) : LocalRepository {
 
-    override suspend fun searchFoodById(searchId: Long): FoodInformationEntity{
+    override val getFoodInfo: LiveData<List<FoodInformationEntity>>
+        get() = foodInformationDao.getFoodInfo()
+
+
+    override suspend fun searchFoodById(searchId: Long): FoodInformationEntity {
         return foodInformationDao.searchFoodById(searchId)
     }
 
-    override suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity){
+    override suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity) {
         return foodInformationDao.insertFoodInfo(foodInformationEntity)
     }
 
@@ -26,7 +29,6 @@ class LocalRepositoryImpl @Inject constructor(
     override suspend fun deleteFoodInformation(foodInformationEntity: List<FoodInformationEntity>) {
         return foodInformationDao.deleteFoodInformation(foodInformationEntity)
     }
-
 
 
 //    private var foodInformationRepo: List<FoodInformation> = emptyList()
