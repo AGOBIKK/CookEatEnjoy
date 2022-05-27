@@ -17,7 +17,6 @@ import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.SaveShared
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
-import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.models.FoodInformation
@@ -29,7 +28,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.*
 import timber.log.Timber
-import javax.inject.Inject
 
 class DetailRecipeFragment : BaseFragment() {
     private var _binding: FragmentDetailRecipeBinding? = null
@@ -37,15 +35,10 @@ class DetailRecipeFragment : BaseFragment() {
     private val args: DetailRecipeFragmentArgs by navArgs()
     private var isFavorite = false
     private val coroutineExceptionHandler =
-        CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
+        CoroutineExceptionHandler { _, throwable -> Timber.d("throwable:$throwable") }
     private val scope =
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
-    private var job: Job? = null
     private val viewModel: DetailRecipeViewModel by viewModels()
-
-
-    @Inject
-    lateinit var database: Database
 
     override fun onAttach(context: Context) {
         appComponent.inject(this)
@@ -60,7 +53,6 @@ class DetailRecipeFragment : BaseFragment() {
         _binding = FragmentDetailRecipeBinding.inflate(inflater, container, false)
         return viewBinding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -88,7 +80,7 @@ class DetailRecipeFragment : BaseFragment() {
     }
 
     private fun subscribeUi() {
-        viewModel.recipeDetail.observe(viewLifecycleOwner) {
+        viewModel.recipeDetail.observe(viewLifecycleOwner) { it ->
             it?.body()?.let { foodInformation ->
                 setDetails(foodInformation)
             }
