@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class AppModule(private val context: Context) {

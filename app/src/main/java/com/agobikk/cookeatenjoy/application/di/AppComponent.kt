@@ -38,9 +38,14 @@ interface AppComponent {
     fun inject(fragment: IngredientListFragment)
     fun inject(application: App)
 
+
     @Component.Builder
     interface AppCompBuilder {
+
         fun buildAppComp(): AppComponent
+        @BindsInstance
+        fun context(context: Context): AppCompBuilder
+
         fun appModule(appModule: AppModule): AppCompBuilder
         fun setRoomModule(roomModule: RoomModule): AppCompBuilder
     }

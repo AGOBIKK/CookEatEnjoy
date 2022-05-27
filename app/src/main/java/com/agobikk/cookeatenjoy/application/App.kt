@@ -21,8 +21,8 @@ class App : Application() {
         super.onCreate()
         appComponent = DaggerAppComponent
             .builder()
-            .appModule(AppModule(this))
-            .setRoomModule(roomModule = RoomModule(applicationContext))
+            .context(this)
+            .setRoomModule(RoomModule(applicationContext))
             .buildAppComp()
 
         val formatStrategy: FormatStrategy = PrettyFormatStrategy.newBuilder()
