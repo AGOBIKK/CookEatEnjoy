@@ -114,7 +114,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     //splashScreen
-    implementation "androidx.core:core-splashscreen:1.0.0-beta02"
+    def splashscreen_version = '1.0.0-beta02'
+    implementation "androidx.core:core-splashscreen:$splashscreen_version"
 
     //Timber+Logger for Log
     def timber_version = '5.0.1'
@@ -137,6 +138,6 @@ dependencies {
     compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:$assisted_dagger_inject_version"
     kapt "com.squareup.inject:assisted-inject-processor-dagger2:$assisted_dagger_inject_version"
 
-    implementation  "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.4.1"
+    
 
 }
