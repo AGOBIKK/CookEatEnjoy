@@ -98,6 +98,17 @@ class DetailRecipeFragment : BaseFragment() {
                     extendedIngredientEntity = ingredients
                 )
                 viewModel.insert(foodInformation)
+                fun updateBtnFavoriteIsNotActive() {
+                    viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
+                        FAVORITE_BTN_NOT_ACTIVE
+                    )
+                }
+
+                fun updateBtnFavoriteIsActive() {
+                    viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
+                        FAVORITE_BTN_IS_ACTIVE
+                    )
+                }
 
                 fun saveStateFavoriteValue(boolean: Boolean) {
                     SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), boolean)
@@ -116,58 +127,25 @@ class DetailRecipeFragment : BaseFragment() {
                     }
                 }
 
-                fun onClickListenerAndUpdateFavoriteButton(
-                    isFavorite: Boolean,
-                    valueBool: Boolean
-                ): Boolean {
+                updateFavoriteButton(isFavorite, valueBool)
 
-                    return when (isFavorite) {
-                        valueBool -> {
-                            updateBtnFavoriteIsActive()
-                            saveStateFavoriteValue(true)
-                            viewModel.insert(foodInformation)
-
-                            true
-
-                        }
-                        !valueBool -> {
-                            updateBtnFavoriteIsNotActive()
-                            saveStateFavoriteValue(false)
-                            viewModel.delete(listOf(foodInformation))
-                            false
-
-                        }
-                        else ->{
-                            updateBtnFavoriteIsNotActive()
-                            saveStateFavoriteValue(false)
-                            viewModel.delete(listOf(foodInformation))
-                            false
-
-                        }
+                viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
+                    isFavorite = if (!isFavorite) {
+                        updateBtnFavoriteIsActive()
+                        saveStateFavoriteValue(true)
+                        viewModel.insert(foodInformation)
+                        true
+                    } else {
+                        updateBtnFavoriteIsNotActive()
+                        saveStateFavoriteValue(false)
+                        viewModel.delete(listOf(foodInformation))
+                        false
                     }
                 }
-                updateFavoriteButton(isFavorite, valueBool)
-                viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
-                    onClickListenerAndUpdateFavoriteButton(isFavorite, valueBool)
-                }
-
-
             }
-
         }
     }
 
-    private fun updateBtnFavoriteIsNotActive() {
-        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
-            FAVORITE_BTN_NOT_ACTIVE
-        )
-    }
-
-    private fun updateBtnFavoriteIsActive() {
-        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
-            FAVORITE_BTN_IS_ACTIVE
-        )
-    }
 
     private fun setDetails(detailRecipe: FoodInformation) = with(viewBinding) {
         context?.let {
@@ -220,6 +198,7 @@ class DetailRecipeFragment : BaseFragment() {
         super.onDestroyView()
         _binding = null
     }
+
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
