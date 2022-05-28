@@ -120,27 +120,38 @@ class DetailRecipeFragment : BaseFragment() {
                     isFavorite: Boolean,
                     valueBool: Boolean
                 ): Boolean {
-                    return when {
-                        isFavorite == valueBool -> {
+
+                    return when (isFavorite) {
+                        valueBool -> {
                             updateBtnFavoriteIsActive()
                             saveStateFavoriteValue(true)
                             viewModel.insert(foodInformation)
-                            true
-                        }
-                        else -> {
 
+                            true
+
+                        }
+                        !valueBool -> {
                             updateBtnFavoriteIsNotActive()
                             saveStateFavoriteValue(false)
                             viewModel.delete(listOf(foodInformation))
                             false
+
+                        }
+                        else ->{
+                            updateBtnFavoriteIsNotActive()
+                            saveStateFavoriteValue(false)
+                            viewModel.delete(listOf(foodInformation))
+                            false
+
                         }
                     }
                 }
-
                 updateFavoriteButton(isFavorite, valueBool)
                 viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
                     onClickListenerAndUpdateFavoriteButton(isFavorite, valueBool)
                 }
+
+
             }
 
         }
