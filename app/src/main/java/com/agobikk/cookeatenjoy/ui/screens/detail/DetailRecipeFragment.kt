@@ -16,7 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.SaveShared
 import com.agobikk.cookeatenjoy.application.appComponent
-import com.agobikk.cookeatenjoy.data.converters.ExtendedIngredientImpl
+import com.agobikk.cookeatenjoy.data.converters.ImplTypeEntitiesTable
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.models.FoodInformation
@@ -85,18 +85,11 @@ class DetailRecipeFragment : BaseFragment() {
                 setDetails(foodInformation)
             }
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
-                val body = list?.body()
-                val converter = ExtendedIngredientImpl()
+                val body = list?.body() ?:  FoodInformation(1,"","","","", emptyList())
+                val converter = ImplTypeEntitiesTable()
                 val ingredients =
-                    list?.body()?.extendedIngredient?.map { converter.convert(it) } ?: emptyList()
-                val foodInformation = FoodInformationEntity(
-                    id = body?.id ?: 1,
-                    image = body?.image ?: "",
-                    instructions = body?.instructions ?: "",
-                    title = body?.title ?: "",
-                    sourceName = body?.sourceName ?: "",
-                    extendedIngredientEntity = ingredients
-                )
+                    list?.body()?.extendedIngredient?.map { converter.convertExtendedIngredient(it) } ?: emptyList()
+                val foodInformation = converter.convertFoodInformationEntity(body,ingredients)
                 viewModel.insert(foodInformation)
                 fun updateBtnFavoriteIsNotActive() {
                     viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
