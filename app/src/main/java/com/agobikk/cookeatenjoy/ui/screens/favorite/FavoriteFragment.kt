@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.agobikk.cookeatenjoy.application.appComponent
+import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentFavoriteBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
@@ -27,7 +28,6 @@ class FavoriteFragment : BaseFragment() {
         super.onAttach(context)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,13 +41,12 @@ class FavoriteFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         init()
-
     }
 
     private fun init() {
         adapter = FavoriteAdapter(object : OnFavoriteClickListener {
-            override fun onClick(foodInformationEntity: FoodInformationEntity) {
-                navigateToDetailRecipeFragment(foodInformationEntity.id)
+            override fun onClick(favoriteRecipeEntity: FavoriteRecipeEntity) {
+                navigateToDetailRecipeFragment(favoriteRecipeEntity.id)
             }
         })
 

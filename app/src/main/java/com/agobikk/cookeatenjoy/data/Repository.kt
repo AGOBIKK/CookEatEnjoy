@@ -7,8 +7,8 @@ import com.agobikk.cookeatenjoy.data.repository.LocalRepositoryImpl
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    remoteRepository: RemoteRepositoryImpl,
-    localRepository: LocalRepositoryImpl
+    remoteRepository: RemoteRepository,
+    localRepository: LocalRepository
 ) {
     val remote = remoteRepository
     val local = localRepository
