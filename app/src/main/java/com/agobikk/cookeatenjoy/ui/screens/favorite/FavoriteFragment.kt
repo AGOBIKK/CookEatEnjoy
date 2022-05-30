@@ -27,7 +27,6 @@ class FavoriteFragment : BaseFragment() {
         super.onAttach(context)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,7 +40,6 @@ class FavoriteFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         init()
-
     }
 
     private fun init() {

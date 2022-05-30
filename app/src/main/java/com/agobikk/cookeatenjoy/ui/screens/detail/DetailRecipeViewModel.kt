@@ -10,6 +10,8 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import timber.log.Timber
@@ -30,6 +32,7 @@ class DetailRecipeViewModel @AssistedInject constructor(
     init {
         Timber.d("-------------some.value:${someValue.value}")
         Timber.d("-------------some.value:${savedStateHandle.get<Long>("detail_some")}")
+
     }
 
     private val _recipeDetail = MutableLiveData<Response<FoodInformation>?>()
@@ -45,6 +48,7 @@ class DetailRecipeViewModel @AssistedInject constructor(
 //    }.flowOn(Dispatchers.Default)
 
 
+
     private fun getFoodInformation(id: Long) {
         viewModelScope.launch {
             _recipeDetail.postValue(repository.remote.getFoodInformation(id = id))
@@ -54,6 +58,8 @@ class DetailRecipeViewModel @AssistedInject constructor(
     fun onViewCreated(id: Long) {
         getFoodInformation(id = id)
     }
+
+
 
 
     fun insert(foodInformationEntity: FoodInformationEntity) =
@@ -72,6 +78,8 @@ class DetailRecipeViewModel @AssistedInject constructor(
             repository.local.deleteFavoriteRecipe(favoriteRecipeEntity)
         }
 
+
+//    val foodInformationLiveData: Flow<List<FoodInformationEntity>> = repository.local.getFoodInfo.asFlow()
 
 
 //    fun delete(foodInformationEntity: List<FoodInformationEntity>) {
