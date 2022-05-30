@@ -29,7 +29,3 @@ interface FoodInformationDao {
     suspend fun searchFoodById(searchId: Long): FoodInformationEntity
 
 }
-
-data class Ingredients(
-    @ColumnInfo(name = "extended_ingredients") var extendedIngredientEntity: List<ExtendedIngredientEntity>
-)

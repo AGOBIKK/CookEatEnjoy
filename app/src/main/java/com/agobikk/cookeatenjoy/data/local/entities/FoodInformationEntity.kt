@@ -14,13 +14,13 @@ data class FoodInformationEntity(
     var image: String,
 
     @ColumnInfo(name = "summary_food")
-    var instructions: String,
+    var instructions: String?,
 
     @ColumnInfo(name = "title_food")
     var title: String,
 
     @ColumnInfo(name = "source_name_food")
-    var sourceName: String,
+    var sourceName: String?,
 
     @ColumnInfo(name = "extended_ingredients")
     var extendedIngredientEntity: List<ExtendedIngredientEntity>

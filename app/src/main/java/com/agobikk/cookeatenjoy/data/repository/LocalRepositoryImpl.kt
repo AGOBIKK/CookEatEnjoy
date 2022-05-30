@@ -11,11 +11,16 @@ import javax.inject.Inject
 
 class LocalRepositoryImpl @Inject constructor(
     private val foodInformationDao: FoodInformationDao,
-    private val favoriteRecipeDao: FavoriteRecipeDao
+    private val favoriteRecipeDao: FavoriteRecipeDao,
+
 ) : LocalRepository {
 
     override val getFoodInfo: LiveData<List<FoodInformationEntity>>
         get() = foodInformationDao.getFoodInfo()
+
+    override val getFavoriteFood: LiveData<List<FavoriteRecipeEntity>>
+        get() = favoriteRecipeDao.getFavoriteRecipe()
+
 
 
     override suspend fun searchFoodById(searchId: Long): FoodInformationEntity {

@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalRepository {
     val getFoodInfo: LiveData<List<FoodInformationEntity>>
+    val getFavoriteFood:LiveData<List<FavoriteRecipeEntity>>
     suspend fun searchFoodById(searchId: Long): FoodInformationEntity
     suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity)
     suspend fun getIngredients(searchId: Long): Ingredients
