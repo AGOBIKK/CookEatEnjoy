@@ -16,8 +16,9 @@ import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.SaveShared
 import com.agobikk.cookeatenjoy.application.appComponent
-import com.agobikk.cookeatenjoy.data.converters.ImplTypeEntitiesTable
-import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
+import com.agobikk.cookeatenjoy.data.converters.ConvertFoodInformationEntityImpl
+import com.agobikk.cookeatenjoy.data.converters.СonvertExtendedIngredientImpl
+import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.models.FoodInformation
 import com.agobikk.cookeatenjoy.ui.BaseFragment
@@ -38,6 +39,8 @@ class DetailRecipeFragment : BaseFragment() {
         CoroutineExceptionHandler { _, throwable -> Timber.d("throwable:$throwable") }
     private val scope =
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
+    private val mainScope =
+        CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private val viewModel: DetailRecipeViewModel by viewModels()
 
     override fun onAttach(context: Context) {
@@ -58,11 +61,18 @@ class DetailRecipeFragment : BaseFragment() {
 
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+//        mainScope.launch {
+//            viewModel.myFlow
+//                .collect { print -> Timber.d("onViewCreated------------->$print:") }
+//        }
         val foodId = getFoodId()
         viewModel.onViewCreated(id = foodId)
         setScrollListener()
         subscribeUi()
         navigate(foodId)
+
+
+
     }
 
     private fun getFoodId(): Long {
@@ -85,58 +95,65 @@ class DetailRecipeFragment : BaseFragment() {
                 setDetails(foodInformation)
             }
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
-                val body = list?.body() ?:  FoodInformation(1,"","","","", emptyList())
-                val converter = ImplTypeEntitiesTable()
+                val body = list?.body() ?: FoodInformation(1, "", "", "", "", emptyList())
+                val converterFoodInformation = ConvertFoodInformationEntityImpl()
+                val converterIngredients = СonvertExtendedIngredientImpl()
                 val ingredients =
-                    list?.body()?.extendedIngredient?.map { converter.convertExtendedIngredient(it) } ?: emptyList()
-                val foodInformation = converter.convertFoodInformationEntity(body,ingredients)
+                    list?.body()?.extendedIngredient?.map { converterIngredients.convertExtendedIngredient(it) }
+                        ?: emptyList()
+                val foodInformation = converterFoodInformation.convertFoodInformationEntity(body, ingredients)
                 viewModel.insert(foodInformation)
-                fun updateBtnFavoriteIsNotActive() {
-                    viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
-                        FAVORITE_BTN_NOT_ACTIVE
-                    )
-                }
 
-                fun updateBtnFavoriteIsActive() {
-                    viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
-                        FAVORITE_BTN_IS_ACTIVE
-                    )
-                }
-
-                fun saveStateFavoriteValue(boolean: Boolean) {
-                    SaveShared.setFavorite(requireContext(), foodInformation.id.toString(), boolean)
-                }
-
-                fun getStateFavoriteButtonBoolean(string: String): Boolean {
-                    return SaveShared.getFavorite(requireContext(), string)
-                }
-
-                val valueBool = getStateFavoriteButtonBoolean(foodInformation.id.toString())
-
-                fun updateFavoriteButton(isFavorite: Boolean, valueBool: Boolean) {
-                    when {
-                        isFavorite != valueBool -> updateBtnFavoriteIsActive()
-                        else -> updateBtnFavoriteIsNotActive()
-                    }
-                }
-
-                updateFavoriteButton(isFavorite, valueBool)
-
-                viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
-                    isFavorite = if (!isFavorite) {
-                        updateBtnFavoriteIsActive()
-                        saveStateFavoriteValue(true)
-                        viewModel.insert(foodInformation)
-                        true
-                    } else {
-                        updateBtnFavoriteIsNotActive()
-                        saveStateFavoriteValue(false)
-                        viewModel.delete(listOf(foodInformation))
-                        false
-                    }
-                }
             }
         }
+
+
+        fun updateBtnFavoriteIsNotActive() {
+            viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
+                FAVORITE_BTN_NOT_ACTIVE
+            )
+        }
+
+        fun updateBtnFavoriteIsActive() {
+            viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
+                FAVORITE_BTN_IS_ACTIVE
+            )
+        }
+
+        fun saveStateFavoriteValue(boolean: Boolean) {
+            SaveShared.setFavorite(requireContext(), getFoodId().toString(), boolean)
+        }
+
+        fun getStateFavoriteButtonBoolean(string: String): Boolean {
+            return SaveShared.getFavorite(requireContext(), string)
+        }
+
+        val valueBool = getStateFavoriteButtonBoolean(getFoodId().toString())
+
+        fun updateFavoriteButton(isFavorite: Boolean, valueBool: Boolean) {
+            when {
+                isFavorite != valueBool -> updateBtnFavoriteIsActive()
+                else -> updateBtnFavoriteIsNotActive()
+            }
+        }
+
+        updateFavoriteButton(isFavorite, valueBool)
+        viewBinding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
+            val favoriteRecipe = FavoriteRecipeEntity(getFoodId(),"image_insert","title")
+            isFavorite = if (!isFavorite) {
+                updateBtnFavoriteIsActive()
+                saveStateFavoriteValue(true)
+
+                viewModel.insertFavoriteRecipe(favoriteRecipe)
+                true
+            } else {
+                updateBtnFavoriteIsNotActive()
+                saveStateFavoriteValue(false)
+                viewModel.deleteFavoriteRecipe(favoriteRecipe)
+                false
+            }
+        }
+
     }
 
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.room.Room
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.RoomConstants
+import com.agobikk.cookeatenjoy.data.local.dao.FavoriteRecipeDao
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
 import com.agobikk.cookeatenjoy.data.repository.LocalRepository
 import com.agobikk.cookeatenjoy.data.repository.LocalRepositoryImpl
@@ -48,6 +49,11 @@ class RoomModule(private val context: Context) {
     @NetworkModuleScope
     fun provideDao(database: Database): FoodInformationDao =
         database.getFoodInformation()
+
+    @Provides
+    @NetworkModuleScope
+    fun provideFavoriteRecipeDao(database: Database):FavoriteRecipeDao =
+        database.getFavoriteRecipe()
 }
 
 
