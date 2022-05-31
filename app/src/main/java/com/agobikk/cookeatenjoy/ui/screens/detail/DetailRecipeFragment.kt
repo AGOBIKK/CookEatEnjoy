@@ -94,6 +94,7 @@ class DetailRecipeFragment : BaseFragment() {
                 setDetails(foodInformation)
             }
         }
+
             viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
                 val body = list?.body() ?: FoodInformation(1, "", "", "", "", emptyList())
                 val converterFoodInformation = ConvertFoodInformationEntityImpl()
