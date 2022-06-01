@@ -6,7 +6,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
+import androidx.core.app.ShareCompat
+import androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -39,7 +40,6 @@ class DetailRecipeFragment :
         CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private val viewModel: DetailRecipeViewModel by viewModels()
     private var job: Job? = null
-    private var job1: Job? = null
     lateinit var deferred: Deferred<FoodInformationEntity>
 
     override fun onAttach(context: Context) {
@@ -146,11 +146,31 @@ class DetailRecipeFragment :
         recipeDetailTitle.text = detailRecipe.title
         sourceNameRecipe.text = detailRecipe.sourceName
         wordProcessing(detailRecipe)
+        shareRecipe(detailRecipe)
+    }
+
+    private fun shareRecipe(shareRecipe: FoodInformation) {
+        binding.includeLayoutDetailIcon.recipeDetailShareIcon.setOnClickListener {
+            val shareText = StringBuilder()
+                .append(resources.getString(R.string.check_this_recipe) + "\n")
+                .append("${shareRecipe.title}\n\n")
+                .append("${shareRecipe.sourceName}\n\n")
+                .append("${shareRecipe.image}\n\n")
+                .append("${shareRecipe.instructions.parseAsHtml(TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)}\n\n")
+            val intent = requireActivity().let {
+                ShareCompat.IntentBuilder(it)
+                    .setText(shareText.toString())
+                    .setType("text/plain")
+                    .intent
+            }
+            startActivity(intent)
+        }
+
     }
 
     private fun wordProcessing(detailRecipe: FoodInformation) = with(binding) {
         includeLayoutCardInstruction.cookingInstructions.text =
-            detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
+            detailRecipe.instructions.parseAsHtml(TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 includeLayoutCardInstruction.cookingInstructions.justificationMode =
@@ -172,8 +192,10 @@ class DetailRecipeFragment :
         }
     }
 
+
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
     }
 }
+

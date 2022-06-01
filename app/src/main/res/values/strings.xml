@@ -16,6 +16,8 @@
     <string name="share_this_recipe">Share this recipe</string>
     <string name="close_recipe">Close recipe</string>
     <string name="search">Search</string>
+    <string name="check_this_recipe">Check this recipe:</string>
+    <string name="ingredients">Ingredient list</string>
 
 
     <!--    Categories-->
