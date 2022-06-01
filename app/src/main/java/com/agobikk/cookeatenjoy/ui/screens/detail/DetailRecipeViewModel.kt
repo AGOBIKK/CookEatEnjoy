@@ -3,13 +3,17 @@ package com.agobikk.cookeatenjoy.ui.screens.detail
 import androidx.lifecycle.*
 import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.Repository
+import com.agobikk.cookeatenjoy.data.converters.ConverterFoodInformationEntityImpl
+import com.agobikk.cookeatenjoy.data.converters.СonverterExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.models.FoodInformation
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -26,27 +30,16 @@ class DetailRecipeViewModel @AssistedInject constructor(
         override fun create(savedStateHandle: SavedStateHandle): DetailRecipeViewModel
     }
 
-    val someValue = savedStateHandle.getLiveData("detail", 45647464)
-
+    lateinit var deferred: Deferred<FoodInformationEntity>
 
     init {
-        Timber.d("-------------some.value:${someValue.value}")
+
         Timber.d("-------------some.value:${savedStateHandle.get<Long>("detail_some")}")
 
     }
 
     private val _recipeDetail = MutableLiveData<Response<FoodInformation>?>()
     val recipeDetail: LiveData<Response<FoodInformation>?> = _recipeDetail
-
-//    val myFlow: Flow<FoodInformationEntity> = flow {
-//        val body = recipeDetail.value?.body() ?:  FoodInformation(1,"","","","", emptyList())
-//        val converter = ImplTypeEntitiesTable()
-//        val ingredients =
-//            body.extendedIngredient.map { converter.convertExtendedIngredient(it) } ?: emptyList()
-//        val foodInformation = converter.convertFoodInformationEntity(body,ingredients)
-//        emit(foodInformation)
-//    }.flowOn(Dispatchers.Default)
-
 
 
     private fun getFoodInformation(id: Long) {
@@ -55,18 +48,31 @@ class DetailRecipeViewModel @AssistedInject constructor(
         }
     }
 
+     suspend fun getFoodInformationConvertToFoodInformationEntity(id: Long): FoodInformationEntity {
+        deferred = viewModelScope.async {
+            _recipeDetail.postValue(repository.remote.getFoodInformation(id = id))
+            val body =
+                _recipeDetail.value?.body() ?: FoodInformation(1, "", "", "", "", emptyList())
+            val converterFoodInformation = ConverterFoodInformationEntityImpl()
+            val converterIngredients = СonverterExtendedIngredientImpl()
+            val ingredients = body.extendedIngredient.map {
+                converterIngredients.convertExtendedIngredient(it)
+            }
+            val foodInformation =
+                converterFoodInformation.convertFoodInformationEntity(body, ingredients)
+            foodInformation
+        }
+        return deferred.await()
+    }
+
     fun onViewCreated(id: Long) {
         getFoodInformation(id = id)
     }
-
-
-
 
     fun insert(foodInformationEntity: FoodInformationEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertFoodInfo(foodInformationEntity)
         }
-
 
     fun insertFavoriteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -77,16 +83,4 @@ class DetailRecipeViewModel @AssistedInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.deleteFavoriteRecipe(favoriteRecipeEntity)
         }
-
-
-//    val foodInformationLiveData: Flow<List<FoodInformationEntity>> = repository.local.getFoodInfo.asFlow()
-
-
-//    fun delete(foodInformationEntity: List<FoodInformationEntity>) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.local.deleteFoodInformation(foodInformationEntity)
-//        }
-//    }
-
-//    val readRecipes: LiveData<List<RecipesEntity>> = repository.local.readRecipes().asLiveData()
 }

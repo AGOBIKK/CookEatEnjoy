@@ -2,15 +2,12 @@ package com.agobikk.cookeatenjoy.ui.screens.favorite
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
-import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentFavoriteBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
 
@@ -38,7 +35,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
         })
 
         binding.recipeFavoriteRecyclerView.adapter = adapter
-        viewModel.getAllRecipe().observe(viewLifecycleOwner) { list ->
+        viewModel.readAllRecipe().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list.asReversed())
         }
     }

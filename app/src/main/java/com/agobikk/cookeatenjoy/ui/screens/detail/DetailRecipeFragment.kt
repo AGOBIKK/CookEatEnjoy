@@ -14,9 +14,8 @@ import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.SaveShared
 import com.agobikk.cookeatenjoy.application.appComponent
-import com.agobikk.cookeatenjoy.data.converters.ConverterFoodInformationEntityImpl
-import com.agobikk.cookeatenjoy.data.converters.СonverterExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
+import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.models.FoodInformation
 import com.agobikk.cookeatenjoy.ui.BaseFragment
@@ -39,6 +38,9 @@ class DetailRecipeFragment :
     private val mainScope =
         CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private val viewModel: DetailRecipeViewModel by viewModels()
+    private var job: Job? = null
+    private var job1: Job? = null
+    lateinit var deferred: Deferred<FoodInformationEntity>
 
     override fun onAttach(context: Context) {
         appComponent.inject(this)
@@ -46,13 +48,8 @@ class DetailRecipeFragment :
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-//        mainScope.launch {
-//            viewModel.myFlow
-//                .collect { print -> Timber.d("onViewCreated------------->$print:") }
-//        }
         val foodId = getFoodId()
         viewModel.onViewCreated(id = foodId)
         setScrollListener()
@@ -80,22 +77,11 @@ class DetailRecipeFragment :
                 setDetails(foodInformation)
             }
         }
-
+        deferred = scope.async {
+            viewModel.getFoodInformationConvertToFoodInformationEntity(getFoodId())
+        }
+        job = mainScope.launch { viewModel.insert(deferred.await()) }
         viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
-            val body = list?.body() ?: FoodInformation(1, "", "", "", "", emptyList())
-            val converterFoodInformation = ConverterFoodInformationEntityImpl()
-            val converterIngredients = СonverterExtendedIngredientImpl()
-            val ingredients =
-                list?.body()?.extendedIngredient?.map {
-                    converterIngredients.convertExtendedIngredient(
-                        it
-                    )
-                }
-                    ?: emptyList()
-            val foodInformation =
-                converterFoodInformation.convertFoodInformationEntity(body, ingredients)
-            viewModel.insert(foodInformation)
-
 
             fun updateBtnFavoriteIsNotActive() {
                 binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
@@ -127,12 +113,12 @@ class DetailRecipeFragment :
             }
 
             binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
+                val body = checkNotNull(list?.body())
                 val favoriteRecipe =
-                    FavoriteRecipeEntity(getFoodId(), foodInformation.image, foodInformation.title)
+                    FavoriteRecipeEntity(getFoodId(), body.image, body.title)
                 isFavorite = if (!isFavorite) {
                     updateBtnFavoriteIsActive()
                     saveStateFavoriteValue(true)
-
                     viewModel.insertFavoriteRecipe(favoriteRecipe)
                     true
                 } else {
@@ -144,12 +130,6 @@ class DetailRecipeFragment :
             }
             updateFavoriteButton(isFavorite, valueBool)
         }
-
-//        mainScope.launch {
-//            viewModel.foodInformationLiveData.collect {
-//                Timber.d("subscribeUi-----------------------${it[it.lastIndex]}")
-//            }
-//        }
     }
 
     private fun setDetails(detailRecipe: FoodInformation) = with(binding) {
@@ -170,9 +150,7 @@ class DetailRecipeFragment :
 
     private fun wordProcessing(detailRecipe: FoodInformation) = with(binding) {
         includeLayoutCardInstruction.cookingInstructions.text =
-            detailRecipe
-                .instructions
-                .parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
+            detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 includeLayoutCardInstruction.cookingInstructions.justificationMode =
@@ -184,17 +162,12 @@ class DetailRecipeFragment :
     private fun navigate(value: Long) {
         with(binding) {
             includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
-                findNavController()
-                    .navigateUp()
+                findNavController().navigateUp()
             }
             ingredientImage.setOnClickListener {
-                val direction =
-                    DetailRecipeFragmentDirections.actionDetailRecipeFragmentToIngredientFragment(
-                        value
-                    )
-
-                findNavController()
-                    .navigate(direction)
+                val direction = DetailRecipeFragmentDirections
+                    .actionDetailRecipeFragmentToIngredientFragment(value)
+                findNavController().navigate(direction)
             }
         }
     }
@@ -202,6 +175,5 @@ class DetailRecipeFragment :
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
-
     }
 }
