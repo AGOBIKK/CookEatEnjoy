@@ -4,7 +4,7 @@ import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.models.FoodInformation
 
-class ConvertFoodInformationEntityImpl :ConvertFoodInformationEntity{
+class ConverterFoodInformationEntityImpl :ConvertFoodInformationEntity{
     override fun convertFoodInformationEntity(value: FoodInformation, ingredient:List<ExtendedIngredientEntity>): FoodInformationEntity {
         return FoodInformationEntity(
             id = value.id,

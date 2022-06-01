@@ -3,8 +3,8 @@ package com.agobikk.cookeatenjoy.data.local.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.agobikk.cookeatenjoy.data.local.RoomConstants.FOOD_INFO_TABLE
-import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
+import com.agobikk.cookeatenjoy.data.local.entities.Ingredients
 
 
 @Dao
@@ -17,7 +17,7 @@ interface FoodInformationDao {
     suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity)
 
    @Query("SELECT extended_ingredients FROM $FOOD_INFO_TABLE WHERE id_food LIKE :searchId")
-    suspend fun getIngredients(searchId: Long):Ingredients
+    suspend fun getIngredients(searchId: Long): Ingredients
 
     @Delete
     suspend fun deleteFoodInformation(foodInformationEntity: List<FoodInformationEntity>)

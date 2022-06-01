@@ -4,9 +4,7 @@ import android.content.Context
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.text.parseAsHtml
@@ -16,10 +14,9 @@ import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.SaveShared
 import com.agobikk.cookeatenjoy.application.appComponent
-import com.agobikk.cookeatenjoy.data.converters.ConvertFoodInformationEntityImpl
-import com.agobikk.cookeatenjoy.data.converters.СonvertExtendedIngredientImpl
+import com.agobikk.cookeatenjoy.data.converters.ConverterFoodInformationEntityImpl
+import com.agobikk.cookeatenjoy.data.converters.СonverterExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
-import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.models.FoodInformation
 import com.agobikk.cookeatenjoy.ui.BaseFragment
@@ -29,7 +26,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
 class DetailRecipeFragment :
@@ -48,7 +44,6 @@ class DetailRecipeFragment :
         appComponent.inject(this)
         super.onAttach(context)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -88,8 +83,8 @@ class DetailRecipeFragment :
 
         viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
             val body = list?.body() ?: FoodInformation(1, "", "", "", "", emptyList())
-            val converterFoodInformation = ConvertFoodInformationEntityImpl()
-            val converterIngredients = СonvertExtendedIngredientImpl()
+            val converterFoodInformation = ConverterFoodInformationEntityImpl()
+            val converterIngredients = СonverterExtendedIngredientImpl()
             val ingredients =
                 list?.body()?.extendedIngredient?.map {
                     converterIngredients.convertExtendedIngredient(
@@ -203,7 +198,6 @@ class DetailRecipeFragment :
             }
         }
     }
-
 
     override fun onDestroy() {
         scope.cancel()

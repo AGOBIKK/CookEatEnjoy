@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.databinding.FragmentSplashBinding
+import com.agobikk.cookeatenjoy.ui.BaseFragment
 
 
-class SplashFragment : Fragment(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 

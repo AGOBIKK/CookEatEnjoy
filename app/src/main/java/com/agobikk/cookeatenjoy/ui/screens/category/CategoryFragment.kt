@@ -2,17 +2,15 @@ package com.agobikk.cookeatenjoy.ui.screens.category
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentCategoryBinding
 import com.agobikk.cookeatenjoy.models.Category
+import com.agobikk.cookeatenjoy.ui.BaseFragment
 import com.agobikk.cookeatenjoy.util.Const
 
 
-class CategoryFragment : Fragment(R.layout.fragment_category) {
-    private val viewBinding: FragmentCategoryBinding by viewBinding()
+class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryBinding::inflate) {
     private lateinit var adapter: CategoryAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -20,7 +18,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
         initRecyclerView()
     }
 
-    private fun initRecyclerView() = with(viewBinding) {
+    private fun initRecyclerView() = with(binding) {
         adapter = CategoryAdapter(object : OnCategoryClickListener {
             override fun onClick(category: Category) {
                 navigateToRecipeList()

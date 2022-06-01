@@ -3,10 +3,9 @@ package com.agobikk.cookeatenjoy.data.repository
 import androidx.lifecycle.LiveData
 import com.agobikk.cookeatenjoy.data.local.dao.FavoriteRecipeDao
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
-import com.agobikk.cookeatenjoy.data.local.dao.Ingredients
+import com.agobikk.cookeatenjoy.data.local.entities.Ingredients
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalRepositoryImpl @Inject constructor(

@@ -1,16 +1,9 @@
 package com.agobikk.cookeatenjoy.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.agobikk.cookeatenjoy.data.local.RoomConstants
-import com.agobikk.cookeatenjoy.data.local.dao.Ingredients
+import com.agobikk.cookeatenjoy.data.local.entities.Ingredients
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
-import com.agobikk.cookeatenjoy.models.ExtendedIngredient
-import kotlinx.coroutines.flow.Flow
 
 interface LocalRepository {
     val getFoodInfo: LiveData<List<FoodInformationEntity>>
