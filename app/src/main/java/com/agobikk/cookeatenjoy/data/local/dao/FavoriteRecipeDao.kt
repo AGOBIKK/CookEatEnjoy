@@ -6,16 +6,16 @@ import com.agobikk.cookeatenjoy.data.local.RoomConstants
 import com.agobikk.cookeatenjoy.data.local.RoomConstants.FAVORITE_RECIPES_TABLE
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteRecipeDao {
 
         @Query("SELECT * FROM $FAVORITE_RECIPES_TABLE")
-        fun getFavoriteRecipe(): LiveData<List<FavoriteRecipeEntity>>
+        fun getFavoriteRecipe(): Flow<List<FavoriteRecipeEntity>>
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun insertFavoriteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity)
-
 
         @Delete
         suspend fun deleteFavoriteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity)

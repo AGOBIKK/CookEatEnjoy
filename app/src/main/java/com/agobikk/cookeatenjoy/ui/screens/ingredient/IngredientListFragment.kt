@@ -4,24 +4,20 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import by.kirich1409.viewbindingdelegate.viewBinding
-import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.application.App
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.Repository
-import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
+import com.agobikk.cookeatenjoy.ui.BaseFragment
 import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
 
 
-class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
-    private val viewBinding: FragmentListIngredientBinding by viewBinding()
+class IngredientListFragment :
+    BaseFragment<FragmentListIngredientBinding>(FragmentListIngredientBinding::inflate) {
     private lateinit var adapter: IngredientListAdapter
     private val viewModel: IngredientViewModel by viewModels()
     private val args: IngredientListFragmentArgs by navArgs()
@@ -63,12 +59,12 @@ class IngredientListFragment : Fragment(R.layout.fragment_list_ingredient) {
         }
     }
 
-    private fun init() = with(viewBinding) {
+    private fun init() = with(binding) {
         adapter = IngredientListAdapter(object : OnIngredientClickListener {
             override fun onClick(extendedIngredient: ExtendedIngredientEntity) {
             }
         })
-        viewBinding.ingredientsRecyclerview.adapter = adapter
+        ingredientsRecyclerview.adapter = adapter
     }
 
     override fun onDestroy() {

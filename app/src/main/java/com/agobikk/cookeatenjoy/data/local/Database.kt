@@ -1,5 +1,6 @@
 package com.agobikk.cookeatenjoy.data.local
 
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -14,8 +15,11 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
         FoodInformationEntity::class,
         FavoriteRecipeEntity::class
     ],
-    version = 1,
-    exportSchema = true
+    version = 2,
+    exportSchema = true,
+    autoMigrations = [
+        AutoMigration (from = 1, to = 2)
+    ]
 )
 @TypeConverters(RoomConverters::class)
 abstract class Database : RoomDatabase() {

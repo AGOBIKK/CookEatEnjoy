@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy.data.local.dao
+package com.agobikk.cookeatenjoy.data.local.entities
 
 import androidx.room.ColumnInfo
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity

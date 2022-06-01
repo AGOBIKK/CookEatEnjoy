@@ -3,7 +3,7 @@ package com.agobikk.cookeatenjoy.data.repository
 import androidx.lifecycle.LiveData
 import com.agobikk.cookeatenjoy.data.local.dao.FavoriteRecipeDao
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
-import com.agobikk.cookeatenjoy.data.local.dao.Ingredients
+import com.agobikk.cookeatenjoy.data.local.entities.Ingredients
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import kotlinx.coroutines.flow.Flow
@@ -13,14 +13,12 @@ class LocalRepositoryImpl @Inject constructor(
     private val foodInformationDao: FoodInformationDao,
     private val favoriteRecipeDao: FavoriteRecipeDao,
 
-) : LocalRepository {
+    ) : LocalRepository {
 
-    override val getFoodInfo: LiveData<List<FoodInformationEntity>>
-        get() = foodInformationDao.getFoodInfo()
+    override val getFoodInfo: Flow<List<FoodInformationEntity>> = foodInformationDao.getFoodInfo()
 
-    override val getFavoriteFood: LiveData<List<FavoriteRecipeEntity>>
-        get() = favoriteRecipeDao.getFavoriteRecipe()
-
+    override val getFavoriteFood: Flow<List<FavoriteRecipeEntity>> =
+        favoriteRecipeDao.getFavoriteRecipe()
 
 
     override suspend fun searchFoodById(searchId: Long): FoodInformationEntity {
@@ -33,10 +31,6 @@ class LocalRepositoryImpl @Inject constructor(
 
     override suspend fun getIngredients(searchId: Long): Ingredients {
         return foodInformationDao.getIngredients(searchId)
-    }
-
-    override fun getFavoriteRecipe(): LiveData<List<FavoriteRecipeEntity>> {
-        TODO("Not yet implemented")
     }
 
     override suspend fun insertFavoriteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity) {
@@ -54,8 +48,6 @@ class LocalRepositoryImpl @Inject constructor(
     override suspend fun searchFavoriteRecipeById(searchId: Long): FavoriteRecipeEntity {
         TODO("Not yet implemented")
     }
-
-
 
 
 //    private var foodInformationRepo: List<FoodInformation> = emptyList()

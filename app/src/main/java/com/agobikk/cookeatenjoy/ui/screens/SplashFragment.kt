@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.databinding.FragmentSplashBinding
+import com.agobikk.cookeatenjoy.ui.BaseFragment
 
 
-class SplashFragment : Fragment(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -23,7 +25,6 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
                     exit = androidx.navigation.ui.R.anim.nav_default_exit_anim
                     popEnter = androidx.navigation.ui.R.anim.nav_default_pop_enter_anim
                     popExit = androidx.navigation.ui.R.anim.nav_default_pop_enter_anim
-
                 }
                 launchSingleTop = true
                 popUpTo(R.id.nav_graph_application) {

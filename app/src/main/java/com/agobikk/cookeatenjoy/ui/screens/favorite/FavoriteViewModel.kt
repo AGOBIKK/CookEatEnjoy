@@ -1,14 +1,12 @@
 package com.agobikk.cookeatenjoy.ui.screens.favorite
 
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.Repository
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
-import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
-import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -23,8 +21,8 @@ class FavoriteViewModel @AssistedInject constructor(
         override fun create(savedStateHandle: SavedStateHandle): FavoriteViewModel
     }
 
-   fun getAllRecipe(): LiveData<List<FavoriteRecipeEntity>> {
-        return repository.local.getFavoriteFood
+   fun readAllRecipe(): LiveData<List<FavoriteRecipeEntity>> {
+        return repository.local.getFavoriteFood.asLiveData()
     }
 
 }

@@ -2,22 +2,17 @@ package com.agobikk.cookeatenjoy.ui.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.agobikk.cookeatenjoy.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.agobikk.cookeatenjoy.databinding.FragmentMainBinding
+import com.agobikk.cookeatenjoy.ui.BaseFragment
 
-class MainFragment : Fragment(R.layout.fragment_main) {
-
+class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-        val bottomNavigationView =
-            view.findViewById<BottomNavigationView>(R.id.mainBottomNavigationView)
+        val bottomNavigationView = binding.mainBottomNavigationView
         val navController =
             (childFragmentManager.findFragmentById(R.id.mainContainerView) as NavHostFragment)
                 .navController
