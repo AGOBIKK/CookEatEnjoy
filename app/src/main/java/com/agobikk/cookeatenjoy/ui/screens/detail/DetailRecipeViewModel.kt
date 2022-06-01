@@ -14,8 +14,6 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import timber.log.Timber
@@ -48,7 +46,7 @@ class DetailRecipeViewModel @AssistedInject constructor(
         }
     }
 
-     suspend fun getFoodInformationConvertToFoodInformationEntity(id: Long): FoodInformationEntity {
+    suspend fun getFoodInformationConvertToFoodInformationEntity(id: Long): FoodInformationEntity {
         deferred = viewModelScope.async {
             _recipeDetail.postValue(repository.remote.getFoodInformation(id = id))
             val body =
