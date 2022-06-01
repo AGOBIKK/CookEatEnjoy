@@ -15,9 +15,7 @@ import com.agobikk.cookeatenjoy.ui.BaseFragment
 import timber.log.Timber
 
 
-class RecipeListFragment : BaseFragment() {
-    private var _binding: FragmentListRecipeBinding? = null
-    private val viewBinding get() = _binding!!
+class RecipeListFragment : BaseFragment<FragmentListRecipeBinding>(FragmentListRecipeBinding::inflate) {
     private var adapter: RecipesAdapter? = null
     private var isFirst = true
     private val viewModel: RecipesViewModel by viewModels()
@@ -25,15 +23,6 @@ class RecipeListFragment : BaseFragment() {
     override fun onAttach(context: Context) {
         appComponent.inject(this)
         super.onAttach(context)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentListRecipeBinding.inflate(inflater, container, false)
-        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,7 +40,7 @@ class RecipeListFragment : BaseFragment() {
                 }
             })
         }
-        viewBinding.recipeListRecyclerView.adapter = adapter
+        binding.recipeListRecyclerView.adapter = adapter
         if (isFirst) {
             viewModel.onViewCreated()
             isFirst = false
@@ -65,12 +54,6 @@ class RecipeListFragment : BaseFragment() {
             RecipeListFragmentDirections.actionRecipeListFragmentToDetailRecipeFragment(value)
         findNavController()
             .navigate(direction)
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
 

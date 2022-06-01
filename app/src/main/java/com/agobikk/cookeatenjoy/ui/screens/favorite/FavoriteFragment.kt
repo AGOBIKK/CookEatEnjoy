@@ -15,26 +15,13 @@ import com.agobikk.cookeatenjoy.databinding.FragmentFavoriteBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
 
 
-class FavoriteFragment : BaseFragment() {
-    private var _binding: FragmentFavoriteBinding? = null
-    private val viewBinding get() = _binding!!
-
+class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteBinding::inflate) {
     private var adapter: FavoriteAdapter? = null
     private val viewModel: FavoriteViewModel by viewModels()
-
 
     override fun onAttach(context: Context) {
         appComponent.inject(this)
         super.onAttach(context)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,23 +37,16 @@ class FavoriteFragment : BaseFragment() {
             }
         })
 
-        viewBinding.recipeFavoriteRecyclerView.adapter = adapter
+        binding.recipeFavoriteRecyclerView.adapter = adapter
         viewModel.getAllRecipe().observe(viewLifecycleOwner) { list ->
             adapter?.submitList(list.asReversed())
         }
-
     }
-
 
     private fun navigateToDetailRecipeFragment(value: Long) {
         val direction =
             FavoriteFragmentDirections.actionFavoriteToDetailRecipeFragment(value)
         findNavController()
             .navigate(direction)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
