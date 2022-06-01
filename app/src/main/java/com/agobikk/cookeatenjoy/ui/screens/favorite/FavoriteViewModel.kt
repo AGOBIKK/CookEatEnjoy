@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.Repository
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
@@ -24,7 +25,7 @@ class FavoriteViewModel @AssistedInject constructor(
     }
 
    fun getAllRecipe(): LiveData<List<FavoriteRecipeEntity>> {
-        return repository.local.getFavoriteFood
+        return repository.local.getFavoriteFood.asLiveData()
     }
 
 }
