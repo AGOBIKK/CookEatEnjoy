@@ -48,17 +48,7 @@ class DetailRecipeViewModel @AssistedInject constructor(
 
     suspend fun getFoodInformationConvertToFoodInformationEntity(id: Long): FoodInformationEntity {
         deferred = viewModelScope.async {
-            _recipeDetail.postValue(repository.remote.getFoodInformation(id = id))
-            val body =
-                _recipeDetail.value?.body() ?: FoodInformation(1, "", "", "", "", emptyList())
-            val converterFoodInformation = ConverterFoodInformationEntityImpl()
-            val converterIngredients = СonverterExtendedIngredientImpl()
-            val ingredients = body.extendedIngredient.map {
-                converterIngredients.convertExtendedIngredient(it)
-            }
-            val foodInformation =
-                converterFoodInformation.convertFoodInformationEntity(body, ingredients)
-            foodInformation
+           repository.readFoodInformationFromServer(id)
         }
         return deferred.await()
     }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.viewModels
@@ -40,6 +41,7 @@ class DetailRecipeFragment :
         CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private val viewModel: DetailRecipeViewModel by viewModels()
     private var job: Job? = null
+    private var jobOne: Job? = null
     lateinit var deferred: Deferred<FoodInformationEntity>
 
     override fun onAttach(context: Context) {
@@ -170,7 +172,7 @@ class DetailRecipeFragment :
 
     private fun wordProcessing(detailRecipe: FoodInformation) = with(binding) {
         includeLayoutCardInstruction.cookingInstructions.text =
-            detailRecipe.instructions.parseAsHtml(TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
+            detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 includeLayoutCardInstruction.cookingInstructions.justificationMode =
@@ -192,10 +194,8 @@ class DetailRecipeFragment :
         }
     }
 
-
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
     }
 }
-
