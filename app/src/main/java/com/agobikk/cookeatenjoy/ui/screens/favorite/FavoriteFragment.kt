@@ -35,8 +35,8 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
         })
 
         binding.recipeFavoriteRecyclerView.adapter = adapter
-        viewModel.readAllRecipe().observe(viewLifecycleOwner) { list ->
-            adapter?.submitList(list.asReversed())
+        viewModel.readAllRecipe().observe(viewLifecycleOwner) { response ->
+            adapter?.submitList(response.asReversed())
         }
     }
 

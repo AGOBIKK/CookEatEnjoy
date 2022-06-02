@@ -49,14 +49,4 @@ class LocalRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-
-//    private var foodInformationRepo: List<FoodInformation> = emptyList()
-//
-//    override fun getIngredientList(recipeId:Long):List<ExtendedIngredient>{
-//      return foodInformationRepo.find { it.id == recipeId }?.extendedIngredient ?: emptyList()
-//    }
-//
-//    override fun insertFoodInfo(foodInformationEntity: FoodInformationEntity) {
-//
-//    }
 }

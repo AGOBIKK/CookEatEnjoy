@@ -3,11 +3,10 @@ package com.agobikk.cookeatenjoy.ui.screens.detail
 import androidx.lifecycle.*
 import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
 import com.agobikk.cookeatenjoy.data.Repository
-import com.agobikk.cookeatenjoy.data.converters.ConverterFoodInformationEntityImpl
-import com.agobikk.cookeatenjoy.data.converters.СonverterExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.models.FoodInformation
+import androidx.lifecycle.asLiveData
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -29,6 +28,7 @@ class DetailRecipeViewModel @AssistedInject constructor(
     }
 
     lateinit var deferred: Deferred<FoodInformationEntity>
+    lateinit var deferredOne: Deferred<LiveData<List<FoodInformationEntity>>>
 
     init {
 
@@ -46,19 +46,16 @@ class DetailRecipeViewModel @AssistedInject constructor(
         }
     }
 
+    suspend fun foodInformationEntity(id: Long): FoodInformationEntity {
+        deferredOne = viewModelScope.async {
+            repository.getFoodInfo(id).asLiveData()
+        }
+        return deferred.await()
+    }
+
     suspend fun getFoodInformationConvertToFoodInformationEntity(id: Long): FoodInformationEntity {
         deferred = viewModelScope.async {
-            _recipeDetail.postValue(repository.remote.getFoodInformation(id = id))
-            val body =
-                _recipeDetail.value?.body() ?: FoodInformation(1, "", "", "", "", emptyList())
-            val converterFoodInformation = ConverterFoodInformationEntityImpl()
-            val converterIngredients = СonverterExtendedIngredientImpl()
-            val ingredients = body.extendedIngredient.map {
-                converterIngredients.convertExtendedIngredient(it)
-            }
-            val foodInformation =
-                converterFoodInformation.convertFoodInformationEntity(body, ingredients)
-            foodInformation
+            foodInformationEntity(id)
         }
         return deferred.await()
     }

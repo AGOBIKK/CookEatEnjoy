@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE
 import androidx.core.text.parseAsHtml
 import androidx.fragment.app.viewModels
@@ -41,6 +42,9 @@ class DetailRecipeFragment :
     private val viewModel: DetailRecipeViewModel by viewModels()
     private var job: Job? = null
     lateinit var deferred: Deferred<FoodInformationEntity>
+    private fun readFoodById(): Long {
+        return args.idFood
+    }
 
     override fun onAttach(context: Context) {
         appComponent.inject(this)
@@ -50,16 +54,12 @@ class DetailRecipeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-        val foodId = getFoodId()
-        viewModel.onViewCreated(id = foodId)
+        viewModel.onViewCreated(id = readFoodById())
         setScrollListener()
         subscribeUi()
-        navigate(foodId)
+        navigate(readFoodById())
     }
 
-    private fun getFoodId(): Long {
-        return args.idFood
-    }
 
     private fun setScrollListener() = with(binding) {
         val appBarLayout = recipeDetailAppBarLayout
@@ -78,10 +78,9 @@ class DetailRecipeFragment :
             }
         }
         deferred = scope.async {
-            viewModel.getFoodInformationConvertToFoodInformationEntity(getFoodId())
+            viewModel.getFoodInformationConvertToFoodInformationEntity(readFoodById())
         }
-        job = mainScope.launch { viewModel.insert(deferred.await()) }
-        viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
+        viewModel.recipeDetail.observe(viewLifecycleOwner) { response ->
 
             fun updateBtnFavoriteIsNotActive() {
                 binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
@@ -96,14 +95,14 @@ class DetailRecipeFragment :
             }
 
             fun saveStateFavoriteValue(boolean: Boolean) {
-                SaveShared.setFavorite(requireContext(), getFoodId().toString(), boolean)
+                SaveShared.setFavorite(requireContext(), readFoodById().toString(), boolean)
             }
 
             fun getStateFavoriteButtonBoolean(string: String): Boolean {
                 return SaveShared.getFavorite(requireContext(), string)
             }
 
-            val valueBool = getStateFavoriteButtonBoolean(getFoodId().toString())
+            val valueBool = getStateFavoriteButtonBoolean(readFoodById().toString())
 
             fun updateFavoriteButton(isFavorite: Boolean, valueBool: Boolean) {
                 when {
@@ -113,9 +112,9 @@ class DetailRecipeFragment :
             }
 
             binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
-                val body = checkNotNull(list?.body())
+                val body = checkNotNull(response?.body())
                 val favoriteRecipe =
-                    FavoriteRecipeEntity(getFoodId(), body.image, body.title)
+                    FavoriteRecipeEntity(readFoodById(), body.image, body.title)
                 isFavorite = if (!isFavorite) {
                     updateBtnFavoriteIsActive()
                     saveStateFavoriteValue(true)
@@ -170,7 +169,7 @@ class DetailRecipeFragment :
 
     private fun wordProcessing(detailRecipe: FoodInformation) = with(binding) {
         includeLayoutCardInstruction.cookingInstructions.text =
-            detailRecipe.instructions.parseAsHtml(TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
+            detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 includeLayoutCardInstruction.cookingInstructions.justificationMode =
@@ -192,10 +191,8 @@ class DetailRecipeFragment :
         }
     }
 
-
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
     }
 }
-
