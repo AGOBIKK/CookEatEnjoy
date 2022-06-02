@@ -41,8 +41,10 @@ class DetailRecipeFragment :
         CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private val viewModel: DetailRecipeViewModel by viewModels()
     private var job: Job? = null
-    private var jobOne: Job? = null
     lateinit var deferred: Deferred<FoodInformationEntity>
+    private fun readFoodById(): Long {
+        return args.idFood
+    }
 
     override fun onAttach(context: Context) {
         appComponent.inject(this)
@@ -52,16 +54,12 @@ class DetailRecipeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-        val foodId = getFoodId()
-        viewModel.onViewCreated(id = foodId)
+        viewModel.onViewCreated(id = readFoodById())
         setScrollListener()
         subscribeUi()
-        navigate(foodId)
+        navigate(readFoodById())
     }
 
-    private fun getFoodId(): Long {
-        return args.idFood
-    }
 
     private fun setScrollListener() = with(binding) {
         val appBarLayout = recipeDetailAppBarLayout
@@ -80,10 +78,9 @@ class DetailRecipeFragment :
             }
         }
         deferred = scope.async {
-            viewModel.getFoodInformationConvertToFoodInformationEntity(getFoodId())
+            viewModel.getFoodInformationConvertToFoodInformationEntity(readFoodById())
         }
-        job = mainScope.launch { viewModel.insert(deferred.await()) }
-        viewModel.recipeDetail.observe(viewLifecycleOwner) { list ->
+        viewModel.recipeDetail.observe(viewLifecycleOwner) { response ->
 
             fun updateBtnFavoriteIsNotActive() {
                 binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
@@ -98,14 +95,14 @@ class DetailRecipeFragment :
             }
 
             fun saveStateFavoriteValue(boolean: Boolean) {
-                SaveShared.setFavorite(requireContext(), getFoodId().toString(), boolean)
+                SaveShared.setFavorite(requireContext(), readFoodById().toString(), boolean)
             }
 
             fun getStateFavoriteButtonBoolean(string: String): Boolean {
                 return SaveShared.getFavorite(requireContext(), string)
             }
 
-            val valueBool = getStateFavoriteButtonBoolean(getFoodId().toString())
+            val valueBool = getStateFavoriteButtonBoolean(readFoodById().toString())
 
             fun updateFavoriteButton(isFavorite: Boolean, valueBool: Boolean) {
                 when {
@@ -115,9 +112,9 @@ class DetailRecipeFragment :
             }
 
             binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
-                val body = checkNotNull(list?.body())
+                val body = checkNotNull(response?.body())
                 val favoriteRecipe =
-                    FavoriteRecipeEntity(getFoodId(), body.image, body.title)
+                    FavoriteRecipeEntity(readFoodById(), body.image, body.title)
                 isFavorite = if (!isFavorite) {
                     updateBtnFavoriteIsActive()
                     saveStateFavoriteValue(true)
