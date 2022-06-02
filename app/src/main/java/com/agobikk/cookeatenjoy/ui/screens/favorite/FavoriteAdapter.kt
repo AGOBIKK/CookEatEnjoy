@@ -33,7 +33,6 @@ class FavoriteAdapter(private val onClickListener: OnFavoriteClickListener) :
         val item = getItem(position)
         holder.itemView.setOnClickListener { onClickListener.onClick(item) }
         holder.bind(item)
-
     }
 
     inner class FavoriteRecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
