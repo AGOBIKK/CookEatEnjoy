@@ -13,6 +13,7 @@ import com.agobikk.cookeatenjoy.databinding.LayoutRecipeListItemBinding
 import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import timber.log.Timber
 
 
 class RecipesAdapter(private val onClickListener: OnClickListener) :
@@ -46,6 +47,7 @@ class RecipesAdapter(private val onClickListener: OnClickListener) :
 
 
             recipeListTitleTextView.text = recipe.title
+            Timber.d("bind:${recipe.title}")
             recipeListImage.apply {
                 Glide
                     .with(context)

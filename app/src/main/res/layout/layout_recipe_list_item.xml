@@ -35,7 +35,7 @@
             android:weightSum="100">
 
             <TextView
-                android:id="@+id/recipeListTitleTextView"
+                android:id="@+id/recipe_list_title_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="100"

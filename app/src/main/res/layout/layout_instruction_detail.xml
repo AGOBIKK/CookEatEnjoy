@@ -10,8 +10,8 @@
     app:cardCornerRadius="@dimen/layout_instruction_cardCornerRadius_for_cardView"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="@+id/informationRecipe"
-    app:layout_constraintTop_toBottomOf="@id/informationRecipe">
+    app:layout_constraintStart_toStartOf="@+id/information_recipe"
+    app:layout_constraintTop_toBottomOf="@id/information_recipe">
 
     <View
         android:id="@+id/view"

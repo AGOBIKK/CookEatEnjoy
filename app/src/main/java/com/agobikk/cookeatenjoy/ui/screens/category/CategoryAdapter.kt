@@ -54,7 +54,6 @@ class CategoryAdapter(private val onCategoryClickListener: OnCategoryClickListen
                 itemView.setOnClickListener {
                     onCategoryClickListener.onClick(item)
                     chooseDishOfType = item.categoryName
-                    Timber.d("onBindViewHolder>>>>>>>>:${item.categoryName}")
                 }
             }
 
