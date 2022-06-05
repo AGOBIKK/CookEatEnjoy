@@ -4,6 +4,7 @@ import androidx.compose.ui.test.hasText
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -13,6 +14,7 @@ import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
+import timber.log.Timber
 
 class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().apply {
     beforeEachTest {
@@ -43,7 +45,9 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
     @Test
     fun testTransitionBetweenFragments() =
         run {
-            step("Check transit between screen and click to button") {
+            step("Check transit between screen and click to button")
+            {
+                testLogger.i("Starting test")
                 activityTestRule.scenario
                 CategoryScreen {
                     recycler.act {
@@ -56,22 +60,28 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                         )
                     }
                 }
-                RecipeListScreen {
-                    recyclerRecipe.act {
-                        actionOnItem<CategoryAdapter.CategoryViewHolder>(
-                            ViewMatchers.hasDescendant(
-                                ViewMatchers.withText(
-                                    "Homemade Garlic and Basil French Fries"
-                                )
-                            ), ViewActions.click()
-                        )
+                step("Check and click button with text") {
+                    RecipeListScreen {
+                        recyclerRecipe.act {
+                            actionOnItem<CategoryAdapter.CategoryViewHolder>(
+                                ViewMatchers.hasDescendant(
+                                    ViewMatchers.withText(
+                                        "Homemade Garlic and Basil French Fries"
+                                    )
+                                ), ViewActions.click()
+                            )
+                        }
                     }
                 }
-                DetailScreen {
-                    ingredientButton { click() }
+                step("Click button ingredient") {
+                    DetailScreen {
+                        ingredientButton { click() }
+                    }
                 }
-                IngredientScreen {
-                    recyclerIngredientList.scrollToEnd()
+                step("Scroll ingredients list") {
+                    IngredientScreen {
+                        recyclerIngredientList.scrollToEnd()
+                    }
                 }
             }
         }
@@ -82,6 +92,7 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
             step("Check transit between screen and click to button") {
                 activityTestRule.scenario
                 CategoryScreen {
+                    recycler.isVisible()
                     recycler.act {
                         actionOnItem<CategoryAdapter.CategoryViewHolder>(
                             ViewMatchers.hasDescendant(
@@ -93,6 +104,7 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                     }
                 }
                 RecipeListScreen {
+                    recyclerRecipe.isVisible()
                     recyclerRecipe.act {
                         actionOnItem<CategoryAdapter.CategoryViewHolder>(
                             ViewMatchers.hasDescendant(
@@ -104,11 +116,18 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                     }
                 }
                 DetailScreen {
-                    favoriteBtn { click() }
+                    image.isVisible()
+                    ingredientText.isVisible()
+                    informationRecipeText.isVisible()
+                    favoriteBtn.doubleClick()
                     favoriteBtnBottomBar { click() }
                 }
                 FavoriteListScreen {
-                    hasText("Homemade Garlic and Basil French Fries")
+                    textRecipeDetailTitle.isVisible()
+                    textRecipeDetailTitle {
+                        androidx.compose.ui.test.hasText("Homemade Garlic and Basil French Fries")
+                    }
+
                 }
 
             }

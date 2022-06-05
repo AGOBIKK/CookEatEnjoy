@@ -94,7 +94,7 @@
                 tools:text="Recipe Detail Title" />
 
             <TextView
-                android:id="@+id/informationRecipe"
+                android:id="@+id/information_recipe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/detail_fragment_marginStart_for_TextView"
@@ -116,7 +116,7 @@
                 android:layout_marginEnd="@dimen/detail_fragment_marginEnd_for_Ingredient_image"
                 android:src="@drawable/ic_ingredients"
                 app:backgroundTint="@android:color/transparent"
-                app:layout_constraintBottom_toTopOf="@+id/informationRecipe"
+                app:layout_constraintBottom_toTopOf="@+id/information_recipe"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recipe_detail_title"
                 android:layout_marginTop="@dimen/detail_fragment_marginTop_for_imageView"

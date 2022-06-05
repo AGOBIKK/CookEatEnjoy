@@ -70,6 +70,9 @@ object DetailScreen : KScreen<DetailScreen>() {
     val image = KImageView { withId(R.id.recipe_detail_image) }
     val favoriteBtn = KButton { withId(R.id.recipe_detail_favorite_icon) }
     val favoriteBtnBottomBar = KButton { withId(R.id.favorite) }
+    val ingredientText = KTextView{withId(R.id.ingredient_text)}
+    val informationRecipeText = KTextView{withId(R.id.information_recipe)}
+
 }
 
 object IngredientScreen : KScreen<IngredientScreen>() {
@@ -110,6 +113,8 @@ object FavoriteListScreen : KScreen<FavoriteListScreen>() {
             itemType(::RecipeItem)
         })
 
+
+    val textRecipeDetailTitle = KTextView{withId(R.id.recipe_detail_title)}
     class DefaultItem(parent: Matcher<View>) : KRecyclerItem<DefaultItem>(parent) {
         val icon = KImageView { withId(R.id.recipe_list_image) }
         val recipeListTitleTextView = KTextView { withId(R.id.recipe_list_title_text_view) }
