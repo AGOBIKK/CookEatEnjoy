@@ -1,6 +1,5 @@
-package com.agobikk.cookeatenjoy.ui.screens.category
+package com.agobikk.cookeatenjoy.ui.scenario
 
-import androidx.compose.ui.test.hasText
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.action.ViewActions
@@ -10,13 +9,15 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.agobikk.cookeatenjoy.MainActivity
 import com.agobikk.cookeatenjoy.R
+import com.agobikk.cookeatenjoy.ui.screens.*
+import com.agobikk.cookeatenjoy.ui.screens.category.CategoryAdapter
+import com.agobikk.cookeatenjoy.ui.screens.favorite.FavoriteAdapter
 import com.kaspersky.kaspresso.kaspresso.Kaspresso
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
-import timber.log.Timber
 
-class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().apply {
+class ScenarioTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().apply {
     beforeEachTest {
         ActivityScenario.launch(MainActivity::class.java)
     }
@@ -41,7 +42,6 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
         }
     }
 
-
     @Test
     fun testTransitionBetweenFragments() =
         run {
@@ -56,7 +56,7 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                                 ViewMatchers.withText(
                                     R.string.mainCourse
                                 )
-                            ), ViewActions.click()
+                            ), click()
                         )
                     }
                 }
@@ -68,7 +68,7 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                                     ViewMatchers.withText(
                                         "Homemade Garlic and Basil French Fries"
                                     )
-                                ), ViewActions.click()
+                                ), click()
                             )
                         }
                     }
@@ -99,7 +99,7 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                                 ViewMatchers.withText(
                                     R.string.mainCourse
                                 )
-                            ), ViewActions.click()
+                            ), click()
                         )
                     }
                 }
@@ -111,7 +111,7 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                                 ViewMatchers.withText(
                                     "Homemade Garlic and Basil French Fries"
                                 )
-                            ), ViewActions.click()
+                            ), click()
                         )
                     }
                 }
@@ -119,10 +119,11 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                     image.isVisible()
                     ingredientText.isVisible()
                     informationRecipeText.isVisible()
-                    favoriteBtn.doubleClick()
+                    favoriteBtn.click()
                     favoriteBtnBottomBar { click() }
                 }
                 FavoriteListScreen {
+                    recyclerRecipe.isVisible()
                     textRecipeDetailTitle.isVisible()
                     textRecipeDetailTitle {
                         androidx.compose.ui.test.hasText("Homemade Garlic and Basil French Fries")
@@ -143,7 +144,7 @@ class FragmentsTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().app
                         ViewMatchers.withText(
                             R.string.mainCourse
                         )
-                    ), ViewActions.click()
+                    ), click()
                 )
             }
         }
