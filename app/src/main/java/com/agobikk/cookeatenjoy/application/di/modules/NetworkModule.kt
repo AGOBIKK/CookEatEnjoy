@@ -1,7 +1,7 @@
 package com.agobikk.cookeatenjoy.application.di.modules
 
-
 import com.agobikk.cookeatenjoy.BuildConfig
+import com.agobikk.cookeatenjoy.BuildConfig.API_KEY
 import com.agobikk.cookeatenjoy.application.di.NetworkConstants
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
 import dagger.Module
@@ -46,11 +46,12 @@ class NetworkModule {
 
     @Provides
     @NetworkModuleScope
+
     fun OkHttpClient.Builder.addHeaderInterceptor() = apply {
         val interceptor = Interceptor { chain ->
             val request = chain.request()
                 .newBuilder()
-                .addHeader(NetworkConstants.API_KEY_HEADER, BuildConfig.API_KEY)
+                .addHeader(NetworkConstants.API_KEY_HEADER, API_KEY)
                 .build()
 
             chain.proceed(request)

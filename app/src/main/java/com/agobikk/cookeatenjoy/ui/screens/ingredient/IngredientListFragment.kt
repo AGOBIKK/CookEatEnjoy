@@ -31,7 +31,7 @@ class IngredientListFragment :
     }
 
     private val coroutineExceptionHandler =
-        CoroutineExceptionHandler { coroutineContext, throwable -> Timber.d("throwable:$throwable") }
+        CoroutineExceptionHandler { _, throwable -> Timber.d("throwable:$throwable") }
     private val scopeIo =
         CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
     private val scopeMain =
