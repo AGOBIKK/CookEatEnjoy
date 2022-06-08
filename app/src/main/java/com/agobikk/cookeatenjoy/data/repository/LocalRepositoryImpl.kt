@@ -15,7 +15,7 @@ class LocalRepositoryImpl @Inject constructor(
 
     ) : LocalRepository {
 
-    override val getFoodInfo: Flow<List<FoodInformationEntity>> = foodInformationDao.getFoodInfo()
+    override suspend fun getFoodInfo(): List<FoodInformationEntity> = foodInformationDao.getFoodInfo()
 
     override val getFavoriteFood: Flow<List<FavoriteRecipeEntity>> =
         favoriteRecipeDao.getFavoriteRecipe()

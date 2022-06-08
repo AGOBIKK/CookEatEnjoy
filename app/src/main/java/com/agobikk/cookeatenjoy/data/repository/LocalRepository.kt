@@ -6,7 +6,7 @@ import com.agobikk.cookeatenjoy.data.local.entities.Ingredients
 import kotlinx.coroutines.flow.Flow
 
 interface LocalRepository {
-    val getFoodInfo: Flow<List<FoodInformationEntity>>
+    suspend fun getFoodInfo(): List<FoodInformationEntity>
     val getFavoriteFood:Flow<List<FavoriteRecipeEntity>>
     suspend fun searchFoodById(searchId: Long): FoodInformationEntity
     suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity)

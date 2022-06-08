@@ -10,12 +10,9 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    remoteRepository: RemoteRepository,
-    localRepository: LocalRepository
+    val remote: RemoteRepository,
+    val local: LocalRepository
 ) {
-    val remote = remoteRepository
-    val local = localRepository
-
     private suspend fun readFoodInformationFromServer(id: Long): FoodInformationEntity {
         val dto = checkNotNull(remote.getFoodInformation(id).body())
         val converterFoodInformation = ConverterFoodInformationEntityImpl()
@@ -30,19 +27,17 @@ class Repository @Inject constructor(
         local.insertFoodInfo(foodInformationEntity)
     }
 
-    private val readFoodInformationFromDateBase: Flow<List<FoodInformationEntity>> =
-        local.getFoodInfo
-
     private suspend fun readIngredient(id: Long): List<ExtendedIngredientEntity> =
         local.getIngredients(id).extendedIngredientEntity
 
-    suspend fun getFoodInfo(id: Long): Flow<List<FoodInformationEntity>> {
-        return if (readFoodInformationFromDateBase != emptyList<FoodInformationEntity>()) {
+    suspend fun getFoodInfo(id: Long): FoodInformationEntity {
+        val item = local.searchFoodById(id)
+        return if (item == null) {
             val responseFromServer = readFoodInformationFromServer(id)
             saveToDataBase(responseFromServer)
-            readFoodInformationFromDateBase
+            responseFromServer
         } else {
-            readFoodInformationFromDateBase
+            item
         }
     }
 }

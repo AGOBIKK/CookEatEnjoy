@@ -36,29 +36,17 @@ class DetailRecipeViewModel @AssistedInject constructor(
 
     }
 
-    private val _recipeDetail = MutableLiveData<Response<FoodInformation>?>()
-    val recipeDetail: LiveData<Response<FoodInformation>?> = _recipeDetail
+    private val _recipeDetail = MutableLiveData<FoodInformationEntity?>()
+    val recipeDetail: LiveData<FoodInformationEntity?> = _recipeDetail
 
 
     private fun getFoodInformation(id: Long) {
         viewModelScope.launch {
-            _recipeDetail.postValue(repository.remote.getFoodInformation(id = id))
+            val g = repository.getFoodInfo(id)
+            _recipeDetail.postValue(g)
         }
     }
 
-    suspend fun foodInformationEntity(id: Long): FoodInformationEntity {
-        deferredOne = viewModelScope.async {
-            repository.getFoodInfo(id).asLiveData()
-        }
-        return deferred.await()
-    }
-
-    suspend fun getFoodInformationConvertToFoodInformationEntity(id: Long): FoodInformationEntity {
-        deferred = viewModelScope.async {
-            foodInformationEntity(id)
-        }
-        return deferred.await()
-    }
 
     fun onViewCreated(id: Long) {
         getFoodInformation(id = id)
