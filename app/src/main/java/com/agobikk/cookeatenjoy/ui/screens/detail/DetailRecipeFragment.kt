@@ -73,13 +73,11 @@ class DetailRecipeFragment :
 
     private fun subscribeUi() {
         viewModel.recipeDetail.observe(viewLifecycleOwner) {
-            it?.body()?.let { foodInformation ->
+            it?.let { foodInformation ->
                 setDetails(foodInformation)
             }
         }
-        deferred = scope.async {
-            viewModel.getFoodInformationConvertToFoodInformationEntity(readFoodById())
-        }
+
         viewModel.recipeDetail.observe(viewLifecycleOwner) { response ->
 
             fun updateBtnFavoriteIsNotActive() {
@@ -112,7 +110,7 @@ class DetailRecipeFragment :
             }
 
             binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
-                val body = checkNotNull(response?.body())
+                val body = checkNotNull(response)
                 val favoriteRecipe =
                     FavoriteRecipeEntity(readFoodById(), body.image, body.title)
                 isFavorite = if (!isFavorite) {
@@ -131,7 +129,7 @@ class DetailRecipeFragment :
         }
     }
 
-    private fun setDetails(detailRecipe: FoodInformation) = with(binding) {
+    private fun setDetails(detailRecipe: FoodInformationEntity) = with(binding) {
         context?.let {
             Glide.with(it)
                 .setDefaultRequestOptions(
@@ -148,14 +146,14 @@ class DetailRecipeFragment :
         shareRecipe(detailRecipe)
     }
 
-    private fun shareRecipe(shareRecipe: FoodInformation) {
+    private fun shareRecipe(shareRecipe: FoodInformationEntity) {
         binding.includeLayoutDetailIcon.recipeDetailShareIcon.setOnClickListener {
             val shareText = StringBuilder()
                 .append(resources.getString(R.string.check_this_recipe) + "\n")
                 .append("${shareRecipe.title}\n\n")
                 .append("${shareRecipe.sourceName}\n\n")
                 .append("${shareRecipe.image}\n\n")
-                .append("${shareRecipe.instructions.parseAsHtml(TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)}\n\n")
+                .append("${shareRecipe.instructions?.parseAsHtml(TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)}\n\n")
             val intent = requireActivity().let {
                 ShareCompat.IntentBuilder(it)
                     .setText(shareText.toString())
@@ -167,9 +165,9 @@ class DetailRecipeFragment :
 
     }
 
-    private fun wordProcessing(detailRecipe: FoodInformation) = with(binding) {
+    private fun wordProcessing(detailRecipe: FoodInformationEntity) = with(binding) {
         includeLayoutCardInstruction.cookingInstructions.text =
-            detailRecipe.instructions.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
+            detailRecipe.instructions?.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 includeLayoutCardInstruction.cookingInstructions.justificationMode =

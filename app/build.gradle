@@ -37,6 +37,7 @@ android {
         it.buildConfigField "String", "API_KEY", apiKey
     }
 
+
     buildTypes {
         release {
             minifyEnabled false
@@ -56,6 +57,7 @@ android {
     packagingOptions {
         resources.excludes.add("META-INF/*")
     }
+
     flavorDimensions "default"
     productFlavors {
         fake {
@@ -197,4 +199,12 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$core_testing_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
+//    testImplementation 'org.junit.platform:junit-platform-commons:1.8.1'
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
 }
+//tasks.withType(Test) {
+//    useJUnitPlatform()
+//}
+

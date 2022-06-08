@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface FoodInformationDao {
 
     @Query("SELECT * FROM $FOOD_INFO_TABLE")
-    fun getFoodInfo(): Flow<List<FoodInformationEntity>>
+    suspend fun getFoodInfo(): List<FoodInformationEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFoodInfo(foodInformationEntity: FoodInformationEntity)
