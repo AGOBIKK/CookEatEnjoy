@@ -216,7 +216,6 @@ object TestMockito {
 object TestUnit {
     const val jUnit = "junit:junit:${Versions.jUnit}"
     const val testExtJunit = "junit:junit:${Versions.testExtJunit}"
-    const val coreTesting = "androidx.arch.core:${Versions.coreTesting}"
 }
 
 object LegacySupport {

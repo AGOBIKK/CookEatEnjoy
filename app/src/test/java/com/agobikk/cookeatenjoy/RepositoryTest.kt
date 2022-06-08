@@ -1,16 +1,21 @@
 package com.agobikk.cookeatenjoy
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+//import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.agobikk.cookeatenjoy.data.Repository
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.data.repository.LocalRepository
 import com.agobikk.cookeatenjoy.models.FoodInformation
+import org.junit.Assert.*
+import org.mockito.Mockito.*
+import org.mockito.*
+
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
@@ -19,8 +24,11 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
+import org.mockito.internal.invocation.MatchersBinder
 import retrofit2.Response
+import java.util.regex.Matcher
 
 @ExperimentalCoroutinesApi
 class RepositoryTest {
@@ -40,6 +48,7 @@ class RepositoryTest {
         repository = Repository(remoteRepository, localRepository)
     }
 
+
     private val extendedIngredient = listOf(
         ExtendedIngredientEntity(
             1, 1.0, "consistency", "image", "name", "original", "unit"
@@ -51,27 +60,16 @@ class RepositoryTest {
         )
     )
 
-    private val remote = remoteRepository
-    private val local = localRepository
-
     @Test
     fun testGetFoodInformation() {
         runBlocking {
             val id: Long = 1
             val response = Mockito.mock(Response::class.java) as Response<FoodInformation>
-            Mockito.`when`(remote.getFoodInformation(id)).thenReturn(response)
+            Mockito.`when`(remoteRepository.getFoodInformation(id)).thenReturn(response)
 
         }
     }
 
-    @Test
-    fun myRepositoryTest() = runBlocking {
-        val fakeSource: Flow<List<FoodInformationEntity>> = flow { emit(foodInformationEntity) }
-
-        `when`(repository.getFoodInfo(1)).thenReturn(fakeSource)
-        assertEquals(repository.getFoodInfo(1), fakeSource)
-
-    }
 
     @Test //Проверим пустой ответ сервера
     fun remoteRepository_ResponseIsEmpty() = runBlocking {
@@ -85,16 +83,9 @@ class RepositoryTest {
     @Test
     fun testLocalRepo()= runBlocking {
 
-        val fakeSource: Flow<List<FoodInformationEntity>> = flow { emit(foodInformationEntity) }
-        Mockito.`when`(local.getFoodInfo).thenReturn(fakeSource)
-        assertEquals(local.getFoodInfo,fakeSource)
+        Mockito.`when`(localRepository.getFoodInfo()).thenReturn(foodInformationEntity)
+        assertEquals(localRepository.getFoodInfo(),foodInformationEntity)
     }
-
-    @Test
-    fun test() {
-        assertEquals(1, 1)
-    }
-
 }
 
 
