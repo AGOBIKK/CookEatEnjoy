@@ -7,10 +7,15 @@ import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.data.repository.LocalRepository
 import com.agobikk.cookeatenjoy.models.FoodInformation
+import org.junit.Assert.*
+import org.mockito.Mockito.*
+import org.mockito.*
+
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
@@ -19,8 +24,11 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
+import org.mockito.internal.invocation.MatchersBinder
 import retrofit2.Response
+import java.util.regex.Matcher
 
 @ExperimentalCoroutinesApi
 class RepositoryTest {
@@ -39,6 +47,7 @@ class RepositoryTest {
         MockitoAnnotations.openMocks(this)
         repository = Repository(remoteRepository, localRepository)
     }
+
 
     private val extendedIngredient = listOf(
         ExtendedIngredientEntity(
@@ -77,12 +86,6 @@ class RepositoryTest {
         Mockito.`when`(localRepository.getFoodInfo()).thenReturn(foodInformationEntity)
         assertEquals(localRepository.getFoodInfo(),foodInformationEntity)
     }
-
-    @Test
-    fun test() {
-        assertEquals(1, 1)
-    }
-
 }
 
 
