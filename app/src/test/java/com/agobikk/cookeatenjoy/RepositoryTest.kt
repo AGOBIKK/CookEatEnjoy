@@ -1,6 +1,6 @@
 package com.agobikk.cookeatenjoy
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+//import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.agobikk.cookeatenjoy.data.Repository
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
@@ -51,44 +51,44 @@ class RepositoryTest {
         )
     )
 
-    private val remote = remoteRepository
-    private val local = localRepository
-
-    @Test
-    fun testGetFoodInformation() {
-        runBlocking {
-            val id: Long = 1
-            val response = Mockito.mock(Response::class.java) as Response<FoodInformation>
-            Mockito.`when`(remote.getFoodInformation(id)).thenReturn(response)
-
-        }
-    }
-
-    @Test
-    fun myRepositoryTest() = runBlocking {
-        val fakeSource: Flow<List<FoodInformationEntity>> = flow { emit(foodInformationEntity) }
-
-        `when`(repository.getFoodInfo(1)).thenReturn(fakeSource)
-        assertEquals(repository.getFoodInfo(1), fakeSource)
-
-    }
-
-    @Test //Проверим пустой ответ сервера
-    fun remoteRepository_ResponseIsEmpty() = runBlocking {
-        val id: Long = 1
-        val response = Mockito.mock(Response::class.java) as Response<FoodInformation?>
-        Mockito.`when`(response.body()).thenReturn(null)
-
-        assertNull(response.body())
-    }
-
-    @Test
-    fun testLocalRepo()= runBlocking {
-
-        val fakeSource: Flow<List<FoodInformationEntity>> = flow { emit(foodInformationEntity) }
-        Mockito.`when`(local.getFoodInfo).thenReturn(fakeSource)
-        assertEquals(local.getFoodInfo,fakeSource)
-    }
+//    private val remote = remoteRepository
+//    private val local = localRepository
+//
+//    @Test
+//    fun testGetFoodInformation() {
+//        runBlocking {
+//            val id: Long = 1
+//            val response = Mockito.mock(Response::class.java) as Response<FoodInformation>
+//            Mockito.`when`(remote.getFoodInformation(id)).thenReturn(response)
+//
+//        }
+//    }
+//
+//    @Test
+//    fun myRepositoryTest() = runBlocking {
+//        val fakeSource: Flow<List<FoodInformationEntity>> = flow { emit(foodInformationEntity) }
+//
+//        `when`(repository.getFoodInfo(1)).thenReturn(fakeSource)
+//        assertEquals(repository.getFoodInfo(1), fakeSource)
+//
+//    }
+//
+//    @Test //Проверим пустой ответ сервера
+//    fun remoteRepository_ResponseIsEmpty() = runBlocking {
+//        val id: Long = 1
+//        val response = Mockito.mock(Response::class.java) as Response<FoodInformation?>
+//        Mockito.`when`(response.body()).thenReturn(null)
+//
+//        assertNull(response.body())
+//    }
+//
+//    @Test
+//    fun testLocalRepo()= runBlocking {
+//
+//        val fakeSource: Flow<List<FoodInformationEntity>> = flow { emit(foodInformationEntity) }
+//        Mockito.`when`(local.getFoodInfo).thenReturn(fakeSource)
+//        assertEquals(local.getFoodInfo,fakeSource)
+//    }
 
     @Test
     fun test() {
