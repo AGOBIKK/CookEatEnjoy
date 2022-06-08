@@ -13,7 +13,8 @@ import com.agobikk.cookeatenjoy.ui.BaseFragment
 import timber.log.Timber
 
 
-class RecipeListFragment : BaseFragment<FragmentListRecipeBinding>(FragmentListRecipeBinding::inflate) {
+class RecipeListFragment :
+    BaseFragment<FragmentListRecipeBinding>(FragmentListRecipeBinding::inflate) {
     private var adapter: RecipesAdapter? = null
     private var isFirst = true
     private val viewModel: RecipesViewModel by viewModels()
@@ -25,7 +26,6 @@ class RecipeListFragment : BaseFragment<FragmentListRecipeBinding>(FragmentListR
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("-------------some.value:${viewModel.some.value}")
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         init()
     }
