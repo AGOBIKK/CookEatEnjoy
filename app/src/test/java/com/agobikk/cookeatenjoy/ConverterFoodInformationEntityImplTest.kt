@@ -9,8 +9,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.*
-import org.mockito.Mockito
-import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
@@ -58,10 +56,10 @@ class ConverterFoodInformationEntityImplTest {
 
     @Test
     fun convertFoodInformationEntity_test() {
-        assertEquals(buildFoodInformation(),converter())
+        assertEquals(returnFoodInformation(),converterFoodInformationEntity())
     }
 
-    private fun buildFoodInformation(): FoodInformationEntity {
+    private fun returnFoodInformation(): FoodInformationEntity {
         return FoodInformationEntity(
                 1,
                 "image",
@@ -84,7 +82,7 @@ class ConverterFoodInformationEntityImplTest {
 
     }
 
-    private fun converter():FoodInformationEntity{
+    private fun converterFoodInformationEntity():FoodInformationEntity{
        return converterFoodInformationEntityImplTest.convertFoodInformationEntity(foodInformation,extendedIngredientEntity)
     }
 }
