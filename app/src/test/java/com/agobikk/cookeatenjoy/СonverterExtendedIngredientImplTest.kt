@@ -1,14 +1,19 @@
 package com.agobikk.cookeatenjoy
 
 import com.agobikk.cookeatenjoy.data.converters.ConverterFoodInformationEntityImpl
+import com.agobikk.cookeatenjoy.data.converters.СonvertExtendedIngredient
 import com.agobikk.cookeatenjoy.data.converters.СonverterExtendedIngredientImpl
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.models.ExtendedIngredient
+import com.nhaarman.mockito_kotlin.isA
+
 import org.junit.Before
 import org.junit.Test
 import org.mockito.MockitoAnnotations
 import org.junit.Assert.*
+import org.mockito.Mockito
+import org.mockito.Mockito.*
 
 class СonverterExtendedIngredientImplTest {
     private lateinit var converterExtendedIngredientImplTest: СonverterExtendedIngredientImpl
@@ -50,5 +55,16 @@ class СonverterExtendedIngredientImplTest {
 
     private fun converterToIngredientEntity(): ExtendedIngredientEntity {
         return converterExtendedIngredientImplTest.convertExtendedIngredient(extendedIngredient)
+    }
+
+    @Test
+    fun argumentExtendedIngredientTest() {
+        val c = mock(СonvertExtendedIngredient::class.java)
+        val extendedIngredientResults = mock(ExtendedIngredient::class.java)
+        val extendedIngredientEntityResult = mock(ExtendedIngredientEntity::class.java)
+        Mockito.`when`(c.convertExtendedIngredient(extendedIngredientResults)).thenReturn(extendedIngredientEntityResult)
+        assertEquals(c.convertExtendedIngredient(extendedIngredientResults),extendedIngredientEntityResult)
+        verify(c, times(1)).convertExtendedIngredient(extendedIngredientResults)
+
     }
 }
