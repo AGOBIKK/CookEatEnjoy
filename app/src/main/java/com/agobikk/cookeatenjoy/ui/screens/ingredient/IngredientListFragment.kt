@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.application.appComponent
-import com.agobikk.cookeatenjoy.data.Repository
+import com.agobikk.cookeatenjoy.data.repository.RepositoryImpl
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
@@ -19,11 +19,10 @@ import javax.inject.Inject
 class IngredientListFragment :
     BaseFragment<FragmentListIngredientBinding>(FragmentListIngredientBinding::inflate) {
     private lateinit var adapter: IngredientListAdapter
-    private val viewModel: IngredientViewModel by viewModels()
     private val args: IngredientListFragmentArgs by navArgs()
 
     @Inject
-    lateinit var repository: Repository
+    lateinit var repositoryImpl: RepositoryImpl
 
     private var listIngredientsBD = emptyList<ExtendedIngredientEntity>()
     private fun getFoodId(): Long {
@@ -52,7 +51,7 @@ class IngredientListFragment :
         job = scopeMain.launch() {
 
             listIngredientsBD = withContext(Dispatchers.IO) {
-                return@withContext repository.local.getIngredients(getFoodId()).extendedIngredientEntity
+                return@withContext repositoryImpl.getIngredients(getFoodId()).extendedIngredientEntity
             }
             Timber.d("list ingredients from BD:${listIngredientsBD}")
             adapter.submitList(listIngredientsBD)

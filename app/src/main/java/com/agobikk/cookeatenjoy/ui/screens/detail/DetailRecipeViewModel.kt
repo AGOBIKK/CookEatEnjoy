@@ -2,19 +2,15 @@ package com.agobikk.cookeatenjoy.ui.screens.detail
 
 import androidx.lifecycle.*
 import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
-import com.agobikk.cookeatenjoy.data.Repository
+import com.agobikk.cookeatenjoy.data.repository.Repository
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
-import com.agobikk.cookeatenjoy.models.FoodInformation
-import androidx.lifecycle.asLiveData
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import timber.log.Timber
 
 class DetailRecipeViewModel @AssistedInject constructor(
@@ -54,16 +50,16 @@ class DetailRecipeViewModel @AssistedInject constructor(
 
     fun insert(foodInformationEntity: FoodInformationEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.insertFoodInfo(foodInformationEntity)
+            repository.insertFoodInfo(foodInformationEntity)
         }
 
     fun insertFavoriteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.insertFavoriteRecipe(favoriteRecipeEntity)
+            repository.insertFavoriteRecipe(favoriteRecipeEntity)
         }
 
     fun deleteFavoriteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.deleteFavoriteRecipe(favoriteRecipeEntity)
+            repository.deleteFavoriteRecipe(favoriteRecipeEntity)
         }
 }

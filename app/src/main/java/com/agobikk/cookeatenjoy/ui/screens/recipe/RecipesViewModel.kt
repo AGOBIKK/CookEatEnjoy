@@ -3,7 +3,8 @@ package com.agobikk.cookeatenjoy.ui.screens.recipe
 
 import androidx.lifecycle.*
 import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
-import com.agobikk.cookeatenjoy.data.Repository
+import com.agobikk.cookeatenjoy.data.repository.Repository
+import com.agobikk.cookeatenjoy.data.repository.RepositoryImpl
 import com.agobikk.cookeatenjoy.models.ModelMainCourse
 import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish
 import dagger.assisted.Assisted
@@ -34,7 +35,7 @@ class RecipesViewModel @AssistedInject constructor(
 
     private fun getModelMainCourse(typeOfDish: String) {
         viewModelScope.launch {
-            _recipeList.postValue(repository.remote.getModelMainCourse(typeOfDish = typeOfDish))
+            _recipeList.postValue(repository.getModelMainCourse(typeOfDish = typeOfDish))
             Timber.d("-------------some.value:${repository}")
         }
     }

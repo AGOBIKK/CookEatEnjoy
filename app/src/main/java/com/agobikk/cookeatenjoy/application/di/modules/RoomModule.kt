@@ -1,20 +1,16 @@
 package com.agobikk.cookeatenjoy.application.di.modules
 
 import android.content.Context
-import androidx.lifecycle.ViewModel
 import androidx.room.Room
 import com.agobikk.cookeatenjoy.data.local.Database
 import com.agobikk.cookeatenjoy.data.local.RoomConstants
 import com.agobikk.cookeatenjoy.data.local.dao.FavoriteRecipeDao
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
-import com.agobikk.cookeatenjoy.data.repository.LocalRepository
-import com.agobikk.cookeatenjoy.data.repository.LocalRepositoryImpl
-import dagger.MapKey
+
+import com.agobikk.cookeatenjoy.data.repository.Repository
+import com.agobikk.cookeatenjoy.data.repository.RepositoryImpl
 import dagger.Module
 import dagger.Provides
-import javax.inject.Scope
-import javax.inject.Singleton
-import kotlin.reflect.KClass
 
 @Module
 class RoomModule(private val context: Context) {
@@ -28,7 +24,7 @@ class RoomModule(private val context: Context) {
 
     @Provides
     @NetworkModuleScope
-    fun provideLocalRepository(localRepositoryImpl: LocalRepositoryImpl) : LocalRepository =
+    fun provideLocalRepository(localRepositoryImpl: RepositoryImpl) : Repository =
         localRepositoryImpl
 
     @Provides
