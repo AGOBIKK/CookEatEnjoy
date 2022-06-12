@@ -1,4 +1,4 @@
-package com.agobikk.cookeatenjoy
+package com.agobikk.cookeatenjoy.data.converters
 
 import com.agobikk.cookeatenjoy.data.converters.ConverterFoodInformationEntityImpl
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
