@@ -17,6 +17,7 @@ import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
 import org.junit.Test
 
+
 class ScenarioTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().apply {
     beforeEachTest {
         ActivityScenario.launch(MainActivity::class.java)
@@ -104,7 +105,7 @@ class ScenarioTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().appl
                     }
                 }
                 RecipeListScreen {
-                    recyclerRecipe.isVisible()
+
                     recyclerRecipe.act {
                         actionOnItem<CategoryAdapter.CategoryViewHolder>(
                             ViewMatchers.hasDescendant(
@@ -119,14 +120,14 @@ class ScenarioTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().appl
                     image.isVisible()
                     ingredientText.isVisible()
                     informationRecipeText.isVisible()
-                    favoriteBtn.click()
+                    favoriteBtn { doubleClick() }
                     favoriteBtnBottomBar { click() }
                 }
                 FavoriteListScreen {
                     recyclerRecipe.isVisible()
                     textRecipeDetailTitle.isVisible()
                     textRecipeDetailTitle {
-                        androidx.compose.ui.test.hasText("Homemade Garlic and Basil French Fries")
+                        hasText("Homemade Garlic and Basil French Fries")
                     }
 
                 }

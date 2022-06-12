@@ -179,7 +179,7 @@ dependencies {
         }
 
         testImplementation(TestUnit.jUnit)
-//        androidTestImplementation(TestUnit.testExtJunit)
+        androidTestImplementation(TestUnit.testExtJunit)
         implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     }

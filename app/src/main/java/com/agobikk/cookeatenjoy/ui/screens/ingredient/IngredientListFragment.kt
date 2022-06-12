@@ -15,13 +15,13 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class IngredientListFragment @Inject constructor(
-    private val repositoryImpl: RepositoryImpl
-) :
+class IngredientListFragment :
     BaseFragment<FragmentListIngredientBinding>(FragmentListIngredientBinding::inflate) {
     private lateinit var adapter: IngredientListAdapter
     private val args: IngredientListFragmentArgs by navArgs()
 
+    @Inject
+    lateinit var repositoryImpl: RepositoryImpl
     private var listIngredientsBD = emptyList<ExtendedIngredientEntity>()
     private fun getFoodId(): Long {
         return args.idFood
