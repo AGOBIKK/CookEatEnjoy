@@ -94,7 +94,7 @@ object Versions {
 
     //TestUnit
     const val jUnit = "5.8.2"
-//    const val testExtJunit = "1.1.3"
+    const val testExtJunit = "1.1.3"
     const val coreTesting = "2.1.0"
 
 
@@ -218,7 +218,7 @@ object TestMockito {
 
 object TestUnit {
     const val jUnit = "org.junit.jupiter:junit-jupiter:${Versions.jUnit}"
-//    const val testExtJunit = "junit:junit:${Versions.testExtJunit}"
+    const val testExtJunit = "androidx.test.ext:junit:${Versions.testExtJunit}"
 }
 
 object LegacySupport {
