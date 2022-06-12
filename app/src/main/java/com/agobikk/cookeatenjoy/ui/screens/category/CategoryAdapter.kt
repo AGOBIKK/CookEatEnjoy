@@ -10,7 +10,7 @@ import com.agobikk.cookeatenjoy.databinding.LayoutCategoryListItemBinding
 import com.agobikk.cookeatenjoy.models.Category
 import com.agobikk.cookeatenjoy.ui.screens.category.ChooseCategoryDish.chooseDishOfType
 import com.bumptech.glide.Glide
-import timber.log.Timber
+
 
 class CategoryAdapter(private val onCategoryClickListener: OnCategoryClickListener) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -56,9 +56,7 @@ class CategoryAdapter(private val onCategoryClickListener: OnCategoryClickListen
                     chooseDishOfType = item.categoryName
                 }
             }
-
     }
-
 }
 
 object ChooseCategoryDish {

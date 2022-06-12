@@ -2,19 +2,15 @@ package com.agobikk.cookeatenjoy.ui.screens.detail
 
 import androidx.lifecycle.*
 import com.agobikk.cookeatenjoy.application.di.AssistedSavedStateViewModelFactory
-import com.agobikk.cookeatenjoy.data.Repository
+import com.agobikk.cookeatenjoy.data.repository.Repository
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
-import com.agobikk.cookeatenjoy.models.FoodInformation
-import androidx.lifecycle.asLiveData
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import timber.log.Timber
 
 class DetailRecipeViewModel @AssistedInject constructor(
@@ -27,26 +23,15 @@ class DetailRecipeViewModel @AssistedInject constructor(
         override fun create(savedStateHandle: SavedStateHandle): DetailRecipeViewModel
     }
 
-    lateinit var deferred: Deferred<FoodInformationEntity>
-    lateinit var deferredOne: Deferred<LiveData<List<FoodInformationEntity>>>
-
-    init {
-
-        Timber.d("-------------some.value:${savedStateHandle.get<Long>("detail_some")}")
-
-    }
-
     private val _recipeDetail = MutableLiveData<FoodInformationEntity?>()
     val recipeDetail: LiveData<FoodInformationEntity?> = _recipeDetail
 
 
     private fun getFoodInformation(id: Long) {
         viewModelScope.launch {
-            val g = repository.getFoodInfo(id)
-            _recipeDetail.postValue(g)
+            _recipeDetail.postValue(repository.getFoodInfo(id))
         }
     }
-
 
     fun onViewCreated(id: Long) {
         getFoodInformation(id = id)
@@ -54,16 +39,16 @@ class DetailRecipeViewModel @AssistedInject constructor(
 
     fun insert(foodInformationEntity: FoodInformationEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.insertFoodInfo(foodInformationEntity)
+            repository.insertFoodInfo(foodInformationEntity)
         }
 
     fun insertFavoriteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.insertFavoriteRecipe(favoriteRecipeEntity)
+            repository.insertFavoriteRecipe(favoriteRecipeEntity)
         }
 
     fun deleteFavoriteRecipe(favoriteRecipeEntity: FavoriteRecipeEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.deleteFavoriteRecipe(favoriteRecipeEntity)
+            repository.deleteFavoriteRecipe(favoriteRecipeEntity)
         }
 }

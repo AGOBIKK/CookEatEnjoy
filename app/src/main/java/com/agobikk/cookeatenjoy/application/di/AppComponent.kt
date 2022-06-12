@@ -4,9 +4,8 @@ import android.content.Context
 import com.agobikk.cookeatenjoy.application.App
 import com.agobikk.cookeatenjoy.application.di.modules.*
 import com.agobikk.cookeatenjoy.data.local.Database
-import com.agobikk.cookeatenjoy.data.remote.RemoteRepository
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
-import com.agobikk.cookeatenjoy.data.repository.LocalRepository
+import com.agobikk.cookeatenjoy.data.repository.Repository
 import com.agobikk.cookeatenjoy.ui.screens.detail.DetailRecipeFragment
 import com.agobikk.cookeatenjoy.ui.screens.favorite.FavoriteFragment
 import com.agobikk.cookeatenjoy.ui.screens.ingredient.IngredientListFragment
@@ -31,8 +30,8 @@ interface AppComponent {
 
     fun getNetworkApi(): ApiService
     fun provideDatabase(): Database
-    fun provideRemoteRepository(): RemoteRepository
-    fun provideLocalRepository(): LocalRepository
+    fun provideRepository(): Repository
+
 
     fun inject(fragment: RecipeListFragment)
     fun inject(fragment: DetailRecipeFragment)
