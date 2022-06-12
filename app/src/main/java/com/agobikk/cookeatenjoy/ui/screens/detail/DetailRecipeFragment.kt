@@ -19,7 +19,6 @@ import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
-import com.agobikk.cookeatenjoy.models.FoodInformation
 import com.agobikk.cookeatenjoy.ui.BaseFragment
 import com.agobikk.cookeatenjoy.util.Const.FAVORITE_BTN_IS_ACTIVE
 import com.agobikk.cookeatenjoy.util.Const.FAVORITE_BTN_NOT_ACTIVE
@@ -36,12 +35,8 @@ class DetailRecipeFragment :
     private val coroutineExceptionHandler =
         CoroutineExceptionHandler { _, throwable -> Timber.d("throwable:$throwable") }
     private val scope =
-        CoroutineScope(Dispatchers.IO + coroutineExceptionHandler + SupervisorJob())
-    private val mainScope =
         CoroutineScope(Dispatchers.Main + coroutineExceptionHandler + SupervisorJob())
     private val viewModel: DetailRecipeViewModel by viewModels()
-    private var job: Job? = null
-    lateinit var deferred: Deferred<FoodInformationEntity>
     private fun readFoodById(): Long {
         return args.idFood
     }
@@ -64,7 +59,6 @@ class DetailRecipeFragment :
     private fun setScrollListener() = with(binding) {
         val appBarLayout = recipeDetailAppBarLayout
         val offsetChangedListener = AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-            Timber.i("setScrollListener: " + verticalOffset + " " + "\n" + "range:  " + appBarLayout.totalScrollRange)
             val seekPosition = -verticalOffset / appBarLayout.totalScrollRange.toFloat()
             recipeDetailMotionLayout.progress = seekPosition
         }

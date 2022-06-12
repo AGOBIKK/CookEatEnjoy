@@ -23,26 +23,15 @@ class DetailRecipeViewModel @AssistedInject constructor(
         override fun create(savedStateHandle: SavedStateHandle): DetailRecipeViewModel
     }
 
-    lateinit var deferred: Deferred<FoodInformationEntity>
-    lateinit var deferredOne: Deferred<LiveData<List<FoodInformationEntity>>>
-
-    init {
-
-        Timber.d("-------------some.value:${savedStateHandle.get<Long>("detail_some")}")
-
-    }
-
     private val _recipeDetail = MutableLiveData<FoodInformationEntity?>()
     val recipeDetail: LiveData<FoodInformationEntity?> = _recipeDetail
 
 
     private fun getFoodInformation(id: Long) {
         viewModelScope.launch {
-            val g = repository.getFoodInfo(id)
-            _recipeDetail.postValue(g)
+            _recipeDetail.postValue(repository.getFoodInfo(id))
         }
     }
-
 
     fun onViewCreated(id: Long) {
         getFoodInformation(id = id)

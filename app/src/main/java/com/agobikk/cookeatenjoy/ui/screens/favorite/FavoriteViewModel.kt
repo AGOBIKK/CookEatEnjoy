@@ -25,6 +25,5 @@ class FavoriteViewModel @AssistedInject constructor(
    fun readAllRecipe(): LiveData<List<FavoriteRecipeEntity>> {
         return repository.getFavoriteFood.asLiveData()
     }
-
 }
 

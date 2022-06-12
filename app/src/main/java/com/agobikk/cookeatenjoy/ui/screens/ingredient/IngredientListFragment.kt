@@ -4,11 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.application.appComponent
-import com.agobikk.cookeatenjoy.data.repository.RepositoryImpl
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
+import com.agobikk.cookeatenjoy.data.repository.RepositoryImpl
 import com.agobikk.cookeatenjoy.databinding.FragmentListIngredientBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
 import kotlinx.coroutines.*
