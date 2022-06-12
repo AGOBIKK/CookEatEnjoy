@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import org.gradle.internal.impldep.org.fusesource.jansi.AnsiRenderer.test
 import java.io.FileInputStream
 import java.util.*
 
@@ -8,6 +9,8 @@ plugins {
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
 }
+
+
 
 configurations.all {
     resolutionStrategy {
@@ -33,7 +36,10 @@ android {
             }
         }
     }
+    tasks.withType<Test> {
+        useJUnitPlatform()
 
+    }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -167,14 +173,16 @@ dependencies {
     testImplementation(TestMockito.mockitoCore)
     testImplementation(TestMockito.mockitoInline)
     testImplementation(TestMockito.mockitoKotlin) {
-        exclude(group = "org.jetbrains.kotlin")
-        exclude(group = "org.mockito")
+        testImplementation(TestMockito.nhaarmanMockitoKotlin) {
+            exclude(group = "org.jetbrains.kotlin")
+            exclude(group = "org.mockito")
+        }
+
+        testImplementation(TestUnit.jUnit)
+//        androidTestImplementation(TestUnit.testExtJunit)
+        implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
     }
-
-    testImplementation(TestUnit.jUnit)
-    androidTestImplementation(TestUnit.testExtJunit)
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
 }
 
 
