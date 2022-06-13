@@ -13,9 +13,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bottomNavigationView = binding.mainBottomNavigationView
-        val navController =
-            (childFragmentManager.findFragmentById(R.id.mainContainerView) as NavHostFragment)
-                .navController
+        val navController = (childFragmentManager.findFragmentById(R.id.mainContainerView) as NavHostFragment).navController
         bottomNavigationView.setupWithNavController(navController)
     }
 }
