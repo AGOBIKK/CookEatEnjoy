@@ -120,15 +120,14 @@ class ScenarioTest : TestCase(kaspressoBuilder = Kaspresso.Builder.simple().appl
                     image.isVisible()
                     ingredientText.isVisible()
                     informationRecipeText.isVisible()
-                    favoriteBtn { doubleClick() }
+                    favoriteBtn { click() }
                     favoriteBtnBottomBar { click() }
                 }
                 FavoriteListScreen {
                     recyclerRecipe.isVisible()
                     textRecipeDetailTitle.isVisible()
-                    textRecipeDetailTitle {
-                        hasText("Homemade Garlic and Basil French Fries")
-                    }
+                    textRecipeDetailTitle.containsText("Homemade Garlic and Basil French Fries")
+
 
                 }
 
