@@ -37,14 +37,11 @@ class RecipeListFragment :
                     navigateToRecipeList(resultMainCourse.id)
                 }
             })
-        }
-        binding.recipeListRecyclerView.adapter = adapter
-        if (isFirst) {
             viewModel.onViewCreated()
             isFirst = false
             adapter?.let { viewModel.updateListRecipeInformation(viewLifecycleOwner, it) }
-
         }
+        binding.recipeListRecyclerView.adapter = adapter
     }
 
     private fun navigateToRecipeList(value: Long) {
