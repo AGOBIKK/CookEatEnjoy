@@ -11,16 +11,16 @@ import io.github.kakaocup.kakao.text.KTextView
 import org.hamcrest.Matcher
 
 object FavoriteListScreen : KScreen<FavoriteListScreen>() {
-    override val layoutId: Int? = R.layout.fragment_favorite
-    override val viewClass: Class<*>? = FavoriteFragment::class.java
+    override val layoutId: Int = R.layout.fragment_favorite
+    override val viewClass: Class<*> = FavoriteFragment::class.java
 
     val recyclerRecipe =
-        KRecyclerView({ withId(R.id.recipe_favorite_recyclerView) }, itemTypeBuilder = {
+        KRecyclerView({ withId(R.id.recipe_favorite_recycler_view) }, itemTypeBuilder = {
             itemType(::DefaultItem)
         })
 
     val predefinedItemsRecycler =
-        KRecyclerView({ withId(R.id.recipe_favorite_recyclerView) }, itemTypeBuilder = {
+        KRecyclerView({ withId(R.id.recipe_favorite_recycler_view) }, itemTypeBuilder = {
             itemType(::RecipeItem)
         })
 
