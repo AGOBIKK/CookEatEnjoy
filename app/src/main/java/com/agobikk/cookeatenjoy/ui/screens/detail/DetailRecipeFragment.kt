@@ -73,7 +73,7 @@ class DetailRecipeFragment :
         }
 
         viewModel.recipeDetail.observe(viewLifecycleOwner) { response ->
-
+            val valueBool = SaveShared.getFavorite(requireContext(), readFoodById().toString())
             fun updateBtnFavoriteIsNotActive() {
                 binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
                     FAVORITE_BTN_NOT_ACTIVE
@@ -90,11 +90,9 @@ class DetailRecipeFragment :
                 SaveShared.setFavorite(requireContext(), readFoodById().toString(), boolean)
             }
 
-            fun getStateFavoriteButtonBoolean(string: String): Boolean {
-                return SaveShared.getFavorite(requireContext(), string)
-            }
 
-            val valueBool = getStateFavoriteButtonBoolean(readFoodById().toString())
+
+
 
             fun updateFavoriteButton(isFavorite: Boolean, valueBool: Boolean) {
                 when {
@@ -102,11 +100,12 @@ class DetailRecipeFragment :
                     else -> updateBtnFavoriteIsNotActive()
                 }
             }
-
+            updateFavoriteButton(isFavorite, valueBool)
             binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
                 val body = checkNotNull(response)
                 val favoriteRecipe =
                     FavoriteRecipeEntity(readFoodById(), body.image, body.title)
+                isFavorite = !isFavorite && valueBool
                 isFavorite = if (!isFavorite) {
                     updateBtnFavoriteIsActive()
                     saveStateFavoriteValue(true)
@@ -119,7 +118,7 @@ class DetailRecipeFragment :
                     false
                 }
             }
-            updateFavoriteButton(isFavorite, valueBool)
+
         }
     }
 
