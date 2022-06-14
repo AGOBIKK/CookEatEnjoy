@@ -23,4 +23,8 @@
 
     </LinearLayout>
 
+    <include
+        android:id="@+id/include_layout_detail_icon"
+        layout="@layout/layout_action_bar" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
