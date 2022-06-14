@@ -16,6 +16,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        displayHomeUp(false)
         initRecyclerView()
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.mainBottomNavigationView)
         navBar.visibility = View.VISIBLE

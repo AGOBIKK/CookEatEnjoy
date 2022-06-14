@@ -17,7 +17,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
         super.onViewCreated(view, savedInstanceState)
         view.postDelayed({
             findNavController().navigate(
-                R.id.action_splashFragment_to_mainFragment
+                R.id.action_splashFragment_to_CategoryFragment
             )
             navOptions {
                 anim {
@@ -27,7 +27,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
                     popExit = androidx.navigation.ui.R.anim.nav_default_pop_enter_anim
                 }
                 launchSingleTop = true
-                popUpTo(R.id.nav_graph_application) {
+                popUpTo(R.id.nav_graph_main_xml) {
                     inclusive = true
                 }
             }
