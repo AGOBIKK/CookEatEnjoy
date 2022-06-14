@@ -1,9 +1,7 @@
 package com.agobikk.cookeatenjoy
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.TaskStackBuilder
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -19,7 +17,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.mainBottomNavigationView)
-        val navHost = supportFragmentManager.findFragmentById(R.id.mainContainerView) as NavHostFragment
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.mainContainerView) as NavHostFragment
         navController = navHost.navController
         bottomNavigationView.setupWithNavController(navController)
     }

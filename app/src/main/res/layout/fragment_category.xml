@@ -12,24 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/category_fragment_padding_for_textView"
-            android:fontFamily="@font/courgette"
-            android:textColor="@color/purple_700"
-            android:text="@string/categories"
-            android:textSize="@dimen/category_fragment_padding_for_textSize" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/category_fragment_layout_height_for_view"
-            android:layout_marginStart="@dimen/category_fragment_marginStart_for_view"
-            android:layout_marginEnd="@dimen/category_fragment_marginEnd_for_view"
-            android:background="@color/purple_700" />
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoryListRecyclerView"
             android:layout_width="match_parent"

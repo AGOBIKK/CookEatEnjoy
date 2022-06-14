@@ -48,6 +48,7 @@ class DetailRecipeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        displayHomeUp(false)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         viewModel.onViewCreated(id = readFoodById())
         setScrollListener()
