@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.SaveShared
+import com.agobikk.cookeatenjoy.SaveSharedImpl
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
@@ -22,6 +22,7 @@ import com.agobikk.cookeatenjoy.databinding.FragmentDetailRecipeBinding
 import com.agobikk.cookeatenjoy.ui.BaseFragment
 import com.agobikk.cookeatenjoy.util.Const.FAVORITE_BTN_IS_ACTIVE
 import com.agobikk.cookeatenjoy.util.Const.FAVORITE_BTN_NOT_ACTIVE
+import com.agobikk.cookeatenjoy.util.SavedShared
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
@@ -40,6 +41,8 @@ class DetailRecipeFragment :
     private fun readFoodById(): Long {
         return args.idFood
     }
+
+    private val savedShared:SavedShared = SaveSharedImpl()
 
     override fun onAttach(context: Context) {
         appComponent.inject(this)
@@ -73,7 +76,7 @@ class DetailRecipeFragment :
         }
 
         viewModel.recipeDetail.observe(viewLifecycleOwner) { response ->
-            val valueBool = SaveShared.getFavorite(requireContext(), readFoodById().toString())
+            val valueBool = savedShared.getFavorite(requireContext(), readFoodById().toString())
             fun updateBtnFavoriteIsNotActive() {
                 binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
                     FAVORITE_BTN_NOT_ACTIVE
@@ -87,11 +90,8 @@ class DetailRecipeFragment :
             }
 
             fun saveStateFavoriteValue(boolean: Boolean) {
-                SaveShared.setFavorite(requireContext(), readFoodById().toString(), boolean)
+                savedShared.setFavorite(requireContext(), readFoodById().toString(), boolean)
             }
-
-
-
 
 
             fun updateFavoriteButton(isFavorite: Boolean, valueBool: Boolean) {
