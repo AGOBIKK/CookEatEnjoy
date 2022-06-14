@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clipToPadding="false"
+    android:elevation="@dimen/layout_icon_elevation_for_constraintLayout">
+
+    <RelativeLayout
+        android:id="@+id/recipe_detail_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recipe_detail_top_bar_size"
+        android:alpha="0.0"
+        android:background="@color/purple_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <ImageView
+        android:id="@+id/recipe_detail_close_icon"
+        style="@style/recipe_detail_icon_bar"
+        android:layout_marginStart="@dimen/layout_icon_marginStart_for_close"
+        android:contentDescription="@string/close_recipe"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/recipe_detail_action_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/recipe_detail_action_bar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

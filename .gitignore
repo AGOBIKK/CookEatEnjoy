@@ -106,7 +106,6 @@ local.properties
 /buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at
 /buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i
 /buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i.len
-/buildSrc/build/classes/kotlin/main/Splashscreen.class
 /buildSrc/build/classes/kotlin/main/TestEspresso.class
 /buildSrc/build/classes/kotlin/main/TestFragment.class
 /buildSrc/build/classes/kotlin/main/TestKasptesso.class

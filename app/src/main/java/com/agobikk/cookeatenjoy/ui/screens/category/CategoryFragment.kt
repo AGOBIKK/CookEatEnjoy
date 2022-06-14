@@ -8,6 +8,7 @@ import com.agobikk.cookeatenjoy.databinding.FragmentCategoryBinding
 import com.agobikk.cookeatenjoy.models.Category
 import com.agobikk.cookeatenjoy.ui.BaseFragment
 import com.agobikk.cookeatenjoy.util.Const
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryBinding::inflate) {
@@ -15,7 +16,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        displayHomeUp(false)
         initRecyclerView()
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.mainBottomNavigationView)
+        navBar.visibility = View.VISIBLE
     }
 
     private fun initRecyclerView() = with(binding) {
@@ -36,6 +40,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
     }
 
     private fun navigateToRecipeList() {
-        findNavController().navigate(R.id.action_categoryFragment_to_recipeListFragment)
+        findNavController().navigate(R.id.action_CategoryFragment_to_RecipeListFragment)
     }
 }

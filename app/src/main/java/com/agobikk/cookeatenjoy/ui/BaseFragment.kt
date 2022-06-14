@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,7 @@ abstract class BaseFragment<VB : ViewBinding>(
 ) : Fragment(), HasDefaultViewModelProviderFactory {
     private var _binding: VB? = null
     val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,6 +27,12 @@ abstract class BaseFragment<VB : ViewBinding>(
     ): View? {
         _binding = inflate.invoke(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        displayHomeUp(true)
     }
 
     override fun onDestroyView() {
@@ -38,5 +46,9 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory =
         defaultViewModelFactory.get().create(this, arguments)
 
-
+    protected fun displayHomeUp(show: Boolean) {
+        activity?.run {
+            (this as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(show)
+        }
+    }
 }
