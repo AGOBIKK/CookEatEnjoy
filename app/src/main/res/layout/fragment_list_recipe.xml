@@ -22,4 +22,9 @@
         tools:listitem="@layout/layout_recipe_list_item" />
 
     </LinearLayout>
+
+    <include
+        android:id="@+id/include_layout_detail_icon"
+        layout="@layout/custom_toolbar_recipe_fragment" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

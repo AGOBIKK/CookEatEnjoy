@@ -28,9 +28,10 @@ class RecipeListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        displayHomeUp(true)
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+      //  displayHomeUp(true)
         init()
+        navigateUP()
     }
 
     private fun init() {
@@ -47,10 +48,20 @@ class RecipeListFragment :
         binding.recipeListRecyclerView.adapter = adapter
     }
 
-    private fun displayHomeUp(show: Boolean) {
-        requireActivity().run {
-            (this as AppCompatActivity).supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-            supportActionBar?.setCustomView(R.layout.custom_toolbar_recipe_fragment)
+//    private fun displayHomeUp(show: Boolean) {
+//        requireActivity().run {
+//            (this as AppCompatActivity).supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+//            supportActionBar?.setCustomView(R.layout.custom_toolbar_recipe_fragment)
+//        }
+//    }
+
+
+
+    private fun navigateUP() {
+        with(binding) {
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
+                findNavController().navigate(R.id.action_RecipeListFragment_to_CategoryFragment)
+            }
         }
     }
 
@@ -60,6 +71,7 @@ class RecipeListFragment :
         findNavController()
             .navigate(direction)
     }
+
 }
 
 
