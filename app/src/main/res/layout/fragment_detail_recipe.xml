@@ -144,6 +144,6 @@
 
     <include
         android:id="@+id/include_layout_detail_icon"
-        layout="@layout/layout_icon_detail" />
+        layout="@layout/custom_toolbar_details_fragment" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

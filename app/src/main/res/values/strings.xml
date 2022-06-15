@@ -39,5 +39,8 @@
     <string name="grams">Grams</string>
     <string name="_100">100</string>
     <string name="name">Name</string>
-    <string name="Ingredients">Ingredient</string>
+    <string name="Ingredients">Ingredients</string>
+    <string name="Recipes">Recipes</string>
+    <string name="Favorites">Favorites</string>
+    <string name="Details">Details</string>
 </resources>

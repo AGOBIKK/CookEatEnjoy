@@ -63,4 +63,8 @@
     <dimen name="detail_fragment_layout_height_for_imageView">50dp</dimen>
     <dimen name="detail_fragment_marginBottom_for_imageView">16dp</dimen>
     <dimen name="detail_fragment_marginTop_for_imageView">12dp</dimen>
+    <dimen name="custom_toolbar_layout_height_root">56dp</dimen>
+    <dimen name="custom_toolbar_image_view_layout_widt">52dp</dimen>
+    <dimen name="custom_toolbar_image_view_layout_heigth">52dp</dimen>
+    <dimen name="custom_toolbar_text_view">18sp</dimen>
 </resources>
