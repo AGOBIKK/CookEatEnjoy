@@ -100,14 +100,14 @@ class DetailRecipeFragment :
                     else -> updateBtnFavoriteIsNotActive()
                 }
             }
+
             val valueBool = savedShared.getFavorite(requireContext(), readFoodById().toString())
             updateFavoriteButton(isFavorite, valueBool)
-
+            isFavorite = valueBool
             binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
                 val body = checkNotNull(response)
                 val favoriteRecipe =
                     FavoriteRecipeEntity(readFoodById(), body.image, body.title)
-
                 isFavorite = if (!isFavorite) {
                     updateBtnFavoriteIsActive()
                     saveStateFavoriteValue(true)
