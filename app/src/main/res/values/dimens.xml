@@ -67,4 +67,8 @@
     <dimen name="custom_toolbar_image_view_layout_widt">52dp</dimen>
     <dimen name="custom_toolbar_image_view_layout_heigth">52dp</dimen>
     <dimen name="custom_toolbar_text_view">18sp</dimen>
+    <dimen name="layout_recipe_marginTop_for_imageView">52dp</dimen>
+    <dimen name="layout_recipe_height_for_imageView">200dp</dimen>
+    <dimen name="layout_favorite_recipe_TextView_text_size">18sp</dimen>
+    <dimen name="layout_details_marginTop_for_AppBarLayout">58dp</dimen>
 </resources>

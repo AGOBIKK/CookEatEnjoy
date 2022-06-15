@@ -14,6 +14,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/include_layout_detail_icon" />
+
+    <include
+        android:id="@+id/include_layout_detail_icon"
+        layout="@layout/custom_toolbar_search_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

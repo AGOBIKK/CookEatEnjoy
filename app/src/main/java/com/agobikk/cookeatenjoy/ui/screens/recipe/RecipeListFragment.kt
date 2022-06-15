@@ -12,6 +12,7 @@ import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.agobikk.cookeatenjoy.ui.BaseFragment
+import com.agobikk.cookeatenjoy.ui.screens.category.CategoryFragment
 import timber.log.Timber
 
 
@@ -29,7 +30,6 @@ class RecipeListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-      //  displayHomeUp(true)
         init()
         navigateUP()
     }
@@ -47,15 +47,6 @@ class RecipeListFragment :
         }
         binding.recipeListRecyclerView.adapter = adapter
     }
-
-//    private fun displayHomeUp(show: Boolean) {
-//        requireActivity().run {
-//            (this as AppCompatActivity).supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-//            supportActionBar?.setCustomView(R.layout.custom_toolbar_recipe_fragment)
-//        }
-//    }
-
-
 
     private fun navigateUP() {
         with(binding) {

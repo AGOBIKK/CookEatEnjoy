@@ -23,4 +23,7 @@
 
     </LinearLayout>
 
+    <include
+        android:id="@+id/include_layout_detail_icon"
+        layout="@layout/custom_toolbar_favorite_fragment" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
