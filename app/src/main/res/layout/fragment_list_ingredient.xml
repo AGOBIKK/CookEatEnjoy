@@ -19,4 +19,8 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/layout_ingredients_item" />
 
+    <include
+        android:id="@+id/include_layout_detail_icon"
+        layout="@layout/custom_toolbar_ingredient_fragment" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

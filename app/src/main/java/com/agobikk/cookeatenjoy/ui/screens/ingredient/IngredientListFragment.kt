@@ -3,10 +3,9 @@ package com.agobikk.cookeatenjoy.ui.screens.ingredient
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
 import com.agobikk.cookeatenjoy.data.repository.RepositoryImpl
@@ -44,9 +43,10 @@ class IngredientListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        displayHomeUp(true)
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        //    displayHomeUp(true)
         init()
+        navigateUP()
 
 
         job = scopeMain.launch() {
@@ -67,12 +67,15 @@ class IngredientListFragment :
         ingredientsRecyclerview.adapter = adapter
     }
 
-    private fun displayHomeUp(show: Boolean) {
-        requireActivity().run {
-            (this as AppCompatActivity).supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-            supportActionBar?.setCustomView(R.layout.custom_toolbar_ingredient_fragment)
+    private fun navigateUP() {
+        with(binding) {
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
+                findNavController().navigateUp()
+            }
         }
     }
+
+
     override fun onDestroy() {
         scopeIo.cancel()
         scopeMain.cancel()
