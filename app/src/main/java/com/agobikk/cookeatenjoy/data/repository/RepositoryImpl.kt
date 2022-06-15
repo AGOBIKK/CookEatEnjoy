@@ -71,11 +71,11 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteAllFavoriteRecipe() {
-        TODO("Not yet implemented")
+        TODO("удалить всё из вафоритов")
     }
 
     override suspend fun searchFavoriteRecipeById(searchId: Long): FavoriteRecipeEntity {
-        TODO("Not yet implemented")
+        TODO("поиск по id избранного")
     }
 
     override suspend fun getModelMainCourse(typeOfDish: String): Response<ModelMainCourse> {
