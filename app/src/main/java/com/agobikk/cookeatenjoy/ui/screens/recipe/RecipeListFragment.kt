@@ -3,6 +3,7 @@ package com.agobikk.cookeatenjoy.ui.screens.recipe
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,7 @@ import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.databinding.FragmentListRecipeBinding
 import com.agobikk.cookeatenjoy.models.ResultMainCourse
 import com.agobikk.cookeatenjoy.ui.BaseFragment
+import com.agobikk.cookeatenjoy.ui.screens.category.CategoryFragment
 import timber.log.Timber
 
 
@@ -27,9 +29,9 @@ class RecipeListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        displayHomeUp(false)
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         init()
+        navigateUP()
     }
 
     private fun init() {
@@ -46,12 +48,21 @@ class RecipeListFragment :
         binding.recipeListRecyclerView.adapter = adapter
     }
 
+    private fun navigateUP() {
+        with(binding) {
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
+                findNavController().navigate(R.id.action_RecipeListFragment_to_CategoryFragment)
+            }
+        }
+    }
+
     private fun navigateToRecipeList(value: Long) {
         val direction =
             RecipeListFragmentDirections.actionRecipeListFragmentToDetailRecipeFragment(value)
         findNavController()
             .navigate(direction)
     }
+
 }
 
 

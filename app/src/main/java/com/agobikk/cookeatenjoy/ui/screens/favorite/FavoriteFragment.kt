@@ -23,8 +23,9 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         init()
+        navigateUP()
     }
 
     private fun init() {
@@ -46,4 +47,13 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
         findNavController()
             .navigate(direction)
     }
+
+    private fun navigateUP() {
+        with(binding) {
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
+    }
+
 }

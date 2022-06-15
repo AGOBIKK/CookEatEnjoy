@@ -21,7 +21,8 @@
         <ImageView
             android:id="@+id/recipe_list_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/recipe_image_list_height"
+            android:layout_height="@dimen/layout_recipe_height_for_imageView"
+            android:layout_marginTop="@dimen/layout_recipe_marginTop_for_imageView"
             android:contentDescription="@string/recipe_image"
             android:scaleType="centerCrop"
             tools:src="@drawable/salad" />
@@ -90,7 +91,7 @@
                 android:layout_weight="10"
                 android:gravity="center"
                 android:textColor="@color/purple_700"
-                android:textSize="18sp"
+                android:textSize="@dimen/layout_favorite_recipe_TextView_text_size"
                 android:textStyle="bold"
                 tools:text="45" />
 
@@ -99,7 +100,6 @@
 
 
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>
 

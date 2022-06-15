@@ -2,6 +2,8 @@ package com.agobikk.cookeatenjoy.ui.screens.category
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.agobikk.cookeatenjoy.R
 import com.agobikk.cookeatenjoy.databinding.FragmentCategoryBinding
@@ -16,10 +18,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayHomeUp(false)
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         initRecyclerView()
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.mainBottomNavigationView)
-        navBar.visibility = View.VISIBLE
     }
 
     private fun initRecyclerView() = with(binding) {
@@ -42,4 +42,5 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
     private fun navigateToRecipeList() {
         findNavController().navigate(R.id.action_CategoryFragment_to_RecipeListFragment)
     }
+
 }

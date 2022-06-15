@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Cook Eat Enjoy</string>
-    <string name="title_feed">Главная</string>
-    <string name="title_like">Избранное</string>
-    <string name="title_search">Поиск</string>
+    <string name="title_feed">Main</string>
+    <string name="title_like">Favorites</string>
+    <string name="title_search">Search</string>
     <string name="main_fragment">MAIN</string>
     <string name="categories">Categories</string>
     <string name="recipe_image">Recipe Image</string>
@@ -39,5 +39,9 @@
     <string name="grams">Grams</string>
     <string name="_100">100</string>
     <string name="name">Name</string>
-    <string name="Ingredients">Ingredient</string>
+    <string name="Ingredients">Ingredients</string>
+    <string name="Recipes">Recipes</string>
+    <string name="Favorites">Favorites</string>
+    <string name="Details">Details</string>
+    <string name="Search">Search</string>
 </resources>

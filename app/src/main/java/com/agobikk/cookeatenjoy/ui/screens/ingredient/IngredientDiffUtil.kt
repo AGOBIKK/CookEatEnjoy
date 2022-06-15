@@ -14,6 +14,4 @@ class IngredientDiffUtil(
         oldItem: ExtendedIngredientEntity,
         newItem: ExtendedIngredientEntity
     ) = oldItem == newItem
-
-
 }

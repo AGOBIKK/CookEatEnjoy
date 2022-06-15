@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
@@ -42,8 +43,10 @@ class IngredientListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+        //    displayHomeUp(true)
         init()
+        navigateUP()
 
 
         job = scopeMain.launch() {
@@ -63,6 +66,15 @@ class IngredientListFragment :
         })
         ingredientsRecyclerview.adapter = adapter
     }
+
+    private fun navigateUP() {
+        with(binding) {
+            includeLayoutDetailIcon.recipeDetailCloseIcon.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
+    }
+
 
     override fun onDestroy() {
         scopeIo.cancel()

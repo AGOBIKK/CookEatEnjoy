@@ -22,8 +22,4 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
         bottomNavigationView.setupWithNavController(navController)
     }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
 }

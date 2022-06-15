@@ -32,7 +32,6 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        displayHomeUp(true)
     }
 
     override fun onDestroyView() {
@@ -46,9 +45,4 @@ abstract class BaseFragment<VB : ViewBinding>(
     override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory =
         defaultViewModelFactory.get().create(this, arguments)
 
-    protected fun displayHomeUp(show: Boolean) {
-        activity?.run {
-            (this as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(show)
-        }
-    }
 }

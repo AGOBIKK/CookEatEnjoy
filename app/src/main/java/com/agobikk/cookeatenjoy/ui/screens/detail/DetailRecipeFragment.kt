@@ -51,7 +51,6 @@ class DetailRecipeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayHomeUp(false)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         viewModel.onViewCreated(id = readFoodById())
         setScrollListener()
@@ -162,7 +161,7 @@ class DetailRecipeFragment :
 
     private fun wordProcessing(detailRecipe: FoodInformationEntity) = with(binding) {
         includeLayoutCardInstruction.cookingInstructions.text =
-            detailRecipe.instructions?.parseAsHtml(HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
+            detailRecipe.instructions?.parseAsHtml(TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 includeLayoutCardInstruction.cookingInstructions.justificationMode =
