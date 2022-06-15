@@ -1,9 +1,7 @@
-package com.agobikk.cookeatenjoy
+package com.agobikk.cookeatenjoy.util
 
 import android.content.Context
 import androidx.preference.PreferenceManager
-import com.agobikk.cookeatenjoy.util.SavedShared
-
 
 class SaveSharedImpl:SavedShared {
 
@@ -22,5 +20,4 @@ class SaveSharedImpl:SavedShared {
                 ?.getBoolean(key, false)
                 ?: true
         }
-
 }

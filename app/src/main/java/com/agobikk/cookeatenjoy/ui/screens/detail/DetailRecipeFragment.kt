@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.agobikk.cookeatenjoy.R
-import com.agobikk.cookeatenjoy.SaveSharedImpl
+import com.agobikk.cookeatenjoy.util.SaveSharedImpl
 import com.agobikk.cookeatenjoy.application.appComponent
 import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
@@ -42,7 +42,7 @@ class DetailRecipeFragment :
         return args.idFood
     }
 
-    private val savedShared:SavedShared = SaveSharedImpl()
+    private val savedShared: SavedShared = SaveSharedImpl()
 
     override fun onAttach(context: Context) {
         appComponent.inject(this)
@@ -76,7 +76,6 @@ class DetailRecipeFragment :
         }
 
         viewModel.recipeDetail.observe(viewLifecycleOwner) { response ->
-            val valueBool = savedShared.getFavorite(requireContext(), readFoodById().toString())
             fun updateBtnFavoriteIsNotActive() {
                 binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setImageResource(
                     FAVORITE_BTN_NOT_ACTIVE
@@ -100,12 +99,14 @@ class DetailRecipeFragment :
                     else -> updateBtnFavoriteIsNotActive()
                 }
             }
+
+            val valueBool = savedShared.getFavorite(requireContext(), readFoodById().toString())
             updateFavoriteButton(isFavorite, valueBool)
+            isFavorite = valueBool
             binding.includeLayoutDetailIcon.recipeDetailFavoriteIcon.setOnClickListener {
                 val body = checkNotNull(response)
                 val favoriteRecipe =
                     FavoriteRecipeEntity(readFoodById(), body.image, body.title)
-                isFavorite = !isFavorite && valueBool
                 isFavorite = if (!isFavorite) {
                     updateBtnFavoriteIsActive()
                     saveStateFavoriteValue(true)

@@ -13,7 +13,7 @@ class RoomConverters {
     fun toJson(segments: List<ExtendedIngredientEntity>?): String? {
         return gson.toJson(segments)
     }
-//todo посмотреть как лучше сделать конвертирование из строки в объекты
+
     @TypeConverter
     fun formJson(json: String?): List<ExtendedIngredientEntity>? {
         return gson.fromJson<List<ExtendedIngredientEntity>>(
