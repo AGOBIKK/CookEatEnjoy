@@ -112,12 +112,12 @@ class DetailRecipeFragment :
                     saveStateFavoriteValue(true)
                     viewModel.insertFavoriteRecipe(favoriteRecipe)
                     true
-                } else {
-                    updateBtnFavoriteIsNotActive()
+                } else if (!isFavorite && valueBool) {
+                    true
+                } else{updateBtnFavoriteIsNotActive()
                     saveStateFavoriteValue(false)
                     viewModel.deleteFavoriteRecipe(favoriteRecipe)
-                    false
-                }
+                    false }
             }
 
         }
