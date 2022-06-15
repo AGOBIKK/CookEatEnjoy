@@ -18,11 +18,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        displayHomeUp(true)
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         initRecyclerView()
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.mainBottomNavigationView)
-        navBar.visibility = View.VISIBLE
     }
 
     private fun initRecyclerView() = with(binding) {
@@ -46,10 +43,4 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
         findNavController().navigate(R.id.action_CategoryFragment_to_RecipeListFragment)
     }
 
-    private fun displayHomeUp(show: Boolean) {
-        requireActivity().run {
-            (this as AppCompatActivity).supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-            supportActionBar?.setCustomView(R.layout.custom_toolbar_category_fragment)
-        }
-    }
 }

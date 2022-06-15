@@ -71,4 +71,5 @@
     <dimen name="layout_recipe_height_for_imageView">200dp</dimen>
     <dimen name="layout_favorite_recipe_TextView_text_size">18sp</dimen>
     <dimen name="layout_details_marginTop_for_AppBarLayout">58dp</dimen>
+    <dimen name="fragment_marginTop_for_RecyclerView">54dp</dimen>
 </resources>

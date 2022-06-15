@@ -14,6 +14,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categoryListRecyclerView"
+            android:layout_marginTop="@dimen/fragment_marginTop_for_RecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/category_fragment_marginStart_for_recyclerview"
@@ -25,5 +26,10 @@
             tools:listitem="@layout/layout_category_list_item">
 
         </androidx.recyclerview.widget.RecyclerView>
+
     </LinearLayout>
+    <include
+        android:id="@+id/include_layout_detail_icon"
+        layout="@layout/custom_toolbar_category_fragment" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
