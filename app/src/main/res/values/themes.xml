@@ -33,7 +33,7 @@
         <item name="android:padding">4dp</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
-        <item name="android:tint">#ED0834</item>
+        <item name="android:tint">@color/purple_700</item>
     </style>
 
 
