@@ -43,4 +43,5 @@
     <string name="Recipes">Recipes</string>
     <string name="Favorites">Favorites</string>
     <string name="Details">Details</string>
+    <string name="Search">Search</string>
 </resources>
