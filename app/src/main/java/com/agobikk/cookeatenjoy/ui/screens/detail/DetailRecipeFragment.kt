@@ -32,7 +32,7 @@ import timber.log.Timber
 class DetailRecipeFragment :
     BaseFragment<FragmentDetailRecipeBinding>(FragmentDetailRecipeBinding::inflate) {
     private val args: DetailRecipeFragmentArgs by navArgs()
-    private var isFavorite = false
+
     private val coroutineExceptionHandler =
         CoroutineExceptionHandler { _, throwable -> Timber.d("throwable:$throwable") }
     private val scope =
@@ -92,7 +92,7 @@ class DetailRecipeFragment :
                 savedShared.setFavorite(requireContext(), readFoodById().toString(), boolean)
             }
 
-
+            var isFavorite = false
             fun updateFavoriteButton(isFavorite: Boolean, valueBool: Boolean) {
                 when {
                     isFavorite != valueBool -> updateBtnFavoriteIsActive()
