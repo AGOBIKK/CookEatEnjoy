@@ -8,11 +8,13 @@ import com.agobikk.cookeatenjoy.data.local.dao.FavoriteRecipeDao
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao
 import com.agobikk.cookeatenjoy.data.local.dao.FoodInformationDao_Impl
 import com.agobikk.cookeatenjoy.data.local.entities.ExtendedIngredientEntity
+import com.agobikk.cookeatenjoy.data.local.entities.FavoriteRecipeEntity
 import com.agobikk.cookeatenjoy.data.local.entities.FoodInformationEntity
 import com.agobikk.cookeatenjoy.data.remote.api.ApiService
 import com.agobikk.cookeatenjoy.models.ExtendedIngredient
 import com.agobikk.cookeatenjoy.models.FoodInformation
 import com.agobikk.cookeatenjoy.models.ModelMainCourse
+import com.nhaarman.mockito_kotlin.any
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
@@ -21,10 +23,7 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
-import org.mockito.kotlin.any
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
+import org.mockito.kotlin.*
 import retrofit2.Response
 
 
@@ -136,6 +135,24 @@ class RepositoryImplTest {
             val actual = response.body()
             repository.getModelMainCourse(dish)
             assertNotNull(actual)
+        }
+    }
+
+    @Test
+    fun `should call method deleteFavoriteRecipe once and return Unit`() {
+        runBlocking {
+            val repository = mock<RepositoryImpl>()
+            val fakeSourceFavoriteRecipeEntity =
+                FavoriteRecipeEntity(id = 3, image = "image name", title = "title name")
+            Mockito.`when`(favoriteRecipeDao.deleteFavoriteRecipe(fakeSourceFavoriteRecipeEntity))
+                .thenReturn(Unit)
+            val actual = repository.deleteFavoriteRecipe(fakeSourceFavoriteRecipeEntity)
+            val expected = Unit
+            Assertions.assertEquals(expected, actual)
+            verify(
+                repository,
+                times(1)
+            ).deleteFavoriteRecipe(favoriteRecipeEntity = fakeSourceFavoriteRecipeEntity)
         }
     }
 }
