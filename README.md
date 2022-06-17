@@ -37,11 +37,13 @@
 
 
 ### Screens
- 
-![Image alt](https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_categories.png)
-![Image alt](https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_recipes.png)
-![Image alt](https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_details.png)
-![Image alt](https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_ingredient.png)
+
+<p float="left">
+  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_categories.jpg" height="400" />
+  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_recipes.jpg" height="400" />
+  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_details.jpg" height="400" />
+  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_ingredient.jpg" height="400" />
+</p>
 
 ## License
 ```xml
