@@ -19,7 +19,7 @@
 - Share your favorite recipe
 - Detailed view of ingredients
 
-## Libraries
+### Libraries
 - 100% Kotlin + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 - Single Activity
 - MVVM
@@ -36,12 +36,12 @@
 
 
 
-<p float="left">
-  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_categories.png" height="400" />
-  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_recipes.png" height="400" />
-  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_details.png" height="400" />
-  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_ingredient.png" height="400" />
-</p>
+### Screens
+ 
+![Image alt](https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_categories.png)
+![Image alt](https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_recipes.png)
+![Image alt](https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_details.png)
+![Image alt](https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_ingredient.png)
 
 ## License
 ```xml
