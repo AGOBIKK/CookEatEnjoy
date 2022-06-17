@@ -40,9 +40,12 @@
 
 <p float="left">
   <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_categories.jpg" height="400" />
+
   <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_recipes.jpg" height="400" />
+
   <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_details.jpg" height="400" />
-  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_ingredient.jpg" height="400" />
+
+  <img src="https://github.com/AGOBIKK/CookEatEnjoy/blob/develop/app/src/main/res/drawable/screenshot_ingredients.jpg" height="400" />
 </p>
 
 ## License
